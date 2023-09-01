@@ -1,0 +1,91 @@
+button {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    background-color: var(--color-background);
+    border: none;
+    color: var(--color-badge-text);
+    padding-left: 0;
+    padding-right: 0;
+}
+
+button:hover {
+    background-color: var(--color-badge-hover);
+}
+
+.badge {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    flex-shrink: 0;
+    outline-width: 0px;
+    border-spacing: 0px 0px;
+    margin: 0px;
+    text-align: center;
+    flex-grow: 0;
+    flex-basis: auto;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    overflow: visible;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+}
+
+.badge:hover {
+    transform: translate(var(0), var(0)) rotate(var(0)) skewX(var(0)) skewY(var(0)) scaleX(var(1.25)) scaleY(var(1.25));
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.content {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    place-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 20px;
+    box-sizing: border-box;
+    min-width: 20px;
+    border-radius: 10px;
+    z-index: 1;
+    color: white;
+    top: 0px;
+    right: -5px;
+}
+
+.label {
+    vertical-align: sub;
+    display: none;
+    margin-left: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .label {
+        display: inline;
+    }
+
+    button {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+}

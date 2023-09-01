@@ -1,0 +1,86 @@
+
+.drawermain {
+    position:fixed;
+    background-color: rgba(var(--color-background) / .25);
+    overflow: hidden;
+    opacity:0;
+    z-index:10;
+    top: 0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+}
+
+.drawerscreen {
+    width:100%;
+}
+.drawerfit {
+    width: fit-content;
+}
+.drawerw25 {
+    width: 25%;
+}
+.drawerfull {
+    height:100%;
+}
+.drawerfit-h {
+    height: fit-content;
+}
+
+.drawerarticle {
+    position:relative;
+    max-width:32rem;
+    padding-bottom:1rem;
+    display:flex;
+    flex-direction: column;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+    overflow-y: clip;
+    height:100%;
+}
+
+.drawerarticle header {
+    padding:1rem;
+    font-weight:700;
+}
+
+.drawershow {
+    opacity:1;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration:500ms;
+    transform: translateX(0);
+}
+
+.drawerhide {
+    opacity:0;
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration:150ms;
+    transition-delay: 500ms;
+    transform: translateX(100%);
+}
+
+.drawercontent {
+    max-width:32rem;
+    position:absolute;
+    right:0px;
+    background-color: var(--color-drawer-bg);
+    transition-duration: 500ms;
+    transition-delay:400ms;
+    transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property:all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transform:translate(0,0) rotate(0) skew(0,0) scale(1,1);
+}
+.drawercontentopen {
+    transform:translate(0,0) rotate(0) skey(0,0) scale(1,1);
+}
+.drawercontentclose {
+    transform: translate(100%,0) rotate(0) skey(0,0) scale(1,1);
+}
+.draweroutside {
+    width:100vw;
+    height:100%;
+    cursor:pointer;
+}

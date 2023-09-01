@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
+/* Following is placeholder for global before and after styles */
+*,
+::before,
+::after {
+    --my-border-spacing-x: 0;
+    --my-border-spacing-y: 0;
+    --my-bg-opacity: 1;
+}
+
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
+}
+
+
+/* Light Mode */
+:root {
+    --color-background: white;
+    --color-text: #222;
+    --color-link: rgb(40, 119, 192);
+    --color-link-hover: #222;
+    --color-icon: #334155;
+    --color-icon-hover: white;
+    --color-btn-background: rgb(50, 40, 192);
+    --color-btn-text: white;
+    --color-btn-hover: rgb(14 165 233);
+    --color-badge-background: white;
+    --color-badge-text: black;
+    --color-badge-hover: rgba(143, 143, 143, 0.4);
+    --color-drawer-bg: rgb(202, 200, 200);
+    --color-star: #209e4e;
+    --color-star-hover: #029f3b;
+    --color-star-none: #334155;
+    --color-li-border: rgb(209 213 219 / 1);
+    --svg-fill: black;
+    --svg-bg: white;
+    --color-modal: white;
+    --color-toast-bg: rgb(115 115 115 / 1);
+    --date-filter: 0;
+    /* ... more colors */
+}
+
+/* Dark Mode */
+:root.dark {
+    --color-background: rgb(30 41 59);
+    --color-text: #DDD;
+    --color-link: rgb(47, 176, 235);
+    --color-link-hover: white;
+    --color-icon: white;
+    --color-icon-hover: black;
+    --color-btn-background: rgb(40, 119, 192);
+    --color-btn-off-background: #7d7c7c;
+    --color-btn-text: rgb(22, 22, 22);
+    --color-btn-hover: rgb(14 165 233);
+    --color-badge-background: black;
+    --color-badge-text: white;
+    --color-badge-hover: rgb(143, 143, 143, 0.6);
+    --color-drawer-bg: rgb(51, 65, 85);
+    --color-star: #fde047;
+    --color-star-hover: #ffd400;
+    --color-star-none: #a7aeb6;
+    --color-li-border: rgb(30 41 59 / 0.5);
+    --svg-fill: white;
+    --svg-bg: black;
+    --color-modal: rgb(55 65 81);
+    --color-toast-bg: rgb(245 245 245 / 1);
+    --date-filter: 1;
+    /* ... more colors */
+}
+
+html {
+    min-height: 100%;
+    line-height: 1.5;
+    tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-family: "Montserrat";
+}
+
+body {
+    display: block;
+    margin: 0px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    overflow-y: hidden;
+}
+
+a:link,
+a:visited,
+a:active {
+    background-color: var(--color-modal);
+    color: var(--color-link);
+    text-decoration: underline solid var(--color-link);
+}
+
+a:hover {
+    background-color: var(--color-badge-hover);
+}
+
+img,
+svg {
+    vertical-align: middle;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(var(--date-filter))
+}
+
+/*
+svg:hover {
+    transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(1.25) scaleY(1.25);
+}
+*/
+.iconmenu {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    flex-shrink: 0;
+    fill: var(--color-icon);
+}
+
+/*
+.icon-menu:hover {
+    transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(1.25) scaleY(1.25);
+    fill: var(--color-icon-hover)
+}
+*/
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+    padding: 0.1rem;
+    /* overflow-x: hidden; */
+}
+
+.appheader {
+    height: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+
+}
+
+.apph4 {
+    display: none;
+}
+
+.mr2 {
+    margin-right: 0.25rem;
+}
+
+.ml2 {
+    margin-left: 0.25rem;
+}
+
+.p0 {
+    padding: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.uncover {
+    object-fit: unset !important;
+}
+
+.appbg {
+    background-color: var(--color-background);
+}
+
+.drawerbg {
+    background-color: var(--color-drawer-bg);
+}
+
+@media (min-width: 640px) {
+    .apph4 {
+        display: inline;
+    }
+    .app {
+        padding: 0.25rem;
+    }
+}
+
+.profileimg {
+    border-radius: 9999px;
+    height: 3rem;
+    width: 3rem;
+}
+
+.profiledrawer {
+    display: flex;
+    border-bottom-width: 1px;
+    border-color: var(--color-li-border);
+    padding: 0.75rem;
+    max-width: 24rem;
+    width: 100%;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+}
+
+.profiledrawer .account {
+    flex: 1 1 0%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 1rem;
+    font-size: 0.875rem;
+}
+
+.profiledrawer .account .name {
+    font-weight: 500;
+    width: 75%;
+}
+
+.badges {
+    display: flex;
+    flex-direction: row;
+}
+
+.divider {
+    border-bottom-width: 1px;
+    padding-bottom: 0.25rem;
+}
+
+.text {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.text-xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+.closebtn {
+    cursor: pointer;
+    height: fit-content;
+    background-color: var(--color-modal);
+    scale: 1.5;
+}
+
+.appmain {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: auto;
+    min-height: calc(100vh - 80px);
+    /* overflow-y: auto;
+    overflow-x: clip; */
+    background-color: var(--color-background);
+}
+
+@media (min-width: 1216px) {
+    .appmain {
+        flex-direction: column;
+    }
+}
+
+.appfooter {
+    font-weight: 400;
+    font-size: 0.75rem;
+    line-height: 2.0rem;
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.flexrow {
+    display: flex;
+    flex-direction: row;
+}
+
+.svgBroken {
+    filter: invert(0.5);
+    width: initial;
+    opacity: 0.2;
+}
+
+
+.expandshow {
+    display: inline-block;
+}
+
+.expandhide {
+    display: none;
+}
+
+.favcolor {
+    fill: var(--color-star);
+}
+
+.favcolor:hover {
+    fill: var(--color-star-hover);
+}
+
+.favnocolor {
+    fill: var(--color-star-none);
+}
+
+.favnocolor:hover {
+    fill: var(--color-star-hover);
+}
+
+.tileGroup {
+    display:flex;
+}
+.tileButton {
+    width: 150px;
+    height: 50px;
+    letter-spacing: 0.5px;
+    background-color: #E0314B;
+    color: white;
+    font-size: 32px;
+    border: 1.5px solid #E0314B;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: #c264ad;
+    border: 1.5px solid rgb(25, 26, 24); 
+}
