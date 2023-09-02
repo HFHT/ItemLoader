@@ -18,15 +18,15 @@ export function Header() {
         setIsOpen(false);
     }
 
-    async function signOutClickHandler(instance: any) {
-        try {
-            await instance.logoutPopup().then(
-                () => console.log(instance)
-            ).catch((error: any) => console.log(error))
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // async function signOutClickHandler(instance: any) {
+    //     try {
+    //         await instance.logoutPopup().then(
+    //             () => console.log(instance)
+    //         ).catch((error: any) => console.log(error))
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     return (
         <>
             <div className="logo">
@@ -36,8 +36,8 @@ export function Header() {
             <div className="badges">
                 <Badge icon={BadgeIcons('Scan')} label='Scan' content='0' onClick={() => navigate('/search')} color='blue' />
                 <Badge icon={BadgeIcons('Printer')} label='Barcodes' content='0' onClick={() => navigate('/barcodes')} color='blue' />
-                <Badge icon={BadgeIcons('Cart')} label='Orders' content='0' onClick={(e) => navigate('/orders')} color='red' />
-                <Badge icon={BadgeIcons('Pallet')} label='Pallet' content='0' onClick={(e) => navigate('/pallets')} color='red' />
+                <Badge icon={BadgeIcons('Cart')} label='Orders' content='0' onClick={() => navigate('/orders')} color='red' />
+                <Badge icon={BadgeIcons('Pallet')} label='Pallet' content='0' onClick={() => navigate('/pallets')} color='red' />
                 {/* <Badge icon={BadgeIcons('Truck')} label='Shipment' content='0' onClick={(e) => navigate('/shipment')} color='red' /> */}
                 {/* <Badge icon={BadgeIcons('UnBox')} label='Received' content='0' onClick={(e) => navigate('/received')} color='red' /> */}
             </div>
@@ -57,10 +57,10 @@ export function Header() {
                     </div>
                 </div>
                 <div className='divider'>
-                    <button onClick={(e) => handleThemeSwitch()} className='text drawerbg'>{MiscIcons('moon')} Dark Mode</button>
+                    <button onClick={() => handleThemeSwitch()} className='text drawerbg'>{MiscIcons('moon')} Dark Mode</button>
                 </div>
                 <div className='divider'>
-                    <button onClick={(e) => navigate('/settings')} className='text drawerbg'>{MiscIcons('settings')} Settings</button>
+                    <button onClick={() => navigate('/settings')} className='text drawerbg'>{MiscIcons('settings')} Settings</button>
                 </div>
                 <div className=''>
                     {/* <button onClick={() => signOutClickHandler(instance)} className='text drawerbg'>{MiscIcons('logout')} Sign Out</button> */}

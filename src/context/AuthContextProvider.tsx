@@ -17,8 +17,8 @@ interface IAuthContextProvider {
 
 export const AuthContextProvider = (props: IAuthContextProvider) => {
 
-    const [userAccount, setUserAccount] = useState({})
-    const [userPhoto, setUserPhoto] = useState('')
+    const [userAccount, /*setUserAccount*/] = useState({})
+    const [userPhoto, /*setUserPhoto*/] = useState('')
     const [theme, setTheme] = useState('light');
     // const { accounts } = useMsal()
 
