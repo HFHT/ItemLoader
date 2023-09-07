@@ -1,11 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PageLayout, Tiles } from './components'
 import { catS, dimension, finish, mfg, prices, types } from './helpers/objects';
+import { useOpenAI } from './hooks';
 
 function App() {
   const [mIdx, setMIdx] = useState<Iidx>({ m0: -1, m1: -1, m2: -1, m3: -1, ty: -1, mf: -1, f0: -1, f1: -1, dh: -1, dw: -1, dd: -1 })
-
+  const [gpt, getGPT]:any = useOpenAI()
   console.log(catS);
+
+useEffect(() => {
+  hasProp('m3') && getGPT('')
+}, [mIdx])
+
 
   return (
     <div className="app">
