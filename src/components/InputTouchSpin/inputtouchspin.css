@@ -1,0 +1,36 @@
+.touchspin {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.touchspin-input {
+    width: 5rem !important;
+    text-align: center;
+}
+
+.touchspin button {
+    border-radius: 50%;
+    background-color: var(--color-btn-off-background);
+}
+
+.touchspin button:hover {
+    background-color: var(--color-btn-background);
+}
+
+.touchspin button:disabled {
+    opacity: 0;
+}
+
+.touchspin-left {
+    font-size: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 0.25rem;
+}
+
+.touchspin-right {
+    font-size: 1.9rem;
+    padding: 0.25rem 0.78rem 0.25rem 0.78rem;
+
+}

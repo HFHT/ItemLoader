@@ -1,80 +1,80 @@
 
-export const prices = ['20', '25', '30', '50', '75', '100', '125', '150', '175', '200', '250', '300', '350', '400'];
+export const schemaResult = { room: '', prod: '', attr1: '', attr2: '', desc: '', material: '', finish: '', condition: '', conditionAdds: '', price: '', seo: '' }
+export const schemaType = { type: '', imgs: '', result: schemaResult }
 
-export const catS: Ims =
-  [
-    {
-      "n0": "Appliances",
-      "m0": [
-        {
-          "n1": "Climate",
-          "m1": [{
-            "n2": "AC",
-            "sk": 3265
-          }]
-        },
-        {
-          "n1": "Floor",
-          "m1": [{
-            "n2": "Buffer",
-            "sk": 3288
-          }]
-        },
-        {
-          "n1": "Garage",
-          "m1": [{
-            "n2": "Opener",
-            "sk": 3291
-          }]
-        },
-        {
-          "n1": "Kitchen",
-          "m1": [{
-            "n2": "Combo",
-            "t": "Pwr",
-            "f": "A",
-            "m": "A",
-            "sk": 3296
-          }]
-        },
-        {
-          "n1": "Laundry",
-          "m1": [{
-            "n2": "Combo",
-            "t": "Pwr",
-            "f": "T",
-            "m": "A",
-            "sk": 3296
-          }]
-        }
-      ]
-    },
-    {
-      "n0": "Cabinets",
-      "m0": [{
-        "n1": "Bath",
-        "m1": [{
-          "n2": "xyz",
-          "f": ["Wood", "Paint"],
-          "d": {
-            "Height": "CH", "Width": "CW", "Depth": "CD"
-          },
-          "sk": 1234
-        }]
-      }]
-    }
-  ]
+export const prices = ['$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
 
-export const types: Iidx = {
-  "Pwr": ['Electric', 'Gas', 'Other']
+export const conditions = ['New', 'Like new', 'Gently used', 'Good condition', 'Some wear']
+export const conditionAdds = [' ', 'Fade', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
+export const collections = ['Treasures']
+
+
+const mfg: Iidx = {
+  Appl: ['Bosch', 'Electrolux', 'Frigidaire', 'GE', 'Kenmore', 'Kitchen Aid', 'LG', 'Maytag', 'Samsung', 'Whirlpool']
+}
+const types: Iidx = {
+  Pwr: ['Electric', 'Gas', 'Other']
+}
+const finish: Iidx = {
+  Appl: ['Black', 'White', 'Stainless'],
+  Wood: ['Birch', 'Cherry', 'Maple', 'Mesquite', 'Oak', 'Pine', 'Walnut'],
+  Metal: ['Bronze', 'Pewter', 'Nickel'],
+  Paint: ['White', 'Black'],
+}
+const attr: Iidx = {
+  Bed: ['Twin', 'Double', 'King', 'California King'],
+  Frig: ['Top Freezer', 'Bottom Freezer', 'Side-by-Side', 'French Door', 'Mini/Compact'],
+  CabType: ['Base', 'Corner', 'Drawer Base', 'Pantry', 'Sink Base', 'Speciality', 'Wall'],
+  CabSize: ['9 in.', '12 in.', '18 in.', '24 in.', '36 in.', '48 in.']
 }
 
-export const finish: Iidx = {
-  "A": ['Black', 'White', 'Stainless'],
-  "Wood": ['Maple', 'Oak'],
-  "M": ['Bronze', 'Pewter', 'Nickel'],
-  "Paint": ['White', 'Black']
+const seo: Iidx = {
+  Furniture: [' ', 'Antique', 'Art Deco', 'Asian', 'Early American', 'Gothic', 'Industrial', 'Minimalist', 'Mid-Century Modern', 'Mission', 'Modern', 'Nautical', 'Queen Anne', 'Rustic', 'Southwest', 'Traditional', 'Victorian', 'Vintage']
 }
+
+export const catType = ['Furniture', 'Appliances', 'Cabinet', 'Housewares', 'Door', 'Lighting', 'Plumbing', 'Tool', 'Window']
+
+export const catApplType = [
+  { Climate: { item: [{ AC: { i: 3265 } }, { 'Air Purifier': { i: 3266 } }, { 'Ceiling Fan': { i: 3271 } }, { 'Evaporative Cooler': { i: 3269 } }, { Furnace: { i: 3276 } }, { 'Pedestal Fan': { i: 3272 } }, { 'Space Heater': { i: 3281 } }, { 'Ventilation Fan': { i: 3274 } }, { 'Water Heater': { i: 3302 } }], mfg: [], pwr: [], finish: [], color: [], seo: [] } },
+  { Floor: { item: [{ 'Floor Buffer': { i: 3288 } }, { 'Rug Shampooer': { i: 3284 } }, { 'Steam Cleaner': { i: 3283 } }, { 'Steam Mop': { i: 3287 } }, { 'Vacuum Cleaner': { i: 3300 } }], mfg: [], pwr: [], finish: [], color: [], seo: [] } },
+  { Household: { item: [{ 'Household Appliance': { i: 3263 } }], mfg: [], pwr: [], finish: [], color: [], seo: [] } },
+  { Kitchen: { item: [{ Refigerator: { i: 3649 } }], mfg: mfg.Appl, pwr: types.Pwr, finish: finish.Appl, color: [], seo: [] } },
+  { Laundry: { item: [{ 'Clothes Dryer': { i: 3293 } }, { 'Iron/Ironing Board': { i: 3295 } }, { 'Washing Machine': { i: 3298 } }, { 'Washer/Dryer Combo': { i: 3296 } }], mfg: mfg.Appl, pwr: types.Pwr, finish: finish.Appl, color: [], seo: [] } },
+  { Outdoor: { item: [{ 'Grill': { i: 0 } }, { 'Misting System': { i: 3279 } }, { 'Patio Heater': { i: 3280 } }], mfg: [], pwr: types.Pwr, finish: finish.Appl, color: [], seo: [] } },
+
+]
+
+export const catCabType = [
+  { Bath: { item: [{ Vanity: { i: 2085 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
+  { Kitchen: { item: [{ Cabinet: { i: 2078 } }, { Island: { i: 2090 } }, { "Sink Base": { i: 2078 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
+  { Storage: { item: [{ Chest: { i: 2082 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
+
+]
+export const catDoorType = []
+export const catFurnType = [
+  { Baby: { item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }] } },
+  { Bedroom: { item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { 'Bedroom Set': { a: [attr.Bed], i: 2111, s: true } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0, s: true } }, { Shelving: { i: 0 } }, { Wardrobe: { i: 2072 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { Bathroom: { item: [{ 'Bath Set': { i: 2110, s: true } }, { Cabinet: { i: 0 } }, { 'Bathroom Mirror': { i: 0 } }, { 'Bath Organizer': { i: 0 } }, { 'Shelving': { i: 0 } }, { 'Vanity': { i: 2070 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { "Dining Room": { item: [{ Barstool: { i: 0, s: true } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0, s: true } }, { 'Dining Room Set': { s: true, i: 2112 } }, { 'Wine Rack': { i: 2089 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { Kitchen: { item: [{ Bench: { i: 2068 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { "Living Room": { item: [{ 'Arm Chair': { i: 2096 } }, { 'Bean Bag Chair': { i: 2097 } }, { 'Coffee Table': { i: 0 } }, { 'End Table': { i: 0, s: true } }, { 'Media Center': { i: 2080 } }, { 'Living Room Set': { i: 2113, s: true } }, { Recliner: { i: 0 } }, { Sectional: { i: 0, s: true } }, { Shelving: { i: 0 } }, { Sofa: { i: 0 } }, { Storage: { i: 2081 } }, { 'TV Stand': { i: 0 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { Office: { item: [{ Bookcase: { i: 0 } }, { Credenza: { i: 0 } }, { Desk: { i: 0 } }, { 'File Cabinet': { i: 2076 } }, { 'Office Chair': { i: 0 } }, { 'Office Set': { i: 2076, s: true } }, { 'Printer Stand': { i: 0 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+  { Patio: { item: [{ Hammock: { i: 3869 } }, { 'Outdoor Bed': { i: 2131 } }, { 'Outdoor Sofa': { i: 2138 } }, { 'Outdoor Storage Box': { i: 2140 } }, { 'Outdoor Structure': { i: 3874 } }, { 'Patio Chairs': { i: 2136, s: true } }, { 'Patio Set': { i: 2132, s: true } }, { 'Sunshade': { i: 3885 } }], finish: finish.Wood, color: finish.Paint, seo: seo.Furniture } },
+]
+//Taxonomy 3894
+export const catToolType = []
+
+export const catHouseType = []
+
+
+
+
+export const catLightType = []
+export const catPlumbType = []
+export const catWindType = []
+
+
+
 
 export const dimension: Iidx = {
   "CH": ['18.5', '25', '31.5', '35'],
@@ -84,239 +84,4 @@ export const dimension: Iidx = {
   "WH": ['12', '18', '24', '30', '36', '42', '48', '54', '60']
 }
 
-export const mfg: Iidx = {
-  "A": ['Bosch', 'Electrolux', 'Frigidaire', 'GE', 'Kenmore', 'Kitchen Aid', 'LG', 'Maytag', 'Samsung', 'Whirlpool']
-}
 
-
-
-export const catSchema =
-{
-  "Appliances": [
-    {
-      "Climate": [
-        {
-          "AC": 3265
-        },
-        {
-          "Purifier": 3266
-        },
-        {
-          "Evap": 3269
-        },
-        {
-          "Fan - Ceiling": 3271
-        },
-        {
-          "Fan - Pedestal": 3272
-        },
-        {
-          "Fan - Ventilation": 3274
-        },
-        {
-          "Furnace": 3276
-        },
-        {
-          "Heater-Patio": 3280
-        },
-        {
-          "Heater-Space": 3281
-        },
-        {
-          "Mister": 3279
-        }
-      ]
-    },
-    {
-      "Floor": [
-        {
-          "Buffer": 3288
-        },
-        {
-          "Scrubber": 3286
-        },
-        {
-          "Shampooer": 3284
-        },
-        {
-          "Steam Cleaner": 3283
-        },
-        {
-          "Steam Mop": 3287
-        }
-      ]
-    },
-    {
-      "Garage": [
-        {
-          "Opener": 3291
-        },
-        {
-          "Keypad": 3290
-        }
-      ]
-    },
-    {
-      "Laundry": [
-        {
-          "Combo": 3296
-        },
-        {
-          "Dryer": 3293
-        },
-        {
-          "Ironing": 3295
-        },
-        {
-          "Washer": 3298
-        }
-      ]
-    },
-    {
-      "Vacuum": 3300
-    },
-    {
-      "Water Heater": 3302
-    }
-  ],
-  "Cabinets": [
-    {
-      "Bath": 2086
-    },
-    {
-      "Island": 2090
-    },
-    {
-      "Kitchen": 2078
-    }
-  ],
-  "Furniture": [
-    {
-      "Baby": [
-        {
-          "Bassinet": 2053
-        },
-        {
-          "Bed": 2058
-        },
-        {
-          "Changing": 2054
-        },
-        {
-          "Crib": 2058
-        },
-        {
-          "High Chair": 2060
-        },
-        {
-          "Set": 2051
-        },
-        {
-          "Chest-Toy": 2084
-        }
-      ]
-    },
-    {
-      "Bathroom": [
-        {
-          "Set": 2110
-        }
-      ]
-    },
-    {
-      "Bedroom": [
-        {
-          "Bed Frame": 2063
-        },
-        {
-          "Dresser": 2075
-        },
-        {
-          "Foundation": 2065
-        },
-        {
-          "Head/Foot": 2064
-        },
-        {
-          "Mattress": 2066
-        },
-        {
-          "Set": 2111
-        },
-        {
-          "Wardrobes": 2072
-        }
-      ]
-    },
-    {
-      "Bench": [
-        {
-          "Kitchen": 2068
-        },
-        {
-          "Entry": 2069
-        },
-        {
-          "Storage": 2069
-        },
-        {
-          "Vanity": 2070
-        }
-      ]
-    },
-    {
-      "Dining Room": [
-        {
-          "Set": 2112
-        },
-        {
-          "Buffets": 2073
-        },
-        {
-          "Cart": 2091
-        },
-        {
-          "China": 2074
-        },
-        {
-          "Chest-Hope": 2083
-        },
-        {
-          "Liquor": 2088
-        },
-        {
-          "Table": 2165
-        },
-        {
-          "Wine Rack": 2089
-        }
-      ]
-    },
-    {
-      "Living Room": [
-        {
-          "Arm Chair": 2096
-        },
-        {
-          "Bean Bag": 2097
-        },
-        {
-          "Media": 2080
-        },
-        {
-          "Set": 2113
-        },
-        {
-          "Storage": 2081
-        }
-      ]
-    },
-    {
-      "Office": [
-        {
-          "File Cabinet": 2076
-        }
-      ]
-    }
-  ]
-}

@@ -62,7 +62,7 @@ input::-webkit-outer-spin-button {
     --color-star: #fde047;
     --color-star-hover: #ffd400;
     --color-star-none: #a7aeb6;
-    --color-li-border: rgb(30 41 59 / 0.5);
+    --color-li-border: #e8e8e980;
     --svg-fill: white;
     --svg-bg: black;
     --color-modal: rgb(55 65 81);
@@ -183,6 +183,7 @@ svg:hover {
     .apph4 {
         display: inline;
     }
+
     .app {
         padding: 0.25rem;
     }
@@ -325,9 +326,41 @@ svg:hover {
     fill: var(--color-star-hover);
 }
 
-.tileGroup {
-    display:flex;
+.maingrid {
+    display: grid;
+    /* grid-template-rows:  700px 200px 600px; */
+    padding: 8px;
+    border-style: solid;
+    border-radius: 6px;
+    width: 100%;
 }
+
+.usergrid {
+    min-height: 900px;
+    border-style: solid;
+    border-radius: 6px;
+}
+
+.aigrid {
+    border-style: solid;
+    border-radius: 6px;
+}
+
+.photogrid {
+    border-style: solid;
+    border-radius: 6px;
+}
+
+.tileGroup {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--color-li-border);
+}
+
 .tileButton {
     width: 150px;
     height: 50px;
@@ -342,5 +375,9 @@ svg:hover {
 
 .active {
     background-color: #c264ad;
-    border: 1.5px solid rgb(25, 26, 24); 
+    border: 1.5px solid rgb(25, 26, 24);
+}
+
+.aimain {
+    min-height: 3rem;
 }

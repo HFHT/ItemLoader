@@ -17,7 +17,7 @@ export function PageLayout({ children }: IPL) {
                     {children}
                 </main>
                 <footer className="appfooter">
-                    Copyright<span>&copy;</span> Habitat for Humanity Tucson 2022
+                    Copyright<span>&copy;</span> Habitat for Humanity Tucson 2023
                 </footer>
             </div>
         </>

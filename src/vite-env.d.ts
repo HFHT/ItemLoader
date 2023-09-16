@@ -30,3 +30,34 @@ interface Ims extends Array<Im0> { }
 interface Iidx {
     [k: string]: any
 }
+
+interface Iresult {
+    room: string;
+    prod: string;
+    attr1: string;
+    attr2: string;
+    qty?: number;
+    desc: string;
+    material: string;
+    finish: string;
+    condition: string;
+    conditionAdds: string;
+    price: string;
+    seo: string;
+}
+interface Itype {
+    type: string
+    imgs: string
+    result: Iresult
+}
+
+interface ItheRoom {
+    e: string;
+    i: number;
+    prod: {
+        item: [{ a?: string, i: number, s?: boolean }]
+        finish: string[]
+        color: string[]
+        seo: string[]
+    }
+}

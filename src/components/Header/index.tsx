@@ -34,10 +34,10 @@ export function Header() {
                 <div className="apph4 text-3xl">Shopify Inventory Wizard</div>
             </div>
             <div className="badges">
-                <Badge icon={BadgeIcons('Scan')} label='Scan' content='0' onClick={() => navigate('/search')} color='blue' />
+                {/* <Badge icon={BadgeIcons('Scan')} label='Scan' content='0' onClick={() => navigate('/search')} color='blue' />
                 <Badge icon={BadgeIcons('Printer')} label='Barcodes' content='0' onClick={() => navigate('/barcodes')} color='blue' />
                 <Badge icon={BadgeIcons('Cart')} label='Orders' content='0' onClick={() => navigate('/orders')} color='red' />
-                <Badge icon={BadgeIcons('Pallet')} label='Pallet' content='0' onClick={() => navigate('/pallets')} color='red' />
+                <Badge icon={BadgeIcons('Pallet')} label='Pallet' content='0' onClick={() => navigate('/pallets')} color='red' /> */}
                 {/* <Badge icon={BadgeIcons('Truck')} label='Shipment' content='0' onClick={(e) => navigate('/shipment')} color='red' /> */}
                 {/* <Badge icon={BadgeIcons('UnBox')} label='Received' content='0' onClick={(e) => navigate('/received')} color='red' /> */}
             </div>
