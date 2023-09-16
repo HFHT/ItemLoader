@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import './camera.css';
 
 import { useUserMedia } from "../../hooks";
@@ -28,7 +28,7 @@ export function Camera({ isOpen, onCapture, onClear, onSave }: ICamera) {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [isCanvasEmpty, setIsCanvasEmpty] = useState(true);
 
-    const mediaStream = useUserMedia(CAPTURE_OPTIONS);
+    const mediaStream = useUserMedia(CAPTURE_OPTIONS, isOpen);
     // const offsets = useOffsets(
     //     videoRef.current ? videoRef.current.videoWidth : 0,
     //     videoRef.current ? videoRef.current.videoHeight : 0,
@@ -93,6 +93,7 @@ export function Camera({ isOpen, onCapture, onClear, onSave }: ICamera) {
     function handleSave() {
         console.log('Camera-handleSave', canvasRef);
         if (!canvasRef.current) return
+        handleClear();
         setIsCanvasEmpty(true)
         onSave();
     }
@@ -100,6 +101,11 @@ export function Camera({ isOpen, onCapture, onClear, onSave }: ICamera) {
     if (!mediaStream) {
         return null;
     }
+
+    // useEffect(() => {
+    //     !isOpen && handleClear()
+    // }, [isOpen])
+
 
     return (
 

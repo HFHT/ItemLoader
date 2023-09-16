@@ -1,7 +1,7 @@
 // import { useState } from "react";
 
 import { useState } from "react"
-import { Badge, InputTouchSpin, Tiles } from ".."
+import { Badge, Button, InputTouchSpin, Tiles } from ".."
 import { getCategories } from "../../helpers/functions"
 import { catFurnType, conditionAdds, conditions, prices, schemaResult } from "../../helpers/objects"
 import { Product } from "../Product"
@@ -55,7 +55,7 @@ export const Furniture = ({ isOpen, onClick }: ITile) => {
                     <Product isOpen={theResult.price !== ''} products={theRoom.prod.seo} onClick={(e: any, i: any) => setTheResult({ ...theResult, seo: e })} />
                 </>
             }
-            {theResult.seo && <Badge icon={BadgeIcons('Scan')} label='Scan' content='0' onClick={() => onClick(theResult)} color='blue' />}
+            <Button onClick={() => onClick(theResult)} hidden={theResult.seo===''} classes='photobtn'>Generate Description</Button>
         </div>
     );
 

@@ -21,6 +21,11 @@ function App() {
     }
   }
 
+  function handleSubmit() {
+    doShopify(theType)
+    setTheType(schemaType)
+  }
+
   return (
     <div className="app">
       <PageLayout >
@@ -36,12 +41,12 @@ function App() {
             <Windows isOpen={theType.type === 'Windows'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
           </div>
           <div className="aigrid">
-            <OpenAI isOpen={theType.result.room !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
+            <OpenAI isOpen={theType.result.seo !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
           </div>
           <div className="photogrid">
-            <Photo isOpen={theType.result.seo !== ''} setter={((e: any) => setTheType({ ...theType, imgs: e }))} />
+            <Photo isOpen={theType.result.desc !== ''} setter={((e: any) => setTheType({ ...theType, imgs: e }))} />
           </div>
-          <Button onClick={(e) => doShopify(theType)} disabled={theType.imgs === ''}>Submit</Button>
+          <Button onClick={(e) => handleSubmit()} disabled={theType.imgs === ''}>Submit</Button>
         </div>
       </PageLayout>
     </div>

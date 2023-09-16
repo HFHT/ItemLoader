@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
-export function useUserMedia(requestedMedia: any) {
+export function useUserMedia(requestedMedia: any, isOpen: boolean) {
     const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
 
     useEffect(() => {
+        if (!isOpen) return
         async function enableVideoStream() {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia(
@@ -24,7 +25,7 @@ export function useUserMedia(requestedMedia: any) {
                 });
             };
         }
-    }, [mediaStream, requestedMedia]);
+    }, [mediaStream, requestedMedia, isOpen]);
 
     return mediaStream;
 }
