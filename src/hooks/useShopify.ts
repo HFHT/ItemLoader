@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CONST_COLLECTIONS } from "../constants";
+import { CONST_DISCOUNTS } from "../constants";
+import { uniqueBarCode } from "./barCode";
 
 export function useShopify() {
     const [theCollections, setTheCollections] = useState()
@@ -7,36 +8,17 @@ export function useShopify() {
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
 
-    const doShopify = async (prompt: any) => {
+    const doShopify = async (prompt: any, featured: boolean) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt)
 
-
-
-        // const gQL = {
-        //     bodyHtml: "Good snowboard!",
-        //     collectionsToJoin: `["gid://shopify/Collection/${shopifyCollections.Red}","gid://shopify/Collection/${shopifyCollections.New}"]`,
-        //     productCategory: "Electronics > Electronics Accessories > Computer Components > Input Devices > Keyboards",
-        //     productType: "snowboard",
-        //     status: "gid://shopify/ProductStatus/ACTIVE",
-        //     tags: '["Barne", "Big Air", "John Fav"]',
-        //     title: "Sweet new product",
-        //     variants: `[{ barcode: "11223344", price: "189" }]`,            
-        //     vendor: "My Store"
-        // }
-        // console.log(gQL)
-        // console.log(JSON.stringify(gQL))
-        // const graphStr = `{bodyHtml: "${gQL.bodyHtml}", collectionsToJoin: ${gQL.collectionsToJoin}, productCategory: {productTaxonomyNodeId: ${gQL.productCategory}}, productType: "${gQL.productType}", status: "${gQL.status}", tags: ${gQL.tags}, title: "${gQL.title}", variants: ${gQL.variants}, vendor: "${gQL.vendor}"}`
-
-        // console.log(graphStr)
         let options = {
             method: "POST",
             headers: headers,
             body: JSON.stringify({
                 method: 'add',
-                collections: theCollections ? [theCollections['newly-added-items'], theCollections['blue-discount-collection']] : [],
+                collections: prepareCollections(theCollections, prompt, featured),
                 product: JSON.stringify({
-                    // "query": 'mutation { productCreate(input: '+graphStr+') { product {id}}}'
                     "product": {
                         "title": `${prompt.result.seo} ${prompt.result.finish} ${prompt.result.attr1} ${prompt.result.prod}`,
                         "published_scope": "global",
@@ -46,9 +28,9 @@ export function useShopify() {
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
                         "variants": [{
-                            "barcode": "11223344",
+                            "barcode": uniqueBarCode(),
                             "price": prompt.result.price,
-                            "requires_shipping": false,
+                            "requires_shipping": true,
                             "taxable": false,
                             "inventory_management": "shopify",
                             "inventory_policy": "deny",
@@ -65,14 +47,13 @@ export function useShopify() {
             const response = await fetch(url, options);
             const shopifyResponse = (await response.json());
             console.log(shopifyResponse, shopifyResponse.prodId);
-
             if (shopifyResponse.hasOwnProperty('prodId')) {
                 url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopifyImage`;
 
                 options.body = JSON.stringify({
                     method: 'image',
                     product: shopifyResponse.prodId,
-                    body: prepareImage(1, prompt.imgs)
+                    body: prepareImage(1, prompt.imgs.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
                 })
 
                 const imageResponse = await fetch(url, options);
@@ -129,14 +110,29 @@ export function useShopify() {
                         { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
                     ],
                     attachment: img,
-                    filename: 'rails_logo_gif'
+                    filename: `H${uniqueBarCode()}.png`
                 }
             })
         )
     }
-    function formatGraphQL(g: any) {
-        let strQL = '';
 
-
+    function prepareCollections(theCollections: any, result: any, featured: boolean) {
+        var theDiscounts = CONST_DISCOUNTS
+        theDiscounts = theDiscounts.concat(CONST_DISCOUNTS)
+        theDiscounts = theDiscounts.concat(CONST_DISCOUNTS)
+        const theMonth = new Date().getMonth()
+        if (!theCollections) return []
+        console.log(theDiscounts, theMonth, theDiscounts[theMonth])
+        var aryCol = [
+            theCollections['newly-added-items'],
+            theCollections[theDiscounts[theMonth]]
+        ]
+        featured && (aryCol.push(theCollections['featured-items']))
+        result.result.col.forEach((c: string) => {
+            aryCol.push(theCollections[c])
+        })
+        console.log(aryCol)
+        return aryCol
     }
+
 }

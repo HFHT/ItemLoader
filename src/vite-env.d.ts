@@ -34,10 +34,13 @@ interface Iidx {
 interface Iresult {
     room: string;
     prod: string;
+    mfg: string;
+    pwr: string;
     attr1: string;
     attr2: string;
     qty?: number;
     desc: string;
+    col: string[];
     material: string;
     finish: string;
     condition: string;
@@ -47,6 +50,7 @@ interface Iresult {
 }
 interface Itype {
     type: string
+    idx: number
     imgs: string
     result: Iresult
 }
@@ -56,8 +60,12 @@ interface ItheRoom {
     i: number;
     prod: {
         item: [{ a?: string, i: number, s?: boolean }]
+        mfg: string[]
+        pwr: string[]
+        wood: string[]
         finish: string[]
         color: string[]
+        metal: string[]
         seo: string[]
     }
 }

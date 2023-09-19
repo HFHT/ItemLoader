@@ -1,3 +1,4 @@
+export * from './useBarCode';
 export * from './useNavigate';
 export * from './useOpenAI';
 export * from './useUserMedia';

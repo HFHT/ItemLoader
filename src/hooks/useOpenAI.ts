@@ -1,9 +1,9 @@
-//
+// deprecated model: text-davinci-003
 
 import { useState } from "react";
 
 export function useOpenAI() {
-    const [chatGPT, setChatGPT] = useState();
+    const [chatGPT, setChatGPT] = useState<string |null>();
 
     const getChatGPT = async (userData: any) => {
         // if (!chatGPT) return;
@@ -35,5 +35,11 @@ export function useOpenAI() {
             console.log(error);
         }
     }
-    return [chatGPT, getChatGPT];
+
+    const resetGPT = () => {
+        console.log('resetGPT')
+        setChatGPT('')
+    }
+
+    return [chatGPT, getChatGPT, resetGPT];
 }

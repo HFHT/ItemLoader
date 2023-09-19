@@ -9,14 +9,14 @@ export function PageLayout({ children }: IPL) {
 
     return (
         <>
-            <div className="app">
-                <header className="appheader">
+            <div className="pagetop">
+                <header className="pageheader">
                     <Header />
                 </header>
-                <main className="appmain">
+                <main className="pagemain">
                     {children}
                 </main>
-                <footer className="appfooter">
+                <footer className="pagefooter">
                     Copyright<span>&copy;</span> Habitat for Humanity Tucson 2023
                 </footer>
             </div>

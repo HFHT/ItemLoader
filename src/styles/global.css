@@ -15,7 +15,24 @@ input::-webkit-outer-spin-button {
     margin: 0
 }
 
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    /* color: rgba(255, 255, 255, 0.87);
+    background-color: #242424; */
+  
+    /* font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%; */
+  }
 
+  
 /* Light Mode */
 :root {
     --color-background: white;
@@ -85,9 +102,13 @@ body {
     margin: 0px;
     background-color: var(--color-background);
     color: var(--color-text);
-    overflow-y: hidden;
+    /* overflow-y: auto; */
 }
-
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
 a:link,
 a:visited,
 a:active {
@@ -105,50 +126,12 @@ svg {
     vertical-align: middle;
 }
 
-::-webkit-calendar-picker-indicator {
-    filter: invert(var(--date-filter))
-}
-
-/*
-svg:hover {
-    transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(1.25) scaleY(1.25);
-}
-*/
 .iconmenu {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     display: inline-block;
     flex-shrink: 0;
     fill: var(--color-icon);
-}
-
-/*
-.icon-menu:hover {
-    transform: translate(0,0) rotate(0) skewX(0) skewY(0) scaleX(1.25) scaleY(1.25);
-    fill: var(--color-icon-hover)
-}
-*/
-
-.app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: space-between;
-    padding: 0.1rem;
-    /* overflow-x: hidden; */
-}
-
-.appheader {
-    height: 2.5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 0.25rem;
-
-}
-
-.apph4 {
-    display: none;
 }
 
 .mr2 {
@@ -169,59 +152,6 @@ svg:hover {
 
 .uncover {
     object-fit: unset !important;
-}
-
-.appbg {
-    background-color: var(--color-background);
-}
-
-.drawerbg {
-    background-color: var(--color-drawer-bg);
-}
-
-@media (min-width: 640px) {
-    .apph4 {
-        display: inline;
-    }
-
-    .app {
-        padding: 0.25rem;
-    }
-}
-
-.profileimg {
-    border-radius: 9999px;
-    height: 3rem;
-    width: 3rem;
-}
-
-.profiledrawer {
-    display: flex;
-    border-bottom-width: 1px;
-    border-color: var(--color-li-border);
-    padding: 0.75rem;
-    max-width: 24rem;
-    width: 100%;
-    margin-left: 0.75rem;
-    margin-right: 0.75rem;
-}
-
-.profiledrawer .account {
-    flex: 1 1 0%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    height: 1rem;
-    font-size: 0.875rem;
-}
-
-.profiledrawer .account .name {
-    font-weight: 500;
-    width: 75%;
-}
-
-.badges {
-    display: flex;
-    flex-direction: row;
 }
 
 .divider {
@@ -266,30 +196,6 @@ svg:hover {
     scale: 1.5;
 }
 
-.appmain {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: auto;
-    min-height: calc(100vh - 80px);
-    /* overflow-y: auto;
-    overflow-x: clip; */
-    background-color: var(--color-background);
-}
-
-@media (min-width: 1216px) {
-    .appmain {
-        flex-direction: column;
-    }
-}
-
-.appfooter {
-    font-weight: 400;
-    font-size: 0.75rem;
-    line-height: 2.0rem;
-    text-align: center;
-    flex: 0 0 auto;
-}
-
 .flexrow {
     display: flex;
     flex-direction: row;
@@ -300,7 +206,6 @@ svg:hover {
     width: initial;
     opacity: 0.2;
 }
-
 
 .expandshow {
     display: inline-block;
@@ -324,60 +229,4 @@ svg:hover {
 
 .favnocolor:hover {
     fill: var(--color-star-hover);
-}
-
-.maingrid {
-    display: grid;
-    /* grid-template-rows:  700px 200px 600px; */
-    padding: 8px;
-    border-style: solid;
-    border-radius: 6px;
-    width: 100%;
-}
-
-.usergrid {
-    min-height: 800px;
-    border-style: solid;
-    border-radius: 6px;
-}
-
-.aigrid {
-    border-style: solid;
-    border-radius: 6px;
-}
-
-.photogrid {
-    border-style: solid;
-    border-radius: 6px;
-}
-
-.tileGroup {
-    display: grid;
-    grid-template-columns: repeat(10, minmax(0, 1fr));
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--color-li-border);
-}
-
-.tileButton {
-    width: 150px;
-    height: 50px;
-    letter-spacing: 0.5px;
-    background-color: #E0314B;
-    color: white;
-    font-size: 32px;
-    border: 1.5px solid #E0314B;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.active {
-    background-color: #c264ad;
-    border: 1.5px solid rgb(25, 26, 24);
-}
-
-.aimain {
-    min-height: 3rem;
 }

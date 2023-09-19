@@ -1,14 +1,26 @@
-.logo {
+.headlogo {
     display: flex;
     flex-direction: row;
     margin-left: -8px;
 }
 
-.logo button {
+.headlogo button {
     padding: 0;
 }
 
-/* .logo svg:hover {
-    transform: translate(0, 0) rotate(0) skewX(0) skewY(0) scaleX(1.25) scaleY(1.25);
-    fill: var(--color-icon-hover)
-} */
+.headtitle {
+    display:inline;
+    font-size: unset;
+    line-height: 2.25rem;
+}
+
+.headbadges {
+    display: flex;
+    flex-direction: row;
+}
+
+@media (min-width: 640px) {
+    .headtitle {
+        font-size: 1.875rem;
+    }
+}

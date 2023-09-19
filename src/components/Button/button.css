@@ -35,12 +35,14 @@
     background-color: var(--color-btn-hover);
 }
 
-.butttonmain:disabled {
-    background-color: lightgray;
+.butttonmain:disabled,
+button[disabled] {
+    color: rgb(146, 145, 145);
+    background-color: rgb(99, 98, 98);
 }
 
 .buttonmain:disabled:hover {
-    background-color: unset;
+    background-color: rgb(99, 98, 98);
 }
 
 .buttonhidden {

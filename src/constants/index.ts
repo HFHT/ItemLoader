@@ -1,2 +1,2 @@
 
-export const CONST_COLLECTIONS = { 'Blue': '457775907124', 'Green': '457776300340', 'Red': '457779183924', 'Yellow': '457778987316', 'New': '457779544372', 'Featured': '457779642676' }
+export const CONST_DISCOUNTS = ['blue-discount-collection','green-discount-collection','red-discount-collection','yellow-discount-collection']

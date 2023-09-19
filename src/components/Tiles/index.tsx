@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import './tiles.css';
 
 interface ITile {
     tiles: string[]
@@ -17,8 +18,8 @@ export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
     return (
         <div className="tileGroup">
             {tiles && tiles.map((tileLabel, i) => (
-                <button key={i} name={tileLabel} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "customButton active" : "customButton"}>
-                    {tileLabel}
+                <button key={i} name={tileLabel} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
+                    {tileLabel === ' ' ? '---' : tileLabel }
                 </button>
             ))}
         </div>

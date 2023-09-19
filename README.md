@@ -1,9 +1,12 @@
 # Item Loader
 
-Align with Shopify collections
+Camera sometimes doesn't open
+
+Tailor the system statement for openAI depending on the type.
+
+Finishes - use color palette and metal and wood samples
 Add Discount color on top
-Add Barcode (get from MongoDB)
-Add redo and accept buttons for openai response.
+Add dimensions to furniture
 
 useShopify - use prepareOptions for all fetches.
 
