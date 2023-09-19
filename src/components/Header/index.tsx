@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react';
 import './header.css';
 import { AuthContext } from '../../context/AuthContext';
-import { Badge, Drawer } from '..';
-import { BadgeIcons, Logo, MiscIcons } from '../../icons';
+import { Logo} from '../../icons';
 import { useNavigate } from '../../hooks';
 // import { useMsal } from '@azure/msal-react';
 // import { useNavigate } from 'react-router-dom';
