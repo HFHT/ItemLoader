@@ -9,7 +9,7 @@ interface ICamera {
 }
 
 
-export const WebcamCapture = ({setter}: ICamera) => {
+export const WebcamCapture = ({ setter }: ICamera) => {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
 
@@ -32,7 +32,7 @@ export const WebcamCapture = ({setter}: ICamera) => {
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                videoConstraints={{ width: 400, height: 400 }}
+                videoConstraints={{ width: 400, height: 400, facingMode: { exact: "environment" } }}
             />
             <div className='photocontrols'>
                 <Button onClick={() => console.log('clear')} classes='photobtn'>Retry</Button>

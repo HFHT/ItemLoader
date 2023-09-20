@@ -29,6 +29,7 @@ export function useShopify() {
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
                         "variants": [{
                             "barcode": uniqueBarCode(),
+                            "compare_at_price": prompt.result.price,
                             "price": prompt.result.price,
                             "requires_shipping": true,
                             "taxable": false,
