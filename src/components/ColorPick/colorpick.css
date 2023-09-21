@@ -1,4 +1,4 @@
-.tileGroup {
+.colorpickGroup {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   padding-top: 8px;
@@ -9,20 +9,20 @@
 }
 
 @media (min-width: 412px) {
-  .tileGroup {
+  .colorpickGroup {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 819px) {
-  .tileGroup {
+  .colorpickGroup {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 1216px) {
-  .tileGroup {
-    grid-template-columns: repeat(10, minmax(0, 1fr));
+  .colorpickGroup {
+    grid-template-columns: repeat(20, minmax(0, 1fr));
   }
 }
 
@@ -42,16 +42,6 @@
   background-color: #c264ad;
   border: 1.5px solid rgb(25, 26, 24);
 }
-.tileqty {
-  margin: 1px;
-  border-style:solid;
-  border-width: 1px;
-  min-width: 5px;
-  border-radius: 5px;
-position:relative;
-top: -25px;
-left: 0px;
-}
 
 button {
   border-radius: 8px;
@@ -67,6 +57,7 @@ button {
 
 button:hover {
   border-color: #646cff;
+  border-width: 2px;
 }
 
 button:focus,

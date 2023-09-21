@@ -34,6 +34,7 @@ interface Iidx {
 interface Iresult {
     room: string;
     prod: string;
+    prods: Iprods;
     mfg: string;
     pwr: string;
     attr1: string;
@@ -48,6 +49,12 @@ interface Iresult {
     price: string;
     seo: string;
 }
+interface Iprod {
+    prod: string;
+    qty: number;
+}
+interface Iprods extends Array<Iprod> { }
+
 interface Itype {
     type: string
     idx: number

@@ -17,14 +17,14 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
     const [gpt, getGPT, resetGPT]: any = useOpenAI()
 
     useEffect(() => {
-        if (isOpen && userData.result.desc==='') {
-            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.qty ? userData.result.qty + ' piece' : ''} ${userData.result.prod} ${userData.result.finish}`)
+        if (isOpen && userData.result.desc === '') {
+            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 0 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
             // setToggle(false)
         }
     }, [isOpen])
 
     function getOpenAI() {
-        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.qty ? userData.result.qty + ' piece' : ''} ${userData.result.prod} ${userData.result.finish}`)
+        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 0 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
         setIsChat(true)
     }
     function handleAccept() {
@@ -51,6 +51,19 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
             }
         </div>
     );
+
+    function getProducts() {
+        console.log(userData.result)
+        if (userData.result.prod !== '') {return userData.result.prod}
+        let theProds = '';
+        userData.result.prods.forEach(p => {
+            console.log(p)
+            if (p.qty === 1) {theProds = theProds + `${p.prod},`}
+            if (p.qty === 2) {theProds = theProds + `a pair of ${p.prod},`}
+            if (p.qty > 2) {theProds = theProds + `a set of ${p.qty} ${p.prod},`}
+        })
+        return theProds
+    }
 
 }
 

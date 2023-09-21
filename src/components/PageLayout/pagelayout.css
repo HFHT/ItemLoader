@@ -8,6 +8,7 @@
 } */
 .pagetop {
     min-height: 100%;
+    width: 97%;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }

@@ -1,7 +1,7 @@
 import './styles/app.css';
 
 import { useEffect, useState } from 'react'
-import { Button, Cabinet, Category, Door, OpenAI, PageLayout, Tiles, WebcamCapture, Windows } from './components'
+import { Button, Cabinet, Category, ColorPick, Door, OpenAI, PageLayout, Tiles, WebcamCapture, Windows } from './components'
 import { catApplType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, schemaResult, schemaType } from './helpers/objects';
 import {  useShopify } from './hooks';
 

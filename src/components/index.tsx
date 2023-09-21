@@ -4,6 +4,7 @@ export * from './PageLayout';
 export * from './Tiles';
 export * from './Cabinet';
 export * from './Category';
+export * from './ColorPick';
 export * from './Door';
 export * from './Window';
 export * from './OpenAI';

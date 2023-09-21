@@ -7,7 +7,7 @@ export function useOpenAI() {
 
     const getChatGPT = async (userData: any) => {
         // if (!chatGPT) return;
-
+        console.log(userData)
         const headers = new Headers();
 
         const url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTChatGPT`;
