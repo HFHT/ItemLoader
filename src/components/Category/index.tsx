@@ -69,7 +69,7 @@ export const Category = ({ isOpen, categories, onClick }: ITile) => {
                 <>
                     <Tiles tiles={getCategories(categories)} selected={theRoom.i} onClick={(e: any, i: any) => handleClick(e, i)} />
                     <Products title='Product:' isOpen={theResult.room !== ''} chosen={theResult.prods} products={getCategories(theRoom.prod.item)} onClick={(e: any, i: any, v: number) => { handleProducts(e, i, v) }} />
-                    <Product title='Mfg:' isOpen={theResult.prod !== ''} products={theRoom.prod.mfg} onClick={(e: any, i: any) => setTheResult({ ...theResult, mfg: e })} />
+                    <Product title='Mfg:' isOpen={theResult.prod !== ''  || theResult.prods.length > 0} products={theRoom.prod.mfg} onClick={(e: any, i: any) => setTheResult({ ...theResult, mfg: e })} />
                     <Product title='Pwr:' isOpen={theResult.mfg !== '' && theRoom.prod.pwr.length > 0} products={theRoom.prod.pwr} onClick={(e: any, i: any) => setTheResult({ ...theResult, pwr: e })} />
                     {/* {theSetSize > -1 && <InputTouchSpin value={theResult.qty ? theResult.qty : 1} title='Number of pieces:' setter={(e: any) => setTheResult({ ...theResult, qty: e })} />} */}
                     <Product title='Attr1:' isOpen={theAttr.length > 0} products={theAttr[0]} onClick={(e: any, i: any) => setTheResult({ ...theResult, attr1: e })} />

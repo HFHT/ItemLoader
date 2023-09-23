@@ -20,7 +20,7 @@ const types: Iidx = {
   Yard: [' ', 'Battery', 'Gas', 'Pneumatic', 'Wired']
 }
 const finish: Iidx = {
-  Appl: ['Black', 'White', 'Stainless'],
+  Appl: ['Black', 'White', 'Red', 'Brown', 'Stainless'],
   Wood: ['Bamboo', 'Birch', 'Cedar', 'Cherry', 'Hickory', 'Maple', 'Mahogany', 'Mesquite', 'Pine', 'Red-oak', 'Redwood', 'Rosewood', 'Walnut', 'White-oak'],
   Finish: ['Bamboo Finish', 'Birch Finish', 'Cedar Finish', 'Cherry Finish', 'Hickory Finish', 'Maple Finish', 'Mahogany Finish', 'Mesquite Finish', 'Pine Finish', 'Red-oak Finish', 'Redwood Finish', 'Rosewood Finish', 'Walnut Finish', 'White-oak Finish'],
   Metal: ['Aluminum', 'Chrome', 'Copper', 'Brass', 'Bronze', 'Gold', 'Iron', 'Nickel', 'Pewter', 'Steel'],
@@ -29,8 +29,12 @@ const finish: Iidx = {
 const attr: Iidx = {
   Bed: ['Twin', 'Full', 'Double', 'King', 'California King'],
   Frig: ['Top Freezer', 'Bottom Freezer', 'Side-by-Side', 'French Door', 'Mini/Compact'],
-  CabType: ['Base', 'Corner', 'Drawer Base', 'Pantry', 'Sink Base', 'Speciality', 'Wall'],
-  CabSize: ['9 in.', '12 in.', '18 in.', '24 in.', '36 in.', '48 in.']
+  CabType: [' ', '1-Drawer', '2-Drawer', '3-Drawer', '4-Drawer'],
+  CabSize: ['9 in.', '12 in.', '18 in.', '24 in.', '36 in.', '48 in.'],
+  RugLength: [' ', '3 feet long', '4 feet long', '6 feet long', '8 feet long', '10 feet long', '12 feet long', '14 feet long', '15 feet long', '16 feet long'],
+  RugWidth: [' ', '2 feet wide', '2 1/2 feet wide', '3 feet wide', '4 feet wide', '6 feet wide', '8 feet wide', '9 feet wide', '10 feet wide'],
+  DoorWidth: [' ', '18 inch', '24 inch', '28 inch', '30 inch', '32 inch', '34 inch', '36 inch'],
+  DoorHeight: [' ', '80 inch', '90 inch', '96 inch']
 }
 
 const seo: Iidx = {
@@ -40,37 +44,53 @@ const seo: Iidx = {
   Lighting: [' ', 'xyz', '123'],
   Rug: [' ', 'Abstract', 'Boho', 'Floral', 'Geometric', 'Medallion', 'Modern', 'Moroccan', 'Native American', 'Oriental', 'Persian', 'Solid', 'Vintage'],
   Floor: [' '],
-  Tool: [' ']
+  Cabinet: [' ', 'Antique', 'Contemporary', 'Modern', 'Rustic', 'Traditional', 'Vintage'],
+  Tool: [' '],
+  Door: [' ', 'Glass panel', '1-panel', '1-panel arched', '2-panel', '2-panel arched', '5-panel', '6-panel', '6-panel arched', 'glass panel', 'glass window']
 }
 
 export const catType = ['Furniture', 'Appliances', 'Cabinet', 'Flooring', 'Housewares', 'Door', 'Lighting', 'Plumbing', 'Tool', 'Window']
 
 export const catApplType = [
   { Climate: { col: ['appliances'], item: [{ AC: { i: 3265 } }, { 'Air Purifier': { i: 3266 } }, { 'Evaporative Cooler': { i: 3269 } }, { Furnace: { i: 3276 } }, { 'Space Heater': { i: 3281 } }, { 'Ventilation Fan': { i: 3274 } }, { 'Water Heater': { i: 3302 } }], mfg: mfg.Appl, pwr: types.Pwr, wood: '', finish: '', color: '', metal: '', seo: [' '] } },
+  { Electronic: { col: ['appliances'], item: [{ 'Cabinet Stereo': { i: 0 } }, { 'Component Stereo': { i: 0 } }, { 'Monitor': { i: 0 } }, { 'Portable Stereo': { i: 0 } }, { 'Television': { i: 0 } }], mfg: mfg.Appl, pwr: '', wood: '', finish: '', color: '', metal: '', seo: [' '] } },
   { Floor: { col: ['appliances'], item: [{ 'Floor Buffer': { i: 3288 } }, { 'Rug Shampooer': { i: 3284 } }, { 'Steam Cleaner': { i: 3283 } }, { 'Steam Mop': { i: 3287 } }, { 'Vacuum Cleaner': { i: 3300 } }], mfg: mfg.Appl, pwr: '', wood: '', finish: '', color: '', metal: '', seo: [' '] } },
-  { Household: { col: ['appliances'], item: [{ 'Coffee Maker': { i: 0 } }, { 'Griddle': { i: 0 } }, { 'Indoor Grill': { i: 0 } }, { 'Iron/Ironing Board': { i: 3295 } }, { 'Mixer': { i: 0 } }, { 'Waffle Maker': { i: 0 } },], mfg: mfg.Appl, pwr: '', finish: finish.Appl, color: '', metal: '', seo: [' '] } },
-  { Kitchen: { col: ['appliances'], item: [{ 'Dish Washer': { i: 0 } }, { Refigerator: { i: 3649 } }], mfg: mfg.Appl, pwr: types.Pwr, wood: '', finish: finish.Appl, color: '', metal: '', seo: seo.Frig } },
+  { Household: { col: ['appliances'], item: [{ 'Air Fyer': { i: 0 } }, { Blender: { i: 0 } }, { 'Coffee Maker': { i: 0 } }, { 'Deep Fryer': { i: 0 } }, { Espresso: { i: 0 } }, { 'Griddle': { i: 0 } }, { 'Indoor Grill': { i: 0 } }, { 'Iron/Ironing Board': { i: 3295 } }, { 'Mixer': { i: 0 } }, { Toaster: { i: 0 } }, { 'Toaster Oven': { i: 0 } }, { 'Waffle Maker': { i: 0 } },], mfg: mfg.Appl, pwr: '', finish: finish.Appl, color: '', metal: '', seo: [' '] } },
+  { Kitchen: { col: ['appliances'], item: [{ Cooktop: { i: 0 } }, { 'Dish Washer': { i: 0 } }, { Freezer: { i: 0 } }, { Microwave: { i: 0 } }, { Oven: { i: 0 } }, { Range: { i: 0 } }, { 'Range Hood': { i: 0 } }, { Refigerator: { i: 3649 } }], mfg: mfg.Appl, pwr: types.Pwr, wood: '', finish: finish.Appl, color: '', metal: '', seo: seo.Frig } },
   { Laundry: { col: ['appliances'], item: [{ 'Clothes Dryer': { i: 3293 } }, { 'Washing Machine': { i: 3298 } }, { 'Washer/Dryer Combo': { i: 3296 } }], mfg: mfg.Appl, pwr: types.Pwr, wood: '', finish: finish.Appl, color: '', seo: seo.WashDry } },
   { Outdoor: { col: ['appliances'], item: [{ 'Grill': { i: 0 } }, { 'Misting System': { i: 3279 } }, { 'Patio Heater': { i: 3280 } }], mfg: '', pwr: types.Pwr, wood: '', finish: finish.Appl, color: finish.Paint, seo: [' '] } },
 
 ]
 
 export const catCabType = [
-  { Bath: { col: ['home-improvement', 'cabinets'], item: [{ Vanity: { i: 2085 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
-  { Kitchen: { col: ['home-improvement', 'cabinets'], item: [{ Cabinet: { i: 2078 } }, { Island: { i: 2090 } }, { "Sink Base": { i: 2078 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
-  { Storage: { col: ['home-improvement', 'cabinets'], item: [{ Chest: { i: 2082 } }], finish: finish.Wood, color: finish.Paint, seo: [] } },
+  { Bath: { col: ['home-improvement', 'cabinets'], item: [{ '24 inch Vanity': { a: [attr.CabType, attr.CabSize], i: 2085 } }, { '30 inch Vanity': { i: 2085 } }, { '36 inch Vanity': { i: 2085 } }, { '48 inch Vanity': { i: 2085 } }, { '60 inch Vanity': { i: 2085 } }, { '72 inch Vanity': { i: 2085 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
+  { Kitchen: { col: ['home-improvement', 'cabinets'], item: [{ '9 inch Base': { a: [attr.CabType, attr.CabSize], i: 2078 } }, { '12 inch Base': { i: 2090 } }, { '18 inch Base': { i: 2078 } }, { '24 inch Base': { i: 2078 } }, { '21 inch Base': { i: 2078 } }, { '30 inch Base': { i: 2078 } }, { '36 inch Base': { i: 2078 } }, { '48 inch Base': { i: 2078 } }, { '60 inch Base': { i: 2078 } }, {}, { '9 inch Wall': { i: 2078 } }, { '12 inch Wall': { i: 2090 } }, { '18 inch Wall': { i: 2078 } }, { '24 inch Wall': { i: 2078 } }, { '21 inch Wall': { i: 2078 } }, { '30 inch Wall': { i: 2078 } }, { '36 inch Wall': { i: 2078 } }, {}, {}, {}, { 'Blind Corner': { i: 2078 } }, { 'Lazy Susan': { i: 2078 } }, { '18 inch Pantry': { i: 2078 } }, { '24 inch Pantry': { i: 2078 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
+  { Storage: { col: ['home-improvement', 'cabinets'], item: [{ Chest: { i: 2082 } }, { 'Garage Cabinet': { i: 0 } }, { 'Rolling Cabinet': { i: 0 } }, { 'Tool Chest': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Cabinet } },
 
 ]
-export const catDoorType = []
+export const catDoorType = [
+  { 'Interior Door': { col: ['home-improvement', 'doors-windows'], item: [{ 'pre-hung door': { a: [attr.DoorWidth, attr.DoorHeight], i: 0 } }, { '32"x80" door slab': { i: 0 } }, { '36"x80" pre-hung door': { i: 0 } }, { '36"x80" slab door': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Exterior Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Security Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Sliding Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'French Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Pocket Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Louvered Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+  { 'Bi-fold Door': { col: ['home-improvement', 'doors-windows'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Door } },
+
+
+]
 export const catFurnType = [
   { Baby: { col: ['furniture', 'bedroom'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0, s: true } }, { Shelving: { i: 0 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0 } }, { Shelving: { i: 0 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { Bathroom: { col: ['furniture', 'bathroom'], item: [{ 'Bath Set': { i: 2110, s: true } }, { Cabinet: { i: 0 } }, { 'Bathroom Mirror': { i: 0 } }, { 'Bath Organizer': { i: 0 } }, { 'Shelving': { i: 0 } }, { 'Vanity': { i: 2070 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { "Dining Room": { col: ['furniture', 'dining-room'], item: [{ Barstool: { i: 0, s: true } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0, s: true } }, { 'Wine Rack': { i: 2089 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { "Dining Room": { col: ['furniture', 'dining-room'], item: [{ Barstool: { i: 0, s: true } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0 } }, { 'Wine Rack': { i: 2089 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { Kitchen: { col: ['furniture', 'kitchen'], item: [{ Barstool: { i: 0, s: true } }, { Bench: { i: 2068 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { "Living Room": { col: ['furniture', 'living-room'], item: [{ 'Arm Chair': { i: 2096 } }, { 'Bean Bag Chair': { i: 2097 } }, { 'Coffee Table': { i: 0 } }, { 'End Table': { i: 0, s: true } }, { 'Media Center': { i: 2080 } }, { Recliner: { i: 0 } }, { Sectional: { i: 0, s: true } }, { Shelving: { i: 0 } }, { Sofa: { i: 0 } }, { Storage: { i: 2081 } }, { 'TV Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { Office: { col: ['furniture', 'office-furniture'], item: [{ Bookcase: { i: 0 } }, { Credenza: { i: 0 } }, { Desk: { i: 0 } }, { 'File Cabinet': { i: 2076 } }, { 'Office Chair': { i: 0 } }, { 'Printer Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Patio: { col: ['furniture', 'patio-outdoor-living'], item: [{ Hammock: { i: 3869 } }, { 'Outdoor Bed': { i: 2131 } }, { 'Outdoor Sofa': { i: 2138 } }, { 'Outdoor Storage Box': { i: 2140 } }, { 'Outdoor Structure': { i: 3874 } }, { 'Patio Chairs': { i: 2136, s: true } }, { 'Patio Table': { i: 2136, s: true } }, { 'Sunshade': { i: 3885 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { Patio: { col: ['furniture', 'patio-outdoor-living'], item: [{ Hammock: { i: 3869 } }, { 'Outdoor Bed': { i: 2131 } }, { 'Outdoor Sofa': { i: 2138 } }, { 'Outdoor Storage Box': { i: 2140 } }, { 'Outdoor Structure': { i: 3874 } }, { 'Patio Chairs': { i: 2136, s: true } }, { 'Patio Table': { i: 2136 } }, { 'Sunshade': { i: 3885 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { Sectional: { col: ['furniture', 'living-room'], item: [{ 'Right Chair': { i: 0 } }, { 'Armless Chair': { i: 0 } }, { 'Left Chair': { i: 0 } }, { 'Ottoman': { i: 0 } }, { 'Corner Chair': { i: 0 } }, { 'Chaise': { i: 0 } }, { 'Love Seat': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+
 ]
 //Taxonomy 3894
 export const catToolType = [
@@ -91,8 +111,7 @@ export const catHouseType = [
 
 export const catFloorType = [
   { Flooring: { col: ['flooring', 'building-materials'], item: [{ 'Laminate Flooring': { i: 0 } }, { 'Hardwood Flooring': { i: 0 } }, { 'Tile Flooring': { i: 0 } }, { 'Vinyl Flooring': { i: 0 } }], mfg: '', pwr: '', wood: finish.Wood, finish: '', color: finish.Paint, metal: '', seo: seo.Floor } },
-  { Rug: { col: ['furniture', 'rugs'], item: [{ 'Area Rug': { i: 0 } }, { 'Mat': { i: 0 } }, { 'Outdoor Rug': { i: 0 } }, { 'Runner Rug': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: '', seo: seo.Rug } },
-
+  { Rug: { col: ['furniture', 'rugs'], item: [{ 'Area Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Mat': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Outdoor Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Oval Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Round Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Rug Runner': { a: [attr.RugWidth, attr.RugLength], i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: '', seo: seo.Rug } },
 ]
 
 

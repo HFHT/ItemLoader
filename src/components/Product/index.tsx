@@ -37,7 +37,6 @@ export const Product = ({ isOpen, products, onClick, title }: ITile) => {
 }
 
 export const Products = ({ isOpen, products, chosen, onClick, title }: ITile) => {
-    const [selected, setSelected] = useState([-1])
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         console.log(e, id, chosen, products)
         // setSelected(id)

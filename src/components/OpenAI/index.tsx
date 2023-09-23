@@ -18,13 +18,13 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
 
     useEffect(() => {
         if (isOpen && userData.result.desc === '') {
-            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 0 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
+            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
             // setToggle(false)
         }
     }, [isOpen])
 
     function getOpenAI() {
-        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 0 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
+        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
         setIsChat(true)
     }
     function handleAccept() {

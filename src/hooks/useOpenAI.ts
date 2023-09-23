@@ -18,7 +18,7 @@ export function useOpenAI() {
             body: JSON.stringify({
                 model: import.meta.env.VITE_GPT_MODEL,
                 prompt: `Write an informative, two or three sentences, product description for:\n${userData}`,
-                temperature: 0.44,
+                temperature: 0.2,
                 max_tokens: 105
             })
         };

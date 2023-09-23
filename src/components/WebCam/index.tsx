@@ -8,10 +8,10 @@ interface ICamera {
     setter: Function;
 }
 
-
 export const WebcamCapture = ({ setter }: ICamera) => {
     const webcamRef = useRef(null);
     const [imgSrc, setImgSrc] = useState(null);
+    const [cam, toggleCam] = useState(true);
 
     const capture = useCallback(() => {
         if (!webcamRef) return
@@ -32,10 +32,10 @@ export const WebcamCapture = ({ setter }: ICamera) => {
                 audio={false}
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
-                videoConstraints={{ width: 400, height: 400, facingMode: { exact: "environment" } }}
+                videoConstraints={{ width: 400, height: 400, facingMode: setCamera() }}
             />
             <div className='photocontrols'>
-                <Button onClick={() => console.log('clear')} classes='photobtn'>Retry</Button>
+                <Button onClick={() => toggleCam(!cam)} classes='photobtn'>Camera</Button>
                 <Button onClick={capture} classes='photobtn'>Photo</Button>
                 <Button onClick={saveimg} classes='photobtn'>&nbsp;&nbsp;OK&nbsp;</Button>
             </div>
@@ -46,6 +46,10 @@ export const WebcamCapture = ({ setter }: ICamera) => {
             )}
         </>
     );
+    function setCamera() {
+        if (!cam) return {}
+        return { exact: "environment" }
+    }
 };
 
 
