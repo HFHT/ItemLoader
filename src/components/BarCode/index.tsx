@@ -37,15 +37,15 @@ export function BarCode({ barcode, done }: IPL) {
             const iframe = document.createElement('iframe')
             iframe.name = 'printf'
             iframe.id = 'printf'
-            iframe.height = '0'
-            iframe.width = '0'
+            iframe.height = '100px'
+            iframe.width = '200px'
             document.body.appendChild(iframe)
             //@ts-ignore
             const imgUrl = canvas.toDataURL({
                 format: 'jpeg',
                 quality: '1.0'
             })
-            const style = `height:100vh;width:100vw;position:absolute;left:0;top:0`
+            const style = `height:100px;width:200px;position:absolute;left:0;top:0`
             const url = `<img style="${style}" src="${imgUrl}"/>`
             //@ts-ignore
             var newWin = window.frames['printf']
