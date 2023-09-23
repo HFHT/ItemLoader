@@ -5,9 +5,11 @@ import { Button, Cabinet, Category, ColorPick, Door, OpenAI, PageLayout, Tiles, 
 import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, schemaResult, schemaType } from './helpers/objects';
 import {  useShopify } from './hooks';
 import { BarCode } from './components/BarCode';
+import { uniqueBarCode } from './hooks/barCode';
 
 function App() {
   const [theType, setTheType] = useState<Itype>(schemaType)
+  const [doPrint, setDoPrint] = useState(false)
   const [doShopify, getCollections, theCollections]: any = useShopify()
 
   useEffect(() => {
@@ -25,6 +27,7 @@ function App() {
   function handleSubmit(f: boolean) {
     doShopify(theType, f)
     setTheType(schemaType)
+    setDoPrint(true)
   }
 
   return (
@@ -33,7 +36,6 @@ function App() {
         <div className="maingrid">
 
           <div className="usergrid">
-            <BarCode />
             <Tiles tiles={catType} selected={theType.idx} onClick={(e: string, i: number) => handleSetType(e, i)} />
             <Category key={1} categories={catFurnType} isOpen={theType.type === 'Furniture'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
             <Category key={2} categories={catApplType} isOpen={theType.type === 'Appliances'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
@@ -58,6 +60,8 @@ function App() {
           </div>
           <Button onClick={(e) => handleSubmit(false)} disabled={theType.imgs === ''}>Submit</Button>
           <Button onClick={(e) => handleSubmit(true)} disabled={theType.imgs === ''}>Submit as Featured</Button>
+          {doPrint && <BarCode barcode={uniqueBarCode()} done={()=>setDoPrint(false)}/> }
+
         </div>
       </PageLayout>
     </div>

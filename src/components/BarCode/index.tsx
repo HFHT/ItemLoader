@@ -1,31 +1,33 @@
 import JsBarcode from 'jsbarcode';
 import { Input } from '../Input';
 import './barcode.css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 
 interface IPL {
-    children?: React.ReactNode;
+    barcode: string;
+    done: Function;
 }
 
-export function BarCode({ children }: IPL) {
+export function BarCode({ barcode, done }: IPL) {
     const [value, setValue] = useState('')
     const barcodeRef = useRef(null)
-    const onChange = (e: any) => {
-        console.log(e)
-        setValue(e.target.value)
-    }
+    useEffect(() => {
+        genBarcode(barcode)
+        done()
+    }, [barcode])
+    
     return (
         <div className="content">
-            <Input type={'text'} value={value} onChange={(e: any) => setValue(e)} title={''} />
+            {/* <Input type={'text'} value={value} onChange={(e: any) => setValue(e)} title={''} /> */}
             <div ref={barcodeRef}>
-                <svg onClick={(e) => window.print()} id="barcode"></svg>
+                <svg id="barcode"></svg>
             </div>
-            <button onClick={(e) => genBarcode()} id="btn">Generate</button>
+            {/* <button onClick={(e) => genBarcode()} id="btn">Generate</button> */}
         </div>
     )
-    function genBarcode() {
-        JsBarcode("#barcode", value,
+    function genBarcode(theCode:string) {
+        JsBarcode("#barcode", theCode,
             {
 
             });
