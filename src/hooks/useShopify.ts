@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CONST_DISCOUNTS } from "../constants";
-import { uniqueBarCode } from "./barCode";
+import { uniqueBarCode } from "../helpers/barCode";
 
 export function useShopify() {
     const [theCollections, setTheCollections] = useState()
@@ -8,7 +8,7 @@ export function useShopify() {
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
 
-    const doShopify = async (prompt: any, featured: boolean) => {
+    const doShopify = async (prompt: Itype, featured: boolean = false, isSku: boolean = false) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt)
 
@@ -17,25 +17,26 @@ export function useShopify() {
             headers: headers,
             body: JSON.stringify({
                 method: 'add',
-                collections: prepareCollections(theCollections, prompt, featured),
+                collections: prepareCollections(theCollections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
                         "title": `${prompt.result.seo} ${prompt.result.finish} ${prompt.result.attr1} ${prompt.result.prod}`,
                         "published_scope": "global",
                         "body_html": prompt.result.desc,
-                        "vendor": "My Store",
+                        "vendor": prompt.vendor !== '' ? prompt.vendor : "My Store",
                         "product_type": prompt.result.prod,
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
                         "variants": [{
-                            "barcode": uniqueBarCode(),
+                            "barcode": prompt.hasOwnProperty('sku') ? prompt.sku : uniqueBarCode(),
+                            "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',
                             "compare_at_price": prompt.result.price,
                             "price": prompt.result.price,
                             "requires_shipping": true,
                             "taxable": false,
                             "inventory_management": "shopify",
                             "inventory_policy": "deny",
-                            "inventory_quantity": 1,
+                            "inventory_quantity": prompt.hasOwnProperty('invQty') ? prompt.invQty : 1,
                             "weight_unit": "kg",
                             "grams": 0,
                             "weight": 0
@@ -103,8 +104,21 @@ export function useShopify() {
     }
 
     function prepareImage(imageNo: number, img: string) {
-        return (
-            JSON.stringify({
+        let theImg = {}
+        console.log(img.slice(0, 8))
+        if (img.slice(0, 8) === 'https://') {
+            theImg = {
+                image: {
+                    position: imageNo,
+                    metafields: [
+                        { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
+                    ],
+                    src: img,
+                    filename: `H${uniqueBarCode()}.png`
+                }
+            }
+        } else {
+            theImg = {
                 image: {
                     position: imageNo,
                     metafields: [
@@ -113,11 +127,14 @@ export function useShopify() {
                     attachment: img,
                     filename: `H${uniqueBarCode()}.png`
                 }
-            })
+            }
+        }
+        return (
+            JSON.stringify(theImg)
         )
     }
 
-    function prepareCollections(theCollections: any, result: any, featured: boolean) {
+    function prepareCollections(theCollections: any, result: any, featured: boolean, isSku: boolean) {
         var theDiscounts = CONST_DISCOUNTS
         theDiscounts = theDiscounts.concat(CONST_DISCOUNTS)
         theDiscounts = theDiscounts.concat(CONST_DISCOUNTS)
@@ -125,8 +142,8 @@ export function useShopify() {
         if (!theCollections) return []
         console.log(theDiscounts, theMonth, theDiscounts[theMonth])
         var aryCol = [
-            theCollections['newly-added-items'],
-            theCollections[theDiscounts[theMonth]]
+            theCollections[isSku ? 'purchased-products' : 'newly-added-items'],
+            theCollections[result.col === '' ? theDiscounts[theMonth] : result.col]
         ]
         featured && (aryCol.push(theCollections['featured-items']))
         result.result.col.forEach((c: string) => {

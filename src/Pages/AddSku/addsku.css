@@ -1,0 +1,7 @@
+
+.addaigrid {
+    display:grid;
+    grid-row:auto; 
+    border-style: solid;
+    border-radius: 6px;
+}

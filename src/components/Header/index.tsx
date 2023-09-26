@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react';
 import './header.css';
 import { AuthContext } from '../../context/AuthContext';
-import { Logo} from '../../icons';
-import { useNavigate } from '../../hooks';
+import { BadgeIcons, Logo, MiscIcons} from '../../icons';
+import { Badge } from '..';
+import { useNavigate } from 'react-router-dom';
 // import { useMsal } from '@azure/msal-react';
 // import { useNavigate } from 'react-router-dom';
 
@@ -32,6 +33,11 @@ export function Header() {
                 <button className="p0" title="home" onClick={() => navigate('/')}><Logo classes='' /></button>
             </div>
             <div className="headtitle">Shopify Inventory Wizard</div>
+            <div className="headbadges">
+                <Badge icon={BadgeIcons('Magic')} label='Wizard' content='0' onClick={() => navigate('/')} color='blue' />
+                <Badge icon={BadgeIcons('CirclePlus')} label='AddItem' content='0' onClick={() => navigate('/additem')} color='blue' />
+                <Badge icon={BadgeIcons('Scan')} label='Add SKU' content='0' onClick={(e) => navigate('/addsku')} color='red' />
+            </div>
         </>
     )
 }

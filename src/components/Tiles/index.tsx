@@ -4,7 +4,7 @@ import './tiles.css';
 
 interface ITile {
     tiles: string[]
-    selected?: number
+    selected?: number | string
     chosen?: Iprods
     onClick(e: string, i: number): Function | void
 }
@@ -20,7 +20,7 @@ export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
     return (
         <div className="tileGroup">
             {tiles && tiles.map((tileLabel, i) => (
-                <button key={i} name={tileLabel} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
+                <button key={i} name={tileLabel} onClick={(e) => handleClick(e, i)} className={(selected === i || selected.toString() === tileLabel) ? "tileButton tileactive" : "tileButton"}>
                     {tileLabel === ' ' ? '---' : tileLabel}
                 </button>
             ))}

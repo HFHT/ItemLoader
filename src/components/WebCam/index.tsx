@@ -5,12 +5,13 @@ import Webcam from "react-webcam";
 import { Button } from '../Button';
 
 interface ICamera {
+    imgUrl?: string;
     setter: Function;
 }
 
-export const WebcamCapture = ({ setter }: ICamera) => {
+export const WebcamCapture = ({ imgUrl, setter }: ICamera) => {
     const webcamRef = useRef(null);
-    const [imgSrc, setImgSrc] = useState(null);
+    const [imgSrc, setImgSrc] = useState(imgUrl);
     const [cam, toggleCam] = useState(true);
 
     const capture = useCallback(() => {

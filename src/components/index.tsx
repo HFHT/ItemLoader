@@ -1,4 +1,6 @@
+export * from './AltDesc';
 export * from './Badge';
+export * from './BarCode';
 export * from './Header';
 export * from './PageLayout';
 export * from './Tiles';
@@ -9,6 +11,9 @@ export * from './Door';
 export * from './Window';
 export * from './OpenAI';
 export * from './WebCam';
+export * from './Product';
+export * from './Setup';
+export * from './Scan';
 
 // export * from './ErrorFallBack';
 // export * from './FAB';

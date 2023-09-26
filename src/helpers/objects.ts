@@ -1,6 +1,6 @@
 
 export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', attr1: '', attr2: '', desc: '', col: [''], material: '', finish: '', condition: '', conditionAdds: '', price: '', seo: '' }
-export const schemaType = { type: '', idx: -1, imgs: '', result: schemaResult }
+export const schemaType = { type: '', idx: -1, imgs: '', col: { c: '', i: -1 }, barcode: '', result: schemaResult }
 
 export const prices = ['$5', '$10', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
 

@@ -59,6 +59,13 @@ interface Itype {
     type: string
     idx: number
     imgs: string
+    col: {c:string, i:number}
+    barcode: string
+    sku?: string
+    vendor?: string
+    invQty?: number
+    desc?: string
+    imgUrl?: string
     result: Iresult
 }
 
@@ -75,4 +82,24 @@ interface ItheRoom {
         metal: string[]
         seo: string[]
     }
+}
+
+interface IUPC {
+    brand: string;
+    categories: string;
+    description: string;
+    image: string;
+    manufacturer: {
+        company: string;
+    };
+    product_web_page: string;
+    retun_code: number;
+    return_message: string;
+    thumbnail: {
+        height: string;
+        width: string;
+        url: string;
+    }
+    upc_code: string;
+    usage: string;
 }
