@@ -41,11 +41,11 @@
     flex: 0 0 auto;
 }
 
-@media (min-width: 1216px) {
+/* @media (min-width: 1216px) {
     .pagemain {
         flex-direction: column;
     }
-}
+} */
 
 @media (min-width: 640px) {
 

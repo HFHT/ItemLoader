@@ -36,8 +36,8 @@
     background-color: var(--color-background);
 }
 
-@media (min-width: 1216px) {
+/* @media (min-width: 1216px) {
     .apptop {
         flex-direction: row;
     }
-}
+} */
