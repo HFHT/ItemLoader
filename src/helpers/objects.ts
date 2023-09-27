@@ -2,7 +2,7 @@
 export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', attr1: '', attr2: '', desc: '', col: [''], material: '', finish: '', condition: '', conditionAdds: '', price: '', seo: '' }
 export const schemaType = { type: '', idx: -1, imgs: '', col: { c: '', i: -1 }, barcode: '', result: schemaResult }
 
-export const prices = ['$5', '$10', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
+export const prices = ['$1', '$1.25', '$1.50', '$1.75', '$2', '$2.25', '$2.50', '$2.75', '$3.00', '$3.25', '$3.50', '$3.75', '$4', '$4.50', '$5', '$6', '$7', '$8', '$9', '$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
 
 export const conditions = ['New', 'Like new', 'Gently used', 'Good condition', 'Some wear']
 export const conditionAdds = [' ', 'Fade', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
@@ -27,7 +27,7 @@ const finish: Iidx = {
   Paint: ['White', 'Black', 'Violet', 'Blue', 'Cyan', 'Green', 'Yellow', 'Orange', 'Red'],
 }
 const attr: Iidx = {
-  Bed: ['Twin', 'Full', 'Double', 'King', 'California King'],
+  Bed: ['Child', 'Twin', 'Full', 'Double', 'King', 'California King'],
   Frig: ['Top Freezer', 'Bottom Freezer', 'Side-by-Side', 'French Door', 'Mini/Compact'],
   CabType: [' ', '1-Drawer', '2-Drawer', '3-Drawer', '4-Drawer'],
   CabSize: ['9 in.', '12 in.', '18 in.', '24 in.', '36 in.', '48 in.'],
@@ -46,7 +46,8 @@ const seo: Iidx = {
   Floor: [' '],
   Cabinet: [' ', 'Antique', 'Contemporary', 'Modern', 'Rustic', 'Traditional', 'Vintage'],
   Tool: [' '],
-  Door: [' ', 'Glass panel', '1-panel', '1-panel arched', '2-panel', '2-panel arched', '5-panel', '6-panel', '6-panel arched', 'glass panel', 'glass window']
+  Door: [' ', 'Glass panel', '1-panel', '1-panel arched', '2-panel', '2-panel arched', '5-panel', '6-panel', '6-panel arched', 'glass panel', 'glass window'],
+  Paint: [' ']
 }
 
 export const catType = ['Furniture', 'Appliances', 'Cabinet', 'Flooring', 'Housewares', 'Door', 'Lighting', 'Plumbing', 'Tool', 'Window']
@@ -81,8 +82,8 @@ export const catDoorType = [
 
 ]
 export const catFurnType = [
-  { Baby: { col: ['furniture', 'bedroom'], item: [{ Bassinet: { i: 2053 } }, { Bed: { i: 2058 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { 'High Chair': { i: 2060 } }, { 'Toy Chest': { i: 2084 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0 } }, { Shelving: { i: 0 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { 'Art & Decor': { col: ['furniture', 'art-home-decor'], item: [{ Art: { i: 0 } }, { 'Silk Plant': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bassinet: { i: 2053 } }, { Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { 'Changing Table': { i: 2054 } }, { Crib: { i: 2058 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { 'High Chair': { i: 2060 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0 } }, { Shelving: { i: 0 } }, { 'Toy Chest': { i: 2084 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { Bathroom: { col: ['furniture', 'bathroom'], item: [{ 'Bath Set': { i: 2110, s: true } }, { Cabinet: { i: 0 } }, { 'Bathroom Mirror': { i: 0 } }, { 'Bath Organizer': { i: 0 } }, { 'Shelving': { i: 0 } }, { 'Vanity': { i: 2070 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { "Dining Room": { col: ['furniture', 'dining-room'], item: [{ Barstool: { i: 0, s: true } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0 } }, { 'Wine Rack': { i: 2089 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { Kitchen: { col: ['furniture', 'kitchen'], item: [{ Barstool: { i: 0, s: true } }, { Bench: { i: 2068 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
@@ -105,7 +106,7 @@ export const catToolType = [
 ]
 
 export const catHouseType = [
-  { Bathroom: { col: ['Plumbing', 'building-materials'], item: [{ 'Toilet': { i: 0 } }, { 'Bidet': { i: 0 } }, { 'Faucet': { i: 0 } }, { 'Pedestal Sink': { i: 0 } }, { 'Sink': { i: 0 } }, { 'Vessel Sink': { i: 0 } }, { 'Vanity Top': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: finish.Metal, seo: seo.Lighting } },
+  { Paint: { col: ['paint', 'building-materials'], item: [{ 'Toilet': { i: 0 } }, { 'Bidet': { i: 0 } }, { 'Faucet': { i: 0 } }, { 'Pedestal Sink': { i: 0 } }, { 'Sink': { i: 0 } }, { 'Vessel Sink': { i: 0 } }, { 'Vanity Top': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: finish.Metal, seo: seo.Lighting } },
 
 ]
 
@@ -134,7 +135,16 @@ export const catPlumbType = [
 ]
 export const catWindType = []
 
+export const catSkuType = [
+  { Paint: { col: ['paint', 'building-materials'], item: [{ 'Drill': { i: 0 } }, { 'Driver': { i: 0 } }, { 'Electic Screwdriver': { i: 0 } }, { 'Hammer Drill': { i: 0 } }, { 'Impact Drill': { i: 0 } }, { 'Screw Gun': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Paint Brush': { col: ['paint', 'building-materials'], item: [{ '1" Paint Brush': { i: 0 } }, { '1.5" Paint Brush': { i: 0 } }, { '1.5" Angled Paint Brush': { i: 0 } }, { '2" Paint Brush': { i: 0 } }, { '2" Angled Paint Brush': { i: 0 } }, { '2.5" Paint Brush': { i: 0 } }, { '2.5" Angled Paint Brush': { i: 0 } }, { '3" Paint Brush': { i: 0 } }, { '4" Paint Brush': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Paint Roller Frame': { col: ['paint', 'building-materials'], item: [{ '4" Roller Frame': { i: 0 } }, { '6" Roller Frame': { i: 0 } }, { '9" Roller Frame': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Paint Roller Covers': { col: ['paint', 'building-materials'], item: [{ '4" mini': { i: 0 } }, { '4" mini box': { i: 0 } }, { '6" mini': { i: 0 } }, { '6" mini box': { i: 0 } }, { '9" 1/4" Nap': { i: 0 } }, { '9" 3/8" Nap': { i: 0 } }, { '9" 1/2" Nap': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Paint Tray': { col: ['paint', 'building-materials'], item: [{ '5 Gal Bucket Grid': { i: 0 } }, { '4" tray': { i: 0 } }, { '4" tray liner': { i: 0 } }, { '6" tray': { i: 0 } }, { '6" tray liner': { i: 0 } }, { '9" tray': { i: 0 } }, { '9" tray liner': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Paint Supplies': { col: ['paint', 'building-materials'], item: [{ '8x12 Tarp': { i: 0 } }, { '9x12 Drop Cloth': { i: 0 } }, { '10x12 Tarp': { i: 0 } }, { 'Caulk Gun': { i: 0 } }, { 'Putty Knife': { i: 0 } }, { 'Gloves-Medium': { i: 0 } }, { 'Gloves-Large': { i: 0 } }, { 'Gloves-XL': { i: 0 } }, { 'Electical Tape': { i: 0 } }, { 'Masking Tape': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
+  { 'Misc': { col: ['paint', 'building-materials'], item: [ { 'Electical Tape': { i: 0 } }, { 'Bungie Cord': { i: 0 } }, { 'Bungie Cord 10 pack': { i: 0 } }, { 'Other!!!': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
 
+]
 
 
 export const dimension: Iidx = {

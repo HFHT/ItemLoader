@@ -9,10 +9,8 @@ interface ITile {
 }
 
 export const ColorPick = ({ onClick, isOpen, selected = -1 }: ITile) => {
-    // const [isSelected, setIsSelected] = useState(-1);
-    console.log('Tiles', selected)
+    // console.log('Tiles', selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        // setIsSelected(id);
         onClick(e.currentTarget.name, id)
     }
     return (

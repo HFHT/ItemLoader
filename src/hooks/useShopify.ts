@@ -20,10 +20,10 @@ export function useShopify() {
                 collections: prepareCollections(theCollections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        "title": `${prompt.result.seo} ${prompt.result.finish} ${prompt.result.attr1} ${prompt.result.prod}`,
+                        "title": prepareTitle(prompt),
                         "published_scope": "global",
                         "body_html": prompt.result.desc,
-                        "vendor": prompt.vendor !== '' ? prompt.vendor : "My Store",
+                        "vendor": prompt.vendor !== '' ? prompt.vendor : "HabiStore",
                         "product_type": prompt.result.prod,
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
@@ -153,4 +153,14 @@ export function useShopify() {
         return aryCol
     }
 
+    function prepareTitle(theItem:Itype) {
+        const theAttrs = `${theItem.result.seo} ${theItem.result.finish} ${theItem.result.attr1}`
+        let theTitle = '';
+        if (theItem.result.prod || theItem.result.prods.length ==1) {
+            theTitle = `${theAttrs} ${theItem.result.prod} ${theItem.result.prods[0].prod}`
+        } else {
+            theTitle = `${theItem.result.prods.length} piece ${theAttrs} ${theItem.result.room} set`
+        }
+        return theTitle
+    }
 }

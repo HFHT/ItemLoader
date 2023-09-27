@@ -4,7 +4,7 @@ interface ILogo {
 
 export const Logo = (props: ILogo): JSX.Element => {
     const iconClass: string = props.classes ? props.classes : '';
-    console.log(window.innerWidth);
+    // console.log(window.innerWidth);
     return (
         <>
             {window.innerWidth > 612 ?

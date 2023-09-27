@@ -21,7 +21,7 @@ export function Wizard({ setter }: IWiz) {
   }, [])
 
   function handleSetType(e: string, i: number) {
-    console.log(e, theType.type)
+    // console.log(e, theType.type)
     if (e !== theType.type) {
       setTheType({ ...theType, type: e, idx: i, result: schemaResult })
     }

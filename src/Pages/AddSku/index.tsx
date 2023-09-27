@@ -3,9 +3,9 @@ import './addsku.css';
 import { useEffect, useState } from "react";
 import { useDigitEyes1, useShopify } from "../../hooks";
 import { parseUpcSKU } from "../../helpers/parseUpc";
-import { AltDesc, Button, Input, OpenAI, Scan, WebcamCapture } from "../../components";
+import { AltDesc, Button, Category, Input, OpenAI, Scan, WebcamCapture } from "../../components";
 import { Wizard } from "../../components/Wizard";
-import { schemaType } from "../../helpers/objects";
+import { catFurnType, catSkuType, schemaType } from "../../helpers/objects";
 
 export function AddSku() {
   const [theType, setTheType] = useState<Itype>(schemaType)
@@ -26,7 +26,9 @@ export function AddSku() {
   return (
     <>
       <Scan isOpen={true} setter={(e: Itype) => setTheType({ ...theType, ...e })} />
-      <Wizard setter={(e: Itype) => setTheType({ ...theType, ...e })} />
+      <Category key={1} categories={catSkuType} isOpen={true} basicOnly={true} onClick={(e: any) => setTheType({ ...theType, result: e })} />
+
+      {/* <Wizard setter={(e: Itype) => setTheType({ ...theType, ...e })} /> */}
       <div className="addaigrid">
         <OpenAI isOpen={theType.result.seo !== ''} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
         <AltDesc isOpen={theType.desc !== ''} disable={theType.result.seo === ''} userData={theType.desc} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />

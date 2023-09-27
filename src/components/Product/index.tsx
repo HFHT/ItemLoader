@@ -17,7 +17,7 @@ interface ITile {
 export const Product = ({ isOpen, products, onClick, title }: ITile) => {
     const [selected, setSelected] = useState(-1)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        console.log(e, id, products)
+        // console.log(e, id, products)
         setSelected(id)
         //@ts-ignore
         onClick(e, id)
@@ -38,7 +38,7 @@ export const Product = ({ isOpen, products, onClick, title }: ITile) => {
 
 export const Products = ({ isOpen, products, chosen, onClick, title }: ITile) => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        console.log(e, id, chosen, products)
+        // console.log(e, id, chosen, products)
         // setSelected(id)
         //@ts-ignore
         onClick(e, id, 1)

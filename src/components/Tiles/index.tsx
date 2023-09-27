@@ -1,5 +1,4 @@
 // import { useState } from "react";
-import { Badge } from '../Badge';
 import './tiles.css';
 
 interface ITile {
@@ -10,10 +9,8 @@ interface ITile {
 }
 
 export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
-    // const [isSelected, setIsSelected] = useState(-1);
-    console.log('Tiles', tiles, selected)
+    // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        // setIsSelected(id);
         onClick(e.currentTarget.name, id)
     }
     if (!tiles) alert('Undefined Tile')
@@ -30,16 +27,14 @@ export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
 }
 
 export const TilesMulti = ({ tiles, chosen, onClick, selected }: ITile) => {
-    // const [isSelected, setIsSelected] = useState(-1);
-    console.log('Tiles', tiles, selected)
+    // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        // setIsSelected(id);
         onClick(e.currentTarget.name, id)
     }
     function isSelected(l: string) {
         let found = false
         chosen?.forEach((x) => {
-            console.log(x.prod, l)
+            // console.log(x.prod, l)
             if (x.prod === l) { found = true }
         })
         return found
@@ -47,7 +42,7 @@ export const TilesMulti = ({ tiles, chosen, onClick, selected }: ITile) => {
     function isSelectedQty(l: string) {
         let qty = -1
         chosen?.forEach((x) => {
-            console.log(x.prod, l)
+            // console.log(x.prod, l)
             if (x.prod === l) { qty = x.qty }
         })
         return qty > 0 ? qty : ''
