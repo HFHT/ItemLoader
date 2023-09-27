@@ -23,8 +23,8 @@
 }
 
 .pagemain {
-    display: flex;
-    flex-direction: row;
+    /* display: flex;
+    flex-direction: row; */
     margin-bottom: auto;
     min-height: calc(100vh - 110px);
     background-color: var(--color-background);
