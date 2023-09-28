@@ -55,7 +55,7 @@ export function useShopify() {
                 options.body = JSON.stringify({
                     method: 'image',
                     product: shopifyResponse.prodId,
-                    body: prepareImage(1, prompt.imgs.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
+                    body: prepareImage(1, prepareTitle(prompt), prompt.imgs.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
                 })
 
                 const imageResponse = await fetch(url, options);
@@ -103,7 +103,7 @@ export function useShopify() {
         });
     }
 
-    function prepareImage(imageNo: number, img: string) {
+    function prepareImage(imageNo: number, alt: string, img: string) {
         let theImg = {}
         console.log(img.slice(0, 8))
         if (img.slice(0, 8) === 'https://') {
@@ -114,6 +114,7 @@ export function useShopify() {
                         { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
                     ],
                     src: img,
+                    alt: alt,
                     filename: `H${uniqueBarCode()}.png`
                 }
             }
@@ -125,6 +126,7 @@ export function useShopify() {
                         { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
                     ],
                     attachment: img,
+                    alt: alt,
                     filename: `H${uniqueBarCode()}.png`
                 }
             }
