@@ -32,7 +32,7 @@ export const Category = ({ isOpen, basicOnly = false, categories, onClick }: ITi
         // console.log(theResult, e, i, theRoom.prod.item[i])
         let thisProd: any = theRoom.prod.item[i]
         if (thisProd[e].hasOwnProperty('a')) { setTheAttr(thisProd[e].a) }
-        if (thisProd[e].hasOwnProperty('s') && thisProd[e].s) { setTheSetSize(0) }
+        if (thisProd[e].hasOwnProperty('s')) { setTheSetSize(0) }
         setTheResult({ ...theResult, prod: e })
     }
     function handleProducts(e: any, i: any, v: any) {
@@ -40,7 +40,7 @@ export const Category = ({ isOpen, basicOnly = false, categories, onClick }: ITi
         let thisProd: any = theRoom.prod.item[i]
         if (thisProd[e].hasOwnProperty('a')) { setTheAttr(thisProd[e].a) }
         // TODO remove the .s properties and remove sets from objects.ts
-        // if (thisProd[e].hasOwnProperty('s') && thisProd[e].s) { setTheSetSize(0) }
+        if (thisProd[e].hasOwnProperty('s') && thisProd[e].s) { setTheSetSize(0) }
 
         // add prop "e" to theResult.prods if it doesn't exist, if it does increase the qty by prop 'i'
         let adjust = theResult.prods
@@ -54,6 +54,13 @@ export const Category = ({ isOpen, basicOnly = false, categories, onClick }: ITi
         // console.log(adjust)
         setTheResult({ ...theResult, prods: adjust })
     }
+    function handleClear(e: any) {
+        console.log('handleClear')
+        setTheResult({ ...theResult, prods: [] })
+    }
+    function handleClearScreen() {
+        location.reload()
+    }    
     function handleReset() {
         setTheResult(schemaResult)
         setTheAttr([])
@@ -69,10 +76,10 @@ export const Category = ({ isOpen, basicOnly = false, categories, onClick }: ITi
             {isOpen &&
                 <>
                     <Tiles tiles={getCategories(categories)} selected={theRoom.i} onClick={(e: any, i: any) => handleClick(e, i)} />
-                    <Products title='Product:' isOpen={theResult.room !== ''} chosen={theResult.prods} products={getCategories(theRoom.prod.item)} onClick={(e: any, i: any, v: number) => { handleProducts(e, i, v) }} />
+                    <Products title='Product:' isOpen={theResult.room !== ''} chosen={theResult.prods} products={getCategories(theRoom.prod.item)} onClick={(e: any, i: any, v: number) => { handleProducts(e, i, v) }} onClear={(e: any) => { handleClear(e) }} />
                     <Product title='Mfg:' isOpen={theResult.prod !== '' || theResult.prods.length > 0} products={theRoom.prod.mfg} onClick={(e: any, i: any) => setTheResult({ ...theResult, mfg: e })} />
                     <Product title='Pwr:' isOpen={theResult.mfg !== '' && theRoom.prod.pwr.length > 0} products={theRoom.prod.pwr} onClick={(e: any, i: any) => setTheResult({ ...theResult, pwr: e })} />
-                    {/* {theSetSize > -1 && <InputTouchSpin value={theResult.qty ? theResult.qty : 1} title='Number of pieces:' setter={(e: any) => setTheResult({ ...theResult, qty: e })} />} */}
+                    {theSetSize > -1 && <InputTouchSpin value={theResult.qty ? theResult.qty : 1} title='Square Feet' setter={(e: any) => setTheResult({ ...theResult, qty: e })} />}
                     <Product title='Attr1:' isOpen={theAttr.length > 0} products={theAttr[0]} onClick={(e: any, i: any) => setTheResult({ ...theResult, attr1: e })} />
                     <Product title='Attr2:' isOpen={theAttr.length > 1} products={theAttr[1]} onClick={(e: any, i: any) => setTheResult({ ...theResult, attr2: e })} />
                     {!basicOnly && <Product title='Material:' isOpen={theResult.prod !== '' || theResult.prods.length > 0} products={selectFinishes(theRoom)} onClick={(e: any, i: any) => setTheResult({ ...theResult, material: e })} />}
@@ -83,7 +90,7 @@ export const Category = ({ isOpen, basicOnly = false, categories, onClick }: ITi
                     <Product title='Price:' isOpen={theResult.condition !== '' || (basicOnly && theResult.prods.length > 0)} products={prices} onClick={(e: any, i: any) => setTheResult({ ...theResult, price: e })} />
                     <Product title='Seo:' isOpen={theResult.price !== ''} products={theRoom.prod.seo} onClick={(e: any, i: any) => setTheResult({ ...theResult, seo: e })} />
                     {theResult.seo !== '' && <Button onClick={() => handleSave()} >Generate Description</Button>}
-                    {theResult.seo === '' && <Button onClick={() => handleReset()}  >Clear</Button>}
+                    {theResult.seo === '' && <Button onClick={() => handleClearScreen()}  >Clear</Button>}
 
                 </>
             }

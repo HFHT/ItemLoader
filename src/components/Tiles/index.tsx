@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import { Button } from '..';
 import './tiles.css';
 
 interface ITile {
@@ -6,6 +7,9 @@ interface ITile {
     selected?: number | string
     chosen?: Iprods
     onClick(e: string, i: number): Function | void
+}
+interface ITiles extends ITile {
+    onClear(e: string): Function | void
 }
 
 export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
@@ -26,7 +30,7 @@ export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
 
 }
 
-export const TilesMulti = ({ tiles, chosen, onClick, selected }: ITile) => {
+export const TilesMulti = ({ tiles, chosen, onClick, onClear, selected }: ITiles) => {
     // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         onClick(e.currentTarget.name, id)
@@ -50,6 +54,7 @@ export const TilesMulti = ({ tiles, chosen, onClick, selected }: ITile) => {
     if (!tiles) alert('Undefined Tile')
     return (
         <div className="tileGroup">
+            <Button onClick={(e:any) => onClear(e)}>Reset</Button>
             {tiles && tiles.map((tileLabel, i) => (
                 <div key={i}>
                     <button name={tileLabel} onClick={(e) => handleClick(e, i)} className={(isSelected(tileLabel)) ? "tileButton tileactive" : "tileButton"}>

@@ -35,8 +35,7 @@ export function Header() {
             <div className="headtitle">Shopify Inventory Wizard</div>
             <div className="headbadges">
                 <Badge icon={BadgeIcons('Magic')} label='Wizard' content='0' onClick={() => navigate('/')} color='blue' />
-                <Badge icon={BadgeIcons('CirclePlus')} label='AddItem' content='0' onClick={() => navigate('/additem')} color='blue' />
-                <Badge icon={BadgeIcons('Scan')} label='Add SKU' content='0' onClick={(e) => navigate('/addsku')} color='red' />
+                <Badge icon={BadgeIcons('Printer')} label='Reprint' content='0' onClick={() => navigate('/reprint')} color='blue' />
             </div>
         </>
     )

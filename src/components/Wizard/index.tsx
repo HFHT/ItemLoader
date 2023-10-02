@@ -1,9 +1,8 @@
 import './wizard.css';
 
 import { useEffect, useState } from 'react'
-import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, schemaResult, schemaType } from '../../helpers/objects';
-import { uniqueBarCode } from '../../helpers/barCode';
-import { BarCode, Button, Cabinet, Category, ColorPick, Door, OpenAI, PageLayout, Product, Setup, Tiles, WebcamCapture, Windows } from '../../components';
+import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, catWindType, schemaResult, schemaType } from '../../helpers/objects';
+import { Category,  Tiles } from '../../components';
 import { useShopify } from '../../hooks';
 
 interface IWiz {
@@ -39,15 +38,13 @@ export function Wizard({ setter }: IWiz) {
       setter(theType);
       setTheType(schemaType)
     }
-  
+
   }, [theType])
-  
+
 
   return (
     <div className="apptop">
-      {/* <PageLayout > */}
       <div className="maingrid">
-
         <div className="usergrid">
           <Tiles tiles={catType} selected={theType.idx} onClick={(e: string, i: number) => handleSetType(e, i)} />
           <Category key={1} categories={catFurnType} isOpen={theType.type === 'Furniture'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
@@ -59,21 +56,9 @@ export function Wizard({ setter }: IWiz) {
           <Category key={7} categories={catToolType} isOpen={theType.type === 'Tool'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
           <Category key={8} categories={catCabType} isOpen={theType.type === 'Cabinet'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
           <Category key={9} categories={catDoorType} isOpen={theType.type === 'Door'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-
-          <Windows isOpen={theType.type === 'Windows'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
+          <Category key={10} categories={catWindType} isOpen={theType.type === 'Window'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
         </div>
-        {/* <div className="aigrid">
-          <OpenAI isOpen={theType.result.seo !== ''} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
-        </div>
-        <div className="photogrid">
-          {theType.result.desc !== '' && <WebcamCapture setter={((e: any) => setTheType({ ...theType, imgs: e }))} />}
-        </div> */}
-        {/* <Button onClick={(e) => handleSubmit(false)} disabled={theType.imgs === ''}>Submit</Button>
-        <Button onClick={(e) => handleSubmit(true)} disabled={theType.imgs === ''}>Submit as Featured</Button>
-        {doPrint && <BarCode barcode={uniqueBarCode()} done={() => setDoPrint(false)} />} */}
-
       </div>
-      {/* </PageLayout> */}
     </div>
   )
 }

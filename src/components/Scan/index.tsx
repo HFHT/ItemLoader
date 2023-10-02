@@ -20,7 +20,7 @@ export function Scan({ isOpen, setter }: IPL) {
         console.log(upc)
         if (upc.status === 200) {
             // upc Search found a product
-            let newSKU: Itype = parseUpcSKU(upc.data);
+            let newSKU: Itype = parseUpcSKU(upc.data, theUpc);
             newSKU = {...newSKU, invQty: Number(theQty)}
             // console.log(newSKU)
             setter(newSKU)

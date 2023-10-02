@@ -18,13 +18,15 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
 
     useEffect(() => {
         if (isOpen && userData.result.desc === '') {
-            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
+            console.log('getOpenAI', userData)
+            getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.qty && userData.result.qty > 0 ? userData.result.qty + ' sq ft' : ''} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
             // setToggle(false)
         }
     }, [isOpen])
 
     function getOpenAI() {
-        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
+        console.log('getOpenAI', userData)
+        getGPT(`${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.qty && userData.result.qty > 0 ? userData.result.qty + ' sq ft' : ''} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
         setIsChat(true)
     }
     function handleAccept() {
@@ -54,13 +56,13 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
 
     function getProducts() {
         console.log(userData.result)
-        if (userData.result.prod !== '') {return userData.result.prod}
+        if (userData.result.prod !== '') { return userData.result.prod }
         let theProds = '';
         userData.result.prods.forEach(p => {
             console.log(p)
-            if (p.qty === 1) {theProds = theProds + `${p.prod},`}
-            if (p.qty === 2) {theProds = theProds + `a pair of ${p.prod},`}
-            if (p.qty > 2) {theProds = theProds + `a set of ${p.qty} ${p.prod},`}
+            if (p.qty === 1) { theProds = theProds + `${p.prod},` }
+            if (p.qty === 2) { theProds = theProds + `a pair of ${p.prod},` }
+            if (p.qty > 2) { theProds = theProds + `a set of ${p.qty} ${p.prod},` }
         })
         return theProds
     }

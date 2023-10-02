@@ -1,2 +1,2 @@
 
-export const CONST_DISCOUNTS = ['blue-discount-collection','green-discount-collection','red-discount-collection','yellow-discount-collection']
+export const CONST_DISCOUNTS = ['red-discount-collection','yellow-discount-collection', 'blue-discount-collection','green-discount-collection']

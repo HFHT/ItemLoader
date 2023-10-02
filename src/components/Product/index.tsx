@@ -3,8 +3,6 @@ import './product.css';
 
 import { useState } from "react"
 import { Tiles, TilesMulti } from ".."
-import { getCategories } from "../../helpers/functions"
-import { catFurnType } from "../../helpers/objects"
 
 interface ITile {
     isOpen: boolean
@@ -12,6 +10,10 @@ interface ITile {
     chosen?: Iprods
     title?: string
     onClick(e: string, i: number, v: number): Function | void
+
+}
+interface ITiles extends ITile {
+    onClear(e: string): Function | void
 }
 
 export const Product = ({ isOpen, products, onClick, title }: ITile) => {
@@ -26,7 +28,7 @@ export const Product = ({ isOpen, products, onClick, title }: ITile) => {
         <>
             {isOpen && products &&
                 <div className="prodtop">
-                    {title}
+                    {/* {title} */}
                     <Tiles tiles={products} selected={selected} onClick={(e: any, i: any) => handleClick(e, i)} />
 
                 </div>
@@ -36,20 +38,21 @@ export const Product = ({ isOpen, products, onClick, title }: ITile) => {
 
 }
 
-export const Products = ({ isOpen, products, chosen, onClick, title }: ITile) => {
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        // console.log(e, id, chosen, products)
-        // setSelected(id)
+export const Products = ({ isOpen, products, chosen, onClick, onClear, title }: ITiles) => {
+    const handleClick = (e: string, id: number) => {
         //@ts-ignore
         onClick(e, id, 1)
+    }
+    const handleClear = (e: string) => {
+        console.log('Products-handleClear')
+        onClear(e)
     }
     return (
         <>
             {isOpen && products &&
                 <div className="prodtop">
-                    {title}
-                    <TilesMulti tiles={products} selected={0} chosen={chosen} onClick={(e: any, i: any) => handleClick(e, i)} />
-
+                    {/* {title} */}
+                    <TilesMulti tiles={products} selected={0} chosen={chosen} onClick={(e: any, i: any) => handleClick(e, i)} onClear={(e: any) => handleClear(e)}/>
                 </div>
             }
         </>
