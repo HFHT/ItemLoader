@@ -28,24 +28,28 @@ export const WebcamCapture = ({ imgUrl, setter }: ICamera) => {
     }
 
     return (
-        <>
-            <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/jpeg"
-                videoConstraints={{ width: 400, height: 400, facingMode: setCamera() }}
-            />
-            <div className='photocontrols'>
-                <Button onClick={() => toggleCam(!cam)} classes='photobtn'>Camera</Button>
-                <Button onClick={capture} classes='photobtn'>Photo</Button>
-                <Button onClick={saveimg} classes='photobtn'>&nbsp;&nbsp;OK&nbsp;</Button>
-            </div>
-            {imgSrc && (
-                <img alt='' width='400'
-                    src={imgSrc}
+        <div className='phototop'>
+            <div>
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={{ width: 400, height: 400, facingMode: setCamera() }}
                 />
-            )}
-        </>
+                <div className='photocontrols'>
+                    <Button onClick={() => toggleCam(!cam)} classes='photobtn'>Camera</Button>
+                    <Button onClick={capture} classes='photobtn'>Photo</Button>
+                    <Button onClick={saveimg} classes='photobtn'>&nbsp;&nbsp;OK&nbsp;</Button>
+                </div>
+            </div>
+            <div>
+                {imgSrc && (
+                    <img alt='' width='400'
+                        src={imgSrc}
+                    />
+                )}
+            </div>
+        </div>
     );
     function setCamera() {
         if (!cam) return {}

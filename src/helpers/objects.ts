@@ -2,10 +2,11 @@
 export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', attr1: '', attr2: '', desc: '', col: [''], material: '', finish: '', condition: '', conditionAdds: '', price: '', seo: '' }
 export const schemaType = { type: '', idx: -1, imgs: '', col: { c: '', i: -1 }, barcode: '', result: schemaResult }
 
-export const prices = ['$1', '$1.25', '$1.50', '$1.75', '$2', '$2.25', '$2.50', '$2.75', '$3.00', '$3.25', '$3.50', '$3.75', '$4', '$4.50', '$5', '$6', '$7', '$8', '$9', '$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
+// export const prices = ['$1', '$1.25', '$1.50', '$1.75', '$2', '$2.25', '$2.50', '$2.75', '$3.00', '$3.25', '$3.50', '$3.75', '$4', '$4.50', '$5', '$6', '$7', '$8', '$9', '$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
+export const prices = ['$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
 
 export const conditions = ['New', 'Like new', 'Gently used', 'Good condition', 'Some wear']
-export const conditionAdds = [' ', 'Fade', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
+export const conditionAdds = [' ', 'Fading', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
 export const collections = ['Treasures']
 
 
@@ -21,7 +22,7 @@ const types: Iidx = {
 }
 const finish: Iidx = {
   Appl: ['Black', 'White', 'Red', 'Brown', 'Stainless'],
-  Wood: ['Bamboo', 'Birch', 'Cedar', 'Cherry', 'Hickory', 'Maple', 'Mahogany', 'Mesquite', 'Pine', 'Red-oak', 'Redwood', 'Rosewood', 'Walnut', 'White-oak'],
+  Wood: ['Real Bamboo', 'Birch Hardwood', 'Cedar Hardwood', 'Cherry Hardwood', 'Hickory Hardwood', 'Maple Hardwood', 'Mahogany Hardwood', 'Mesquite Hardwood', 'Pine Hardwood', 'Red-oak Hardwood', 'Redwood Hardwood', 'Rosewood Hardwood', 'Walnut Hardwood', 'White-oak Hardwood'],
   Finish: ['Bamboo Finish', 'Birch Finish', 'Cedar Finish', 'Cherry Finish', 'Hickory Finish', 'Maple Finish', 'Mahogany Finish', 'Mesquite Finish', 'Pine Finish', 'Red-oak Finish', 'Redwood Finish', 'Rosewood Finish', 'Walnut Finish', 'White-oak Finish'],
   Metal: ['Aluminum', 'Chrome', 'Copper', 'Brass', 'Bronze', 'Gold', 'Iron', 'Nickel', 'Pewter', 'Steel'],
   Window: ['Aluminum', 'Vinyl'],
@@ -34,10 +35,10 @@ const attr: Iidx = {
   CabSize: ['9 in.', '12 in.', '18 in.', '24 in.', '36 in.', '48 in.'],
   RugLength: [' ', '3 feet long', '4 feet long', '6 feet long', '8 feet long', '10 feet long', '12 feet long', '14 feet long', '15 feet long', '16 feet long'],
   RugWidth: [' ', '2 feet wide', '2 1/2 feet wide', '3 feet wide', '4 feet wide', '6 feet wide', '8 feet wide', '9 feet wide', '10 feet wide'],
-  DoorWidth: [' ', '18 inch', '24 inch', '28 inch', '30 inch', '32 inch', '34 inch', '36 inch'],
-  DoorHeight: [' ', '80 inch', '90 inch', '96 inch'],
-  WindowWidth: [' ', '24 inch', '36 inch', '48 inch', '60 inch', '72 inch', '96 inch'],
-  WindowHeight: [' ', '12 inch', '18 inch', '24 inch', '36 inch', '48 inch', '52 inch', '60 inch', '62 inch', '72 inch', '96 inch'],
+  DoorWidth: [' ', '18 inch wide', '24 inch wide', '28 inch wide', '30 inch wide', '32 inch wide', '34 inch wide', '36 inch wide'],
+  DoorHeight: [' ', '80 inch tall', '90 inch tall', '96 inch tall'],
+  WindowWidth: [' ', '24 inch wide', '36 inch wide', '48 inch wide', '60 inch wide', '72 inch wide', '96 inch wide'],
+  WindowHeight: [' ', '12 inch tall', '18 inch tall', '24 inch tall', '36 inch tall', '48 inch tall', '52 inch tall', '60 inch tall', '62 inch tall', '72 inch tall', '96 inch tall'],
   Floor: [' ', '10 sq ft', '15 sq ft', '20 sq ft', '25 sq ft', '30 sq ft', '40 sq ft', '50 sq ft', '60 sq ft', '70 sq ft', '80 sq ft', '90 sq ft', 'over 100 sq ft']
 }
 
@@ -45,13 +46,13 @@ const seo: Iidx = {
   Furniture: [' ', 'Antique', 'Art Deco', 'Asian', 'Early American', 'Gothic', 'Industrial', 'Minimalist', 'Mid-Century Modern', 'Mission', 'Modern', 'Nautical', 'Queen Anne', 'Rustic', 'Southwest', 'Traditional', 'Victorian', 'Vintage'],
   Frig: [' ', 'Ice maker', 'Top Freezer', 'Bottom Freezer', 'French Door', 'Side by Side'],
   WashDry: [' ', 'Top loader', 'Front loader'],
-  Lighting: [' ', 'xyz', '123'],
+  Lighting: [' ', 'Crystal', 'Farmhouse', 'Industrial', 'Modern', 'Rustic', 'Traditional', 'Western'],
   Rug: [' ', 'Abstract', 'Boho', 'Floral', 'Geometric', 'Medallion', 'Modern', 'Moroccan', 'Native American', 'Oriental', 'Persian', 'Solid', 'Vintage'],
-  Floor: [' '],
+  Floor: [' ', 'Glueless-Click', 'Glued', 'Pre-glued', 'Tongue and Groove', 'Smooth', 'Embossed', 'High Gloss'],
   Cabinet: [' ', 'Antique', 'Contemporary', 'Modern', 'Rustic', 'Traditional', 'Vintage'],
   Tool: [' '],
   Door: [' ', 'Glass panel', '1-panel', '1-panel arched', '2-panel', '2-panel arched', '5-panel', '6-panel', '6-panel arched', 'glass panel', 'with security bars', 'with screen'],
-  Window: [' ', 'single pane', 'double pane', 'triple pane', 'has a grid', 'with screen', 'with security bars'],
+  Window: [' ', 'Single pane', 'Double pane', 'Triple pane', 'has a grid', 'with screen', 'with security bars'],
   Paint: [' ']
 }
 
@@ -69,8 +70,8 @@ export const catApplType = [
 ]
 
 export const catCabType = [
-  { Bath: { col: ['home-improvement', 'cabinets'], item: [{ '24 inch Vanity': { a: [attr.CabType, attr.CabSize], i: 2085 } }, { '30 inch Vanity': { i: 2085 } }, { '36 inch Vanity': { i: 2085 } }, { '48 inch Vanity': { i: 2085 } }, { '60 inch Vanity': { i: 2085 } }, { '72 inch Vanity': { i: 2085 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
-  { Kitchen: { col: ['home-improvement', 'cabinets'], item: [{ '9 inch Base': { a: [attr.CabType, attr.CabSize], i: 2078 } }, { '12 inch Base': { i: 2090 } }, { '18 inch Base': { i: 2078 } }, { '24 inch Base': { i: 2078 } }, { '21 inch Base': { i: 2078 } }, { '30 inch Base': { i: 2078 } }, { '36 inch Base': { i: 2078 } }, { '48 inch Base': { i: 2078 } }, { '60 inch Base': { i: 2078 } }, {}, { '9 inch Wall': { i: 2078 } }, { '12 inch Wall': { i: 2090 } }, { '18 inch Wall': { i: 2078 } }, { '24 inch Wall': { i: 2078 } }, { '21 inch Wall': { i: 2078 } }, { '30 inch Wall': { i: 2078 } }, { '36 inch Wall': { i: 2078 } }, {}, {}, {}, { 'Blind Corner': { i: 2078 } }, { 'Lazy Susan': { i: 2078 } }, { '18 inch Pantry': { i: 2078 } }, { '24 inch Pantry': { i: 2078 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
+  { Bath: { col: ['home-improvement', 'cabinets'], item: [{ '24 inch Vanity': { i: 2085 } }, { '30 inch Vanity': { i: 2085 } }, { '36 inch Vanity': { i: 2085 } }, { '48 inch Vanity': { i: 2085 } }, { '60 inch Vanity': { i: 2085 } }, { '72 inch Vanity': { i: 2085 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
+  { Kitchen: { col: ['home-improvement', 'cabinets'], item: [{ '9 inch Base': { i: 2078 } }, { '12 inch Base': { i: 2090 } }, { '18 inch Base': { i: 2078 } }, { '24 inch Base': { i: 2078 } }, { '21 inch Base': { i: 2078 } }, { '30 inch Base': { i: 2078 } }, { '36 inch Base': { i: 2078 } }, { '48 inch Base': { i: 2078 } }, { '60 inch Base': { i: 2078 } }, {}, { '9 inch Wall': { i: 2078 } }, { '12 inch Wall': { i: 2090 } }, { '18 inch Wall': { i: 2078 } }, { '24 inch Wall': { i: 2078 } }, { '21 inch Wall': { i: 2078 } }, { '30 inch Wall': { i: 2078 } }, { '36 inch Wall': { i: 2078 } }, {}, {}, {}, { 'Blind Corner': { i: 2078 } }, { 'Lazy Susan': { i: 2078 } }, { '18 inch Pantry': { i: 2078 } }, { '24 inch Pantry': { i: 2078 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, seo: seo.Cabinet } },
   { Storage: { col: ['home-improvement', 'cabinets'], item: [{ Chest: { i: 2082 } }, { 'Garage Cabinet': { i: 0 } }, { 'Rolling Cabinet': { i: 0 } }, { 'Tool Chest': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Cabinet } },
 
 ]
@@ -117,7 +118,7 @@ export const catToolType = [
 ]
 
 export const catHouseType = [
-  { 'Art & Decor': { col: ['furniture', 'art-home-decor'], item: [{ Art: { i: 0 } }, { 'Silk Plant': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { 'Art & Decor': { col: ['furniture', 'art-home-decor'], item: [{ Art: { i: 0 } }, { 'Plastic Plant': { i: 0 } }, { 'Silk Plant': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { 'Tableware': { col: ['furniture', 'art-home-decor'], item: [{ Dinnerware: { i: 0 } }, { Drinkware: { i: 0 } }, { Serveware: { i: 0 } }, { Silverware: { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { 'Organization': { col: ['furniture', 'art-home-decor'], item: [{ Basket: { i: 0 } }, { Bath: { i: 0 } }, { Closet: { i: 0 } }, { Entryway: { i: 0 } }, { Kitchen: { i: 0 } }, { Jewelry: { i: 0 } }, { Office: { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
   { 'Entertainment': { col: ['furniture', 'art-home-decor'], item: [{ Books: { i: 0 } }, { Movies: { i: 0 } }, { Music: { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
@@ -129,10 +130,6 @@ export const catFloorType = [
   { Flooring: { col: ['flooring', 'home-improvement'], item: [{ 'Laminate Flooring': { s: true, i: 0 } }, { 'Hardwood Flooring': { s: true, i: 0 } }, { 'Tile Flooring': { s: true, i: 0 } }, { 'Vinyl Flooring': { s: true, i: 0 } }], mfg: '', pwr: '', wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: '', seo: seo.Floor } },
   { Rug: { col: ['furniture', 'rugs'], item: [{ 'Area Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Mat': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Outdoor Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Oval Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Round Rug': { a: [attr.RugWidth, attr.RugLength], i: 0 } }, { 'Rug Runner': { a: [attr.RugWidth, attr.RugLength], i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: '', seo: seo.Rug } },
 ]
-
-
-
-
 
 export const catLightType = [
   { Fans: { col: ['lighting'], item: [{ 'Box Fan': { i: 0 } }, { 'Ceiling Fan': { i: 3271 } }, { 'Floor Fan': { i: 0 } }, { 'Industrial Fan': { i: 3271 } }, { 'Pedestal Fan': { i: 3272 } }, { 'Tower Fan': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: finish.Paint, metal: finish.Metal, seo: seo.Lighting } },
@@ -159,7 +156,6 @@ export const catSkuType = [
   { 'Misc': { col: ['paint', 'home-improvement'], item: [{ 'Electical Tape': { i: 0 } }, { 'Bungie Cord': { i: 0 } }, { 'Bungie Cord 10 pack': { i: 0 } }, { 'Other!!!': { i: 0 } }], mfg: '', pwr: '', wood: '', finish: '', color: '', metal: '', seo: seo.Paint } },
 
 ]
-
 
 export const dimension: Iidx = {
   "CH": ['18.5', '25', '31.5', '35'],

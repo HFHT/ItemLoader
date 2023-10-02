@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
+import { parseGPT } from "../helpers/functions";
 
 export function useShopify() {
     const [theCollections, setTheCollections] = useState()
@@ -20,9 +21,9 @@ export function useShopify() {
                 collections: prepareCollections(theCollections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        "title": prepareTitle(prompt),
+                        "title": parseGPT(prompt.result.desc, 0),
                         "published_scope": "global",
-                        "body_html": prompt.result.desc,
+                        "body_html": parseGPT(prompt.result.desc, 1),
                         "vendor": currentDiscount(),
                         "product_type": prompt.result.prod,
                         "status": "active",
@@ -140,9 +141,10 @@ export function useShopify() {
         if (!theCollections) return []
         var aryCol = [
             theCollections[isSku ? 'purchased-products' : 'newly-added-items'],
-            theCollections[result.col === '' ? currentDiscount() : result.col]
+            theCollections[currentDiscount()]
         ]
         featured && (aryCol.push(theCollections['featured-items']))
+        console.log(theCollections)
         result.result.col.forEach((c: string) => {
             aryCol.push(theCollections[c])
         })
@@ -159,10 +161,10 @@ export function useShopify() {
         return theDiscounts[theMonth]
     }
 
-    function prepareTitle(theItem:Itype) {
+    function prepareTitle(theItem: Itype) {
         const theAttrs = `${theItem.result.seo} ${theItem.result.finish} ${theItem.result.attr1}`
         let theTitle = '';
-        if (theItem.result.prod || theItem.result.prods.length ==1) {
+        if (theItem.result.prod || theItem.result.prods.length == 1) {
             theTitle = `${theAttrs} ${theItem.result.prod} ${theItem.result.prods[0].prod}`
         } else {
             theTitle = `${theItem.result.prods.length} piece ${theAttrs} ${theItem.result.room} set`
@@ -170,6 +172,6 @@ export function useShopify() {
         if (theItem.result.qty && theItem.result.qty > -1) {
             theTitle = `${theTitle} (${theItem.result.qty} Sq Ft)`
         }
-        return theTitle
+        return theTitle.replace(/\s+/g, ' ').trim()
     }
 }
