@@ -1,21 +1,28 @@
 // import { useState } from "react";
-import { Button } from '..';
+import { useState } from 'react';
+import { Button, Input } from '..';
 import './tiles.css';
 
 interface ITile {
     tiles: string[]
     selected?: number | string
     chosen?: Iprods
+    hasCustom?: string
     onClick(e: string, i: number): Function | void
 }
 interface ITiles extends ITile {
     onClear(e: string): Function | void
 }
 
-export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
+export const Tiles = ({ tiles, onClick, hasCustom = '', selected = -1 }: ITile) => {
+    const [custom, setCustom] = useState('')
     // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         onClick(e.currentTarget.name, id)
+    }
+    const handleCustom = (e: string) => {
+        setCustom(e);
+        onClick(e, tiles.length)
     }
     if (!tiles) alert('Undefined Tile')
     return (
@@ -25,15 +32,25 @@ export const Tiles = ({ tiles, onClick, selected = -1 }: ITile) => {
                     {tileLabel === ' ' ? '---' : tileLabel}
                 </button>
             ))}
+            {hasCustom && <Input type={hasCustom} value={custom} title={''} onChange={(e: any) => handleCustom(e)} />}
         </div>
     );
 
 }
 
-export const TilesMulti = ({ tiles, chosen, onClick, onClear, selected }: ITiles) => {
+export const TilesMulti = ({ tiles, chosen, onClick, onClear, hasCustom = '', selected }: ITiles) => {
+    const [custom, setCustom] = useState('')
+    const [disabled, setDisabled] = useState(false)
+
     // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         onClick(e.currentTarget.name, id)
+    }
+    const handleCustom = (r: string) => {
+        console.log('handleCustom', r, custom)
+        // setCustom(e);
+        onClick(custom, tiles.length)
+        setDisabled(true)
     }
     function isSelected(l: string) {
         let found = false
@@ -54,7 +71,7 @@ export const TilesMulti = ({ tiles, chosen, onClick, onClear, selected }: ITiles
     if (!tiles) alert('Undefined Tile')
     return (
         <div className="tileGroup">
-            <Button onClick={(e:any) => onClear(e)}>Reset</Button>
+            <Button onClick={(e: any) => onClear(e)}>Reset</Button>
             {tiles && tiles.map((tileLabel, i) => (
                 <div key={i}>
                     <button name={tileLabel} onClick={(e) => handleClick(e, i)} className={(isSelected(tileLabel)) ? "tileButton tileactive" : "tileButton"}>
@@ -63,6 +80,9 @@ export const TilesMulti = ({ tiles, chosen, onClick, onClear, selected }: ITiles
                     <span className={`${isSelectedQty(tileLabel) && 'tileqty'}`}>{isSelectedQty(tileLabel)}</span>
                 </div>
             ))}
+            {hasCustom && <input type={hasCustom} disabled={disabled} value={custom} title={''} onChange={(e: any) => { setCustom(e.target.value) }} onMouseLeave={() => handleCustom('Mouse')} onBlur={() => handleCustom('blur')} />}
+
+            {/* {hasCustom && <Input type={hasCustom} value={custom} title={''} onChange={(e: any) => handleCustom(e)} />} */}
         </div>
     );
 

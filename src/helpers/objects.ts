@@ -3,7 +3,7 @@ export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', a
 export const schemaType = { type: '', idx: -1, imgs: '', col: { c: '', i: -1 }, barcode: '', result: schemaResult }
 
 // export const prices = ['$1', '$1.25', '$1.50', '$1.75', '$2', '$2.25', '$2.50', '$2.75', '$3.00', '$3.25', '$3.50', '$3.75', '$4', '$4.50', '$5', '$6', '$7', '$8', '$9', '$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
-export const prices = ['$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
+export const prices = ['$10', '$12.50', '$15', '$20', '$25', '$30', '$50', '$75', '$99', '$125', '$149', '$175', '$199', '$249', '$299', '$349', '$399', '$449', '$499'];
 
 export const conditions = ['New', 'Like new', 'Gently used', 'Good condition', 'Some wear']
 export const conditionAdds = [' ', 'Fading', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
