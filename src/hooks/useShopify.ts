@@ -5,6 +5,7 @@ import { parseGPT } from "../helpers/functions";
 
 export function useShopify() {
     const [theCollections, setTheCollections] = useState()
+    const [isDone, setIsDone] = useState('')
 
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
@@ -25,11 +26,11 @@ export function useShopify() {
                         "published_scope": "global",
                         "body_html": parseGPT(prompt.result.desc, 1),
                         "vendor": currentDiscount(),
-                        "product_type": prompt.result.prod,
+                        "product_type": prompt.result.col[0],
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
                         "variants": [{
-                            "barcode": prompt.hasOwnProperty('sku') ? prompt.sku : uniqueBarCode(),
+                            "barcode": prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode(),
                             "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',
                             "compare_at_price": prompt.result.price,
                             "price": prompt.result.price,
@@ -61,6 +62,7 @@ export function useShopify() {
 
                 const imageResponse = await fetch(url, options);
                 const shopifyImgResponse = (await imageResponse.json());
+                setIsDone(shopifyImgResponse)
                 console.log(shopifyImgResponse);
             } else {
                 throw 'Upload to Shopify failed, try again later!'
@@ -75,6 +77,7 @@ export function useShopify() {
     const getCollections = async () => {
         try {
             const response = await (fetch(url, prepareOptions('listCol', [], '')))
+            console.log(response)
             const shopifyResponse = (await response.json());
             console.log(shopifyResponse);
             if (shopifyResponse.hasOwnProperty('theCollections')) {
@@ -89,7 +92,7 @@ export function useShopify() {
             alert(error);
         }
     }
-    return [doShopify, getCollections, theCollections];
+    return [doShopify, getCollections, theCollections, isDone];
 
 
     function prepareOptions(method: string, collections: [], product: any) {

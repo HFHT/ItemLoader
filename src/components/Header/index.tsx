@@ -17,16 +17,6 @@ export function Header() {
         setTheme && setTheme(theme === "dark" ? "light" : "dark");
         setIsOpen(false);
     }
-
-    // async function signOutClickHandler(instance: any) {
-    //     try {
-    //         await instance.logoutPopup().then(
-    //             () => console.log(instance)
-    //         ).catch((error: any) => console.log(error))
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
     return (
         <>
             <div className="headlogo">
@@ -35,7 +25,7 @@ export function Header() {
             <div className="headtitle">Shopify Inventory Wizard</div>
             <div className="headbadges">
                 <Badge icon={BadgeIcons('Magic')} label='Wizard' content='0' onClick={() => navigate('/')} color='blue' />
-                <Badge icon={BadgeIcons('Printer')} label='Reprint' content='0' onClick={() => navigate('/reprint')} color='blue' />
+                <Badge icon={BadgeIcons('Printer')} label='Barcodes' content='0' onClick={() => navigate('/reprint')} color='blue' />
             </div>
         </>
     )

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, catWindType, schemaResult, schemaType } from '../../helpers/objects';
 import { Category,  Tiles } from '../../components';
 import { useShopify } from '../../hooks';
+import { uniqueBarCode } from '../../helpers/barCode';
 
 interface IWiz {
   setter: Function;
@@ -11,7 +12,6 @@ interface IWiz {
 
 export function Wizard({ setter }: IWiz) {
   const [theType, setTheType] = useState<Itype>(schemaType)
-  const [doPrint, setDoPrint] = useState(false)
   const [doShopify, getCollections, theCollections]: any = useShopify()
 
   useEffect(() => {
@@ -22,15 +22,10 @@ export function Wizard({ setter }: IWiz) {
   function handleSetType(e: string, i: number) {
     // console.log(e, theType.type)
     if (e !== theType.type) {
-      setTheType({ ...theType, type: e, idx: i, result: schemaResult })
+      setTheType({ ...theType, type: e, idx: i, barcode: uniqueBarCode(), result: schemaResult })
     }
   }
 
-  function handleSubmit(f: boolean) {
-    doShopify(theType, f)
-    setTheType(schemaType)
-    setDoPrint(true)
-  }
   useEffect(() => {
     if (!theType) return
     // Once the seo property has been set then the wizard is done.

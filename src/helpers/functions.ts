@@ -9,7 +9,7 @@ export const getCategories = (catObj: any) => {
 };
 
 export const parseGPT = (gpt: string, pos: number) => {
-    if (!gpt) return
+    if (!gpt) return ''
     let theResult: string = gpt.replace(/[\r\n|\n]+/gm, '')
     if (pos===0) {
         return theResult.slice(8, theResult.search('Descx:'))

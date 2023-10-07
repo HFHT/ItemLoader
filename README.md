@@ -1,8 +1,8 @@
 # Item Loader
 
-Need to reset after submit and barcode print is done. For now, use browser refresh.
+xNeed to reset after submit and barcode print is done. For now, use browser refresh.
 
-Add custom product, price, and seo
+xAdd custom product, price, and seo
 
 
 xAdd a barcode reprint function
