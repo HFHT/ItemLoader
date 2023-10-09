@@ -1,5 +1,9 @@
 # Item Loader
 
+Add a barcode print refresh button (browser refresh doesn't work).
+
+Reprint browser refresh doesn't work, do I have a problem with React-router? 
+
 xNeed to reset after submit and barcode print is done. For now, use browser refresh.
 
 xAdd custom product, price, and seo

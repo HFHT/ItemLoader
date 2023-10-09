@@ -5,7 +5,7 @@ export const CONST_PRINT_MAC = '00:11:62:0e:2f:bc'
 export const CONST_STAR_ALIGN = '[feed: length 24mm]'
 
 
-export const CONST_STARLABEL = '[align: center][mag: w 2; h 2]{price}[mag] {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 6mm]'
+export const CONST_STARLABEL = '[align: center][mag: w 2; h 2]{price}[mag] {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 7mm]'
 
 export const CONST_DISCOUNTS = ['red-collection','yellow-collection', 'blue-discount-collection','green-collection']
 
