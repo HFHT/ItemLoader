@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { parseGPT } from "../helpers/functions";
-import { CONST_PRINT_MAC, CONST_STARLABEL, CONST_STAR_ALIGN } from "../constants";
+import { CONST_PRINT_MAC, CONST_STARLABEL, CONST_STARLABEL_ADJ, CONST_STAR_ADJUST_CNT, CONST_STAR_ALIGN } from "../constants";
+import { getCookie, setCookie } from "../helpers/cookies";
 
 export function usePrint() {
     const [printQ, setPrintQ] = useState();
@@ -12,6 +13,8 @@ export function usePrint() {
         // if (!chatGPT) return;
         console.log(userData)
         if (!userData) return;
+        const printed = getCookie('print') ? Number(getCookie('print')) : 0
+        console.log(printed);
 
         const header: any = { method: "POST", headers: new Headers() };
 
@@ -26,7 +29,7 @@ export function usePrint() {
                     job: userData.barcode,
                     date: Date.now(),
                     desc: parseGPT(userData.result.desc, 0),
-                    blob: buildStarBlob(userData),
+                    blob: buildStarBlob(userData, printed),
                     fileX: ''
                 }
             }
@@ -34,7 +37,7 @@ export function usePrint() {
         try {
             fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
                 .then(response => response.json())
-                .then(data => { setPrintResult(data) })
+                .then(data => { setPrintResult(data); saveCount(printed) })
                 .catch(error => console.log(error))
         }
         catch (error) {
@@ -43,7 +46,7 @@ export function usePrint() {
 
     }
 
-    const doAlign = async (doIt:boolean) => {
+    const doAlign = async (doIt: boolean) => {
         if (!doIt) return
         const header: any = { method: "POST", headers: new Headers() };
 
@@ -103,6 +106,13 @@ export function usePrint() {
     return [printQ, doPrint, doAlign, doReprint, printResult];
 }
 
-function buildStarBlob(blob: any) {
+function buildStarBlob(blob: any, printed: number) {
+    if (printed === CONST_STAR_ADJUST_CNT) {
+        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+    }
     return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+}
+
+function saveCount(printed: number) {
+    printed === CONST_STAR_ADJUST_CNT ? setCookie('print', 0, 30) : setCookie('print', printed + 1, 30)
 }
