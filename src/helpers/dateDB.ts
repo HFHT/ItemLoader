@@ -18,3 +18,9 @@ export const dateFormat = (date: any) => {
 
     return [year, month, day].join('-');
 }
+
+// Return current date in DB format
+export const daysAgo = (dif: number) => {
+    const theDate = new Date;
+    return theDate.setDate(theDate.getDate() - dif);
+};

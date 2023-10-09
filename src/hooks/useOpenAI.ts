@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export function useOpenAI() {
-    const [chatGPT, setChatGPT] = useState<string |null>();
+    const [chatGPT, setChatGPT] = useState<string | null>();
 
     const getChatGPT = async (userData: any) => {
         // if (!chatGPT) return;
@@ -36,7 +36,8 @@ export function useOpenAI() {
         }
     }
 
-    const resetGPT = () => {
+    const resetGPT = (doIt: boolean) => {
+        if (!doIt) return
         console.log('resetGPT')
         setChatGPT('')
     }

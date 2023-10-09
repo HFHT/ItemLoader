@@ -10,19 +10,18 @@ import { Wizard } from '../../components/Wizard';
 export function Main() {
   const [theType, setTheType] = useState<Itype>(schemaType)
   const [doPrintHTML, setDoPrintHTML] = useState(false)
-  const [printQ, doPrint, doAlign, printResult] = usePrint()
+  const [printQ, doPrint, doAlign, doReprint, printResult]:any = usePrint()
   const [doShopify, getCollections, theCollections, shopifyDone]: any = useShopify()
 
   useEffect(() => {
     console.log('getCollections')
-    getCollections();
+    getCollections(true);
   }, [])
 
   useEffect(() => {
     console.log('Print11')
     if (!printResult || !shopifyDone) { return }
     console.log('Print:', printResult, shopifyDone)
-    //@ts-ignore
     if (printResult && shopifyDone) {
     window.location.reload()
     }

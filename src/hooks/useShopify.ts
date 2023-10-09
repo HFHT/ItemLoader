@@ -74,7 +74,9 @@ export function useShopify() {
             alert(error);
         }
     }
-    const getCollections = async () => {
+    async function getCollections(doIt:boolean) {
+        if (!doIt) return
+    // const getCollections = async () => {
         try {
             const response = await (fetch(url, prepareOptions('listCol', [], '')))
             console.log(response)

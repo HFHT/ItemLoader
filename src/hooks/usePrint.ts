@@ -24,6 +24,8 @@ export function usePrint() {
                     mac: CONST_PRINT_MAC,
                     printed: false,
                     job: userData.barcode,
+                    date: Date.now(),
+                    desc: parseGPT(userData.result.desc, 0),
                     blob: buildStarBlob(userData),
                     fileX: ''
                 }
@@ -41,7 +43,8 @@ export function usePrint() {
 
     }
 
-    const doAlign = async () => {
+    const doAlign = async (doIt:boolean) => {
+        if (!doIt) return
         const header: any = { method: "POST", headers: new Headers() };
 
         header.body = JSON.stringify(
@@ -72,7 +75,32 @@ export function usePrint() {
 
     }
 
-    return [printQ, doPrint, doAlign, printResult];
+    const doReprint = async (job: string) => {
+        const header: any = { method: "POST", headers: new Headers() };
+        //req={"method":"updateOne","db":"Inventory","collection":"Test","data":{"a":5},"find":{"_id":0}}
+
+        header.body = JSON.stringify(
+            {
+                method: 'updateOne',
+                db: 'Inventory',
+                collection: 'PrintQueue',
+                find: { job: job },
+                data: { printed: false }
+            }
+        )
+        try {
+            fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
+                .then(response => response.json())
+                .then(data => { setPrintResult(data) })
+                .catch(error => console.log(error))
+        }
+        catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    return [printQ, doPrint, doAlign, doReprint, printResult];
 }
 
 function buildStarBlob(blob: any) {

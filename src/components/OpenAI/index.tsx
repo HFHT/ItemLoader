@@ -35,7 +35,7 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
     }
     function handleAccept() {
         setResult(gpt)
-        resetGPT()
+        resetGPT(true)
         // setToggle(true)
     }
 
