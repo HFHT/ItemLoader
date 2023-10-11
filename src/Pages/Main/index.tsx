@@ -2,15 +2,13 @@ import './main.css';
 
 import { useEffect, useState } from 'react'
 import { schemaResult, schemaType } from '../../helpers/objects';
-import { uniqueBarCode } from '../../helpers/barCode';
-import { BarCode, Button, OpenAI, WebcamCapture } from '../../components';
-import { usePrint, useShopify } from '../../hooks';
+import { Button, OpenAI, WebcamCapture } from '../../components';
+import { useShopify } from '../../hooks';
 import { Wizard } from '../../components/Wizard';
+import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 
 export function Main() {
   const [theType, setTheType] = useState<Itype>(schemaType)
-  const [doPrintHTML, setDoPrintHTML] = useState(false)
-  const [printQ, doPrint, doAlign, doReprint, printResult]:any = usePrint()
   const [doShopify, getCollections, theCollections, shopifyDone]: any = useShopify()
 
   useEffect(() => {
@@ -20,12 +18,12 @@ export function Main() {
 
   useEffect(() => {
     console.log('Print11')
-    if (!printResult || !shopifyDone) { return }
-    console.log('Print:', printResult, shopifyDone)
-    if (printResult && shopifyDone) {
-    window.location.reload()
+    if (!shopifyDone) { return }
+    console.log('Print:', shopifyDone)
+    if (shopifyDone) {
+      window.location.reload()
     }
-  }, [printResult,shopifyDone])
+  }, [shopifyDone])
 
   function handleSetType(e: string, i: number) {
     console.log(e, theType.type)
@@ -34,11 +32,20 @@ export function Main() {
     }
   }
 
+  function addToPrintQueue(bc: any) {
+    let theQueue = getLocalStorage('barcodes')
+    if (!theQueue) {
+      theQueue = []
+    }
+    theQueue.unshift(bc)
+    setLocalStorage('barcodes',theQueue)
+  }
+
   function handleSubmit(f: boolean) {
+    addToPrintQueue(theType)
     doShopify(theType, f)
     setTheType(schemaType)
-    doPrint && doPrint(theType)
-    setDoPrintHTML(true)
+    // doPrint && doPrint(theType)
   }
 
   return (

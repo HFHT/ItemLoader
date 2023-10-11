@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { CONST_DISCOUNTS } from "../constants";
+import { CONST_COLLECTIONS, CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
 import { parseGPT } from "../helpers/functions";
 
 export function useShopify() {
-    const [theCollections, setTheCollections] = useState()
+    // const [theCollections, setTheCollections] = useState()
     const [isDone, setIsDone] = useState('')
 
     const headers = new Headers();
@@ -19,7 +19,7 @@ export function useShopify() {
             headers: headers,
             body: JSON.stringify({
                 method: 'add',
-                collections: prepareCollections(theCollections, prompt, featured, isSku),
+                collections: prepareCollections(CONST_COLLECTIONS, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
                         "title": parseGPT(prompt.result.desc, 0),
@@ -76,25 +76,26 @@ export function useShopify() {
     }
     async function getCollections(doIt:boolean) {
         if (!doIt) return
-    // const getCollections = async () => {
-        try {
-            const response = await (fetch(url, prepareOptions('listCol', [], '')))
-            console.log(response)
-            const shopifyResponse = (await response.json());
-            console.log(shopifyResponse);
-            if (shopifyResponse.hasOwnProperty('theCollections')) {
-                const temp: any = {}
-                shopifyResponse.theCollections.data.custom_collections.forEach((e: any) => temp[e.handle] = e.id)
-                setTheCollections(temp);
+        // try {
+        //     const response = await (fetch(url, prepareOptions('listCol', [], '')))
+        //     console.log(response)
+        //     const shopifyResponse = (await response.json());
+        //     console.log(shopifyResponse);
+        //     if (shopifyResponse.hasOwnProperty('theCollections')) {
+        //         const temp: any = {}
+        //         shopifyResponse.theCollections.data.custom_collections.forEach((e: any) => temp[e.handle] = e.id)
+        //         setTheCollections(temp);
 
-            } else { throw 'Could not retrieve Collections, check the network.' }
-        }
-        catch (error) {
-            console.log(error);
-            alert(error);
-        }
+        //     } else { throw 'Could not retrieve Collections, check the network.' }
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     alert(error);
+        // }
+        return
     }
-    return [doShopify, getCollections, theCollections, isDone];
+    // return [doShopify, getCollections, theCollections, isDone];
+    return [doShopify, getCollections, CONST_COLLECTIONS, isDone];
 
 
     function prepareOptions(method: string, collections: [], product: any) {
