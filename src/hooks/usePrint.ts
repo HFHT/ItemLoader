@@ -28,7 +28,7 @@ export function usePrint() {
                     printed: false,
                     job: userData.barcode,
                     date: Date.now(),
-                    desc: parseGPT(userData.result.desc, 0),
+                    desc: (userData.barcode.slice(-5) + ' ' + parseGPT(userData.result.desc, 0)).slice(0,35),
                     blob: buildStarBlob(userData, printed),
                     fileX: ''
                 }
