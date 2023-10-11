@@ -109,9 +109,9 @@ export function usePrint() {
 
 function buildStarBlob(blob: any, printed: number) {
     if (printed === CONST_STAR_ADJUST_CNT) {
-        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
     }
-    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
 }
 
 function saveCount(printed: number) {
