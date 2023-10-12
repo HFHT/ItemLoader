@@ -6,6 +6,7 @@ import { Button, OpenAI, WebcamCapture } from '../../components';
 import { useShopify } from '../../hooks';
 import { Wizard } from '../../components/Wizard';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
+import { ClipLoader } from 'react-spinners';
 
 export function Main() {
   const [theType, setTheType] = useState<Itype>(schemaType)
@@ -59,6 +60,7 @@ export function Main() {
       </div>
       <Button onClick={(e) => handleSubmit(false)} disabled={theType.imgs === ''}>Submit</Button>
       <Button onClick={(e) => handleSubmit(true)} disabled={theType.imgs === ''}>Submit as Featured</Button>
+      {/* <ClipLoader loading={shopifyDone} /> */}
     </div>
   )
 }

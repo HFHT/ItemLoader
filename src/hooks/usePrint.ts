@@ -29,21 +29,29 @@ export function usePrint() {
                     // job: userData.barcode,
                     job: Date.now(),
                     date: Date.now(),
-                    desc: (userData.barcode.slice(-5) + ' ' + parseGPT(userData.result.desc, 0)).slice(0,35),
+                    desc: (userData.barcode.slice(-5) + ' ' + parseGPT(userData.result.desc, 0)).slice(0, 35),
                     blob: buildStarBlob(userData, printed),
                     fileX: ''
                 }
             }
         )
-        try {
-            fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
-                .then(response => response.json())
-                .then(data => { setPrintResult(data); saveCount(printed) })
-                .catch(error => console.log(error))
-        }
-        catch (error) {
-            console.log(error);
-        }
+
+        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+        console.log(response);
+        const prtResponse = (await response.json());
+        console.log(prtResponse);
+        setPrintResult(prtResponse);
+        saveCount(printed);
+
+        // try {
+        //     fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
+        //         .then(response => response.json())
+        //         .then(data => { setPrintResult(data); saveCount(printed) })
+        //         .catch(error => console.log(error))
+        // }
+        // catch (error) {
+        //     console.log(error);
+        // }
 
     }
 
@@ -67,15 +75,23 @@ export function usePrint() {
                 find: { job: '123456789012' }
             }
         )
-        try {
-            fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
-                .then(response => response.json())
-                .then(data => { setPrintResult(data) })
-                .catch(error => console.log(error))
-        }
-        catch (error) {
-            console.log(error);
-        }
+
+        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+        console.log(response);
+        const prtResponse = (await response.json());
+        console.log(prtResponse);
+        setPrintResult(prtResponse);
+
+
+        // try {
+        //     fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
+        //         .then(response => response.json())
+        //         .then(data => { setPrintResult(data) })
+        //         .catch(error => console.log(error))
+        // }
+        // catch (error) {
+        //     console.log(error);
+        // }
 
     }
 
@@ -94,7 +110,13 @@ export function usePrint() {
         )
         try {
             fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    response.json()
+                })
+                //@ts-ignore
                 .then(data => { setPrintResult(data) })
                 .catch(error => console.log(error))
         }
@@ -109,9 +131,11 @@ export function usePrint() {
 
 function buildStarBlob(blob: any, printed: number) {
     if (printed === CONST_STAR_ADJUST_CNT) {
-        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
+        // return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
     }
-    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
+    // return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
 }
 
 function saveCount(printed: number) {

@@ -22,7 +22,8 @@ export function useShopify() {
                 collections: prepareCollections(CONST_COLLECTIONS, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        "title": parseGPT(prompt.result.desc, 0),
+                        // "title": parseGPT(prompt.result.desc, 0),
+                        "title": prompt.barcode.slice(-5) + ' ' + parseGPT(prompt.result.desc, 0),
                         "published_scope": "global",
                         "body_html": parseGPT(prompt.result.desc, 1),
                         "vendor": currentDiscount(),
