@@ -25,11 +25,23 @@ export function useOpenAI() {
         if (!userData) return;
         try {
             const response = await fetch(url, options);
+            console.log(response);
             const gptResponse = (await response.json());
             console.log(gptResponse);
             console.log(gptResponse.choices[0].text)
             // checkStatusCode(gptResponse.status);
             setChatGPT(gptResponse.choices[0].text);
+
+            // try {
+            //     fetch(url, options)
+            //         .then(response => response.json())
+            //         .then(data => { setChatGPT(data.choices[0].text) })
+            //         .catch(error => console.log(error))
+            // }
+            // catch (error) {
+            //     console.log(error);
+            // }
+
         }
         catch (error) {
             console.log(error);

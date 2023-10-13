@@ -27,7 +27,7 @@ export const whites = [
     {'Light Gray': '#D3D3D3'},
     {Gray: '#808080'},
     {'Slate Gray': '#708090'},
-    {Black: '000000'},
+    {Black: '#000000'},
     {Lemon:'#FFFACD'},
     {Goldenrod: '#EEE8AA'},
     {Bisque: '#FFE4C40'},

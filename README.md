@@ -1,5 +1,16 @@
 # Item Loader
 
+Fix localstore barcodes is empty on the reprint page (err on .map)
+Add fabric as a finish
+
+Removed this from Azure Configuration
+  {
+    "name": "WEBSITE_ENABLE_SYNC_UPDATE_SITE",
+    "value": "true",
+    "slotSetting": false
+  },
+
+
 Add a barcode print refresh button (browser refresh doesn't work).
 
 Reprint browser refresh doesn't work, do I have a problem with React-router? 
