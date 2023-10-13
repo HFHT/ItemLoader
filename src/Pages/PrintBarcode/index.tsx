@@ -37,7 +37,7 @@ export function PrintBarcode() {
         barcodes.map((bc: any, i: number) => (showBarcode(bc, i)))
 
       } */}
-      {getLocalStorage('barcodes').map((bc: any, i: number) => (showBarcode(bc, i)))}
+      {getLocalStorage('barcodes') && getLocalStorage('barcodes').map((bc: any, i: number) => (showBarcode(bc, i)))}
 
     </>
   )

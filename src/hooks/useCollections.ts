@@ -3,79 +3,35 @@ import { CONST_COLLECTIONS, CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
 import { parseGPT } from "../helpers/functions";
 
-export function useShopify() {
+export function useCollections() {
     // const [theCollections, setTheCollections] = useState()
     const [isDone, setIsDone] = useState('')
 
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
 
-    const doShopify = async (prompt: Itype, collections: any, featured: boolean = false, isSku: boolean = false) => {
-        if (!prompt.result.room) return;
-        console.log('useShopify', prompt)
+    async function getCollections(doIt:boolean) {
+        if (!doIt) return
+        // try {
+        //     const response = await (fetch(url, prepareOptions('listCol', [], '')))
+        //     console.log(response)
+        //     const shopifyResponse = (await response.json());
+        //     console.log(shopifyResponse);
+        //     if (shopifyResponse.hasOwnProperty('theCollections')) {
+        //         const temp: any = {}
+        //         shopifyResponse.theCollections.data.custom_collections.forEach((e: any) => temp[e.handle] = e.id)
+        //         setTheCollections(temp);
 
-        let options = {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify({
-                method: 'add',
-                collections: prepareCollections(collections, prompt, featured, isSku),
-                product: JSON.stringify({
-                    "product": {
-                        // "title": parseGPT(prompt.result.desc, 0),
-                        "title": prompt.barcode.slice(-5) + ' ' + parseGPT(prompt.result.desc, 0),
-                        "published_scope": "global",
-                        "body_html": parseGPT(prompt.result.desc, 1),
-                        "vendor": currentDiscount(),
-                        "product_type": prompt.result.col[0],
-                        "status": "active",
-                        "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
-                        "variants": [{
-                            "barcode": prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode(),
-                            "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',
-                            "compare_at_price": prompt.result.price,
-                            "price": prompt.result.price,
-                            "requires_shipping": true,
-                            "taxable": false,
-                            "inventory_management": "shopify",
-                            "inventory_policy": "deny",
-                            "inventory_quantity": prompt.hasOwnProperty('invQty') ? prompt.invQty : 1,
-                            "weight_unit": "kg",
-                            "grams": 0,
-                            "weight": 0
-                        }]
-                    }
-                })
-            })
-        };
-        try {
-            const response = await fetch(url, options);
-            const shopifyResponse = (await response.json());
-            console.log(shopifyResponse, shopifyResponse.prodId);
-            if (shopifyResponse.hasOwnProperty('prodId')) {
-                url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopifyImage`;
-
-                options.body = JSON.stringify({
-                    method: 'image',
-                    product: shopifyResponse.prodId,
-                    body: prepareImage(1, prepareTitle(prompt), prompt.imgs.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
-                })
-
-                const imageResponse = await fetch(url, options);
-                const shopifyImgResponse = (await imageResponse.json());
-                setIsDone(shopifyImgResponse)
-                console.log(shopifyImgResponse);
-            } else {
-                throw 'Upload to Shopify failed, try again later!'
-            }
-
-        }
-        catch (error) {
-            console.log(error);
-            alert(error);
-        }
+        //     } else { throw 'Could not retrieve Collections, check the network.' }
+        // }
+        // catch (error) {
+        //     console.log(error);
+        //     alert(error);
+        // }
+        return
     }
-    return [doShopify, isDone];
+    // return [doShopify, getCollections, theCollections, isDone];
+    return [CONST_COLLECTIONS, getCollections];
 
 
     function prepareOptions(method: string, collections: [], product: any) {

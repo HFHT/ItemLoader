@@ -48,6 +48,7 @@ interface Iresult {
     conditionAdds: string;
     price: string;
     seo: string;
+    new: boolean;
 }
 interface Iprod {
     prod: string;

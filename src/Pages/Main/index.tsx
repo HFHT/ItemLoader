@@ -3,28 +3,31 @@ import './main.css';
 import { useEffect, useState } from 'react'
 import { schemaResult, schemaType } from '../../helpers/objects';
 import { Button, OpenAI, WebcamCapture } from '../../components';
-import { useShopify } from '../../hooks';
+import { useCollections, useShopify } from '../../hooks';
 import { Wizard } from '../../components/Wizard';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 import { ClipLoader } from 'react-spinners';
+import { CONST_COLLECTIONS } from '../../constants';
 
 export function Main() {
   const [theType, setTheType] = useState<Itype>(schemaType)
-  const [doShopify, getCollections, theCollections, shopifyDone]: any = useShopify()
+  const [doShopify, shopifyLoading]: any = useShopify()
+  const [theCollections, getCollections]: any = useCollections()
+
 
   useEffect(() => {
     console.log('getCollections')
     getCollections(true);
   }, [])
 
-  useEffect(() => {
-    console.log('Print11')
-    if (!shopifyDone) { return }
-    console.log('Print:', shopifyDone)
-    if (shopifyDone) {
-      window.location.reload()
-    }
-  }, [shopifyDone])
+  // useEffect(() => {
+  //   console.log('Print11')
+  //   if (!shopifyDone) { return }
+  //   console.log('Print:', shopifyDone)
+  //   if (shopifyDone) {
+  //     window.location.reload()
+  //   }
+  // }, [shopifyDone])
 
   function handleSetType(e: string, i: number) {
     console.log(e, theType.type)
@@ -44,14 +47,17 @@ export function Main() {
 
   function handleSubmit(f: boolean) {
     addToPrintQueue(theType)
-    doShopify(theType, f)
-    setTheType(schemaType)
+    console.log(theType)
+    doShopify(theType, CONST_COLLECTIONS, f)
+    let initType = schemaType
+    initType.result.prods=[]
+    setTheType(initType)
     // doPrint && doPrint(theType)
   }
 
   return (
     <div className="apptop">
-      <Wizard setter={(e: any) => setTheType(e)} />
+      <Wizard thisType={theType} setter={(e: any) => setTheType(e)} />
       <div className="aigrid">
         <OpenAI isOpen={theType.result.seo !== ''} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
       </div>

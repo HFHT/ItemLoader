@@ -7,51 +7,52 @@ import { useShopify } from '../../hooks';
 import { uniqueBarCode } from '../../helpers/barCode';
 
 interface IWiz {
+  thisType: Itype;
   setter: Function;
 }
 
-export function Wizard({ setter }: IWiz) {
-  const [theType, setTheType] = useState<Itype>(schemaType)
-  const [doShopify, getCollections, theCollections]: any = useShopify()
+export function Wizard({ thisType, setter }: IWiz) {
+  // const [theType, setTheType] = useState<Itype>(schemaType)
+  // const [doShopify, getCollections, theCollections]: any = useShopify()
 
-  useEffect(() => {
-    //if (!theCollections) return;
-    getCollections();
-  }, [])
+  // useEffect(() => {
+  //   //if (!theCollections) return;
+  //   getCollections();
+  // }, [])
 
   function handleSetType(e: string, i: number) {
     // console.log(e, theType.type)
-    if (e !== theType.type) {
-      setTheType({ ...theType, type: e, idx: i, barcode: uniqueBarCode(), result: schemaResult })
+    if (e !== thisType.type) {
+      setter({ ...thisType, type: e, idx: i, barcode: uniqueBarCode(), result: schemaResult })
     }
   }
 
   useEffect(() => {
-    if (!theType) return
+    if (!thisType) return
     // Once the seo property has been set then the wizard is done.
-    if (theType.result.seo !== '') {
-      setter(theType);
-      setTheType(schemaType)
+    if (thisType.result.seo !== '') {
+      setter(thisType);
+      // setTheType(schemaType)
     }
 
-  }, [theType])
+  }, [thisType])
 
 
   return (
     <div className="apptop">
       <div className="maingrid">
         <div className="usergrid">
-          <Tiles tiles={catType} selected={theType.idx} onClick={(e: string, i: number) => handleSetType(e, i)} />
-          <Category key={1} categories={catFurnType} isOpen={theType.type === 'Furniture'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={2} categories={catApplType} isOpen={theType.type === 'Appliances'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={3} categories={catHouseType} isOpen={theType.type === 'Housewares'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={4} categories={catFloorType} isOpen={theType.type === 'Flooring'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={5} categories={catLightType} isOpen={theType.type === 'Lighting'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={6} categories={catPlumbType} isOpen={theType.type === 'Plumbing'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={7} categories={catToolType} isOpen={theType.type === 'Tool'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={8} categories={catCabType} isOpen={theType.type === 'Cabinet'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={9} categories={catDoorType} isOpen={theType.type === 'Door'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
-          <Category key={10} categories={catWindType} isOpen={theType.type === 'Window'} onClick={(e: any) => setTheType({ ...theType, result: e })} />
+          <Tiles tiles={catType} selected={thisType.idx} onClick={(e: string, i: number) => handleSetType(e, i)} />
+          <Category key={1} result={thisType.result} categories={catFurnType} isOpen={thisType.type === 'Furniture'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={2} result={thisType.result} categories={catApplType} isOpen={thisType.type === 'Appliances'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={3} result={thisType.result} categories={catHouseType} isOpen={thisType.type === 'Housewares'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={4} result={thisType.result} categories={catFloorType} isOpen={thisType.type === 'Flooring'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={5} result={thisType.result} categories={catLightType} isOpen={thisType.type === 'Lighting'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={6} result={thisType.result} categories={catPlumbType} isOpen={thisType.type === 'Plumbing'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={7} result={thisType.result} categories={catToolType} isOpen={thisType.type === 'Tool'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={8} result={thisType.result} categories={catCabType} isOpen={thisType.type === 'Cabinet'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={9} result={thisType.result} categories={catDoorType} isOpen={thisType.type === 'Door'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={10} result={thisType.result} categories={catWindType} isOpen={thisType.type === 'Window'} setter={(e: any) => setter({ ...thisType, result: e })} />
         </div>
       </div>
     </div>
