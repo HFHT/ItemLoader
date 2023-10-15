@@ -8,6 +8,9 @@
   border-color: var(--color-li-border);
 }
 
+.colorgradient {
+  background-image: linear-gradient(to right, magenta, royalblue)
+}
 @media (min-width: 412px) {
   .colorpickGroup {
     grid-template-columns: repeat(4, minmax(0, 1fr));

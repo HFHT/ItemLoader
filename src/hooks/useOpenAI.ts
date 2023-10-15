@@ -26,6 +26,7 @@ export function useOpenAI() {
         try {
             const response = await fetch(url, options);
             console.log(response);
+            if (!response.ok) throw `ChatGPT failed with ${response.status}: ${response.statusText}`
             const gptResponse = (await response.json());
             console.log(gptResponse);
             console.log(gptResponse.choices[0].text)
@@ -45,6 +46,7 @@ export function useOpenAI() {
         }
         catch (error) {
             console.log(error);
+            alert(error);
         }
     }
 

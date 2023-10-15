@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CONST_COLLECTIONS, CONST_DISCOUNTS } from "../constants";
+import { CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
 import { parseGPT } from "../helpers/functions";
 
@@ -10,7 +10,7 @@ export function useShopify() {
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
 
-    const doShopify = async (prompt: Itype, collections: any, featured: boolean = false, isSku: boolean = false) => {
+    const doShopify = async (prompt: Itype, collections: any, featured: string = 'submit', isSku: boolean = false) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt)
 
@@ -24,7 +24,7 @@ export function useShopify() {
                     "product": {
                         // "title": parseGPT(prompt.result.desc, 0),
                         "title": prompt.barcode.slice(-5) + ' ' + parseGPT(prompt.result.desc, 0),
-                        "published_scope": "global",
+                        "published_scope": featured === 'submit' ? "201136242996" : "global",
                         "body_html": parseGPT(prompt.result.desc, 1),
                         "vendor": currentDiscount(),
                         "product_type": prompt.result.col[0],
@@ -50,6 +50,8 @@ export function useShopify() {
         };
         try {
             const response = await fetch(url, options);
+            console.log(response);
+            if (!response.ok) throw `Shopify Item failed with ${response.status}: ${response.statusText}`
             const shopifyResponse = (await response.json());
             console.log(shopifyResponse, shopifyResponse.prodId);
             if (shopifyResponse.hasOwnProperty('prodId')) {
@@ -62,6 +64,8 @@ export function useShopify() {
                 })
 
                 const imageResponse = await fetch(url, options);
+                console.log(imageResponse);
+                if (!imageResponse.ok) throw `Shopify Image upload failed with ${imageResponse.status}: ${imageResponse.statusText}`
                 const shopifyImgResponse = (await imageResponse.json());
                 setIsDone(shopifyImgResponse)
                 console.log(shopifyImgResponse);
@@ -123,13 +127,13 @@ export function useShopify() {
         )
     }
 
-    function prepareCollections(theCollections: any, result: any, featured: boolean, isSku: boolean) {
+    function prepareCollections(theCollections: any, result: any, featured: string, isSku: boolean) {
         if (!theCollections) return []
         var aryCol = [
             theCollections[isSku ? 'purchased-products' : 'newly-added-items'],
             theCollections[currentDiscount()]
         ]
-        featured && (aryCol.push(theCollections['featured-items']))
+        featured === 'treasure' && (aryCol.push(theCollections['featured-items']))
         console.log(theCollections)
         result.result.col.forEach((c: string) => {
             aryCol.push(theCollections[c])

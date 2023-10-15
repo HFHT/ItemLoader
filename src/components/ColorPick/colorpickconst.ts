@@ -21,6 +21,23 @@ export const spectrum = [
     {Navy: '#000080'},
 ]
 
+export const newColors = [
+    {White: '#F5F5F5'},
+    {Black: '#000000'},
+    {'Slate Gray': '#708090'},
+    {'Red':'#8B0000'},
+    {Magenta: '#8B008B'},
+    {'Pink': '#FF69B4'},
+    {Green: '#008000'},
+    {'Blue': '#4169E1'},
+    {Brown: '#8B4513'},
+    {Tan: '#D2B48C'},
+    {Cream: '#FEFBEA'},
+    {Golden: '#FFD700'},
+    {Orange: '#FFA500'},
+]
+
+
 export const whites = [
     {White: '#FFFFFF'},
     {Ivory: '#F5F5F5'},
@@ -30,7 +47,7 @@ export const whites = [
     {Black: '#000000'},
     {Lemon:'#FFFACD'},
     {Goldenrod: '#EEE8AA'},
-    {Bisque: '#FFE4C40'},
+    {Bisque: '#FFE4C4'},
     {Beige: '#FAEBD7'},
     {Peach:'#FFDAB9'},
     {Pink:'#FFC0CB'},

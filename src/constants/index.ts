@@ -15,8 +15,9 @@ export const CONST_GPT_PROD = 'Write an informative, two or three sentences, pro
 
 export const CONST_GPT_TITLE = 'Make this into a product title,'
 
-export const CONST_GPT_PROMPT = 'Write a product title and a product description. Precede the product title with "Titlex:" and the product description with "Descx:".\n The product title keywords are: {seo}, {products}, {sqft}.\n Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
+export const CONST_GPT_PROMPT = 'Write a product title and a product description. Precede the product title with "Titlex:" and the product description with "Descx:".\n Include only the following keywords: {seo}, {products}, {sqft}.\n Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
 
+// The following are now unused, being kept for now just in case of problems fetching collections
 export const CONST_COLLECTIONS = {
     "appliances": 458029072692,
     "art-home-decor": 458559619380,

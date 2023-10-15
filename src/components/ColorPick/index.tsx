@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import './colorpick.css';
-import { spectrum, whites } from './colorpickconst';
+import { newColors, spectrum, whites } from './colorpickconst';
 
 interface ITile {
     selected?: number
@@ -18,19 +18,22 @@ export const ColorPick = ({ onClick, isOpen, selected = -1 }: ITile) => {
             {isOpen &&
                 <>
                     <div className="colorpickGroup">
-                        {spectrum.map((theColor: Iidx, i) => (
+                        {newColors.map((theColor: Iidx, i) => (
                             <button key={i} name={Object.keys(theColor)[0]} title={Object.keys(theColor)[0]} style={{ backgroundColor: theColor[Object.keys(theColor)[0]] }} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
                                 {'-'}
                             </button>
                         ))}
+                        <button name='Multi Color' title='Multi Color' onClick={(e) => handleClick(e, newColors.length)} className={(selected === newColors.length) ? "tileButton colorgradient tileactive" : "tileButton colorgradient"}>
+                            {'-'}
+                        </button>
                     </div>
-                    <div className="colorpickGroup">
+                    {/* <div className="colorpickGroup">
                         {whites.map((theColor: Iidx, i) => (
                             <button key={i} name={Object.keys(theColor)[0]} title={Object.keys(theColor)[0]} style={{ backgroundColor: theColor[Object.keys(theColor)[0]] }} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
                                 {'-'}
                             </button>
                         ))}
-                    </div>
+                    </div> */}
                 </>
             }
         </>

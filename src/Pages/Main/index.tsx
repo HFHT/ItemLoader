@@ -3,22 +3,21 @@ import './main.css';
 import { useEffect, useState } from 'react'
 import { schemaResult, schemaType } from '../../helpers/objects';
 import { Button, OpenAI, WebcamCapture } from '../../components';
-import { useCollections, useShopify } from '../../hooks';
+import { useShopify } from '../../hooks';
 import { Wizard } from '../../components/Wizard';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 import { ClipLoader } from 'react-spinners';
-import { CONST_COLLECTIONS } from '../../constants';
 
-export function Main() {
+export function Main(collections: any) {
   const [theType, setTheType] = useState<Itype>(schemaType)
   const [doShopify, shopifyLoading]: any = useShopify()
-  const [theCollections, getCollections]: any = useCollections()
 
+  console.log(collections)
 
-  useEffect(() => {
-    console.log('getCollections')
-    getCollections(true);
-  }, [])
+  // useEffect(() => {
+  //   console.log('getCollections')
+  //   getCollections(true);
+  // }, [])
 
   // useEffect(() => {
   //   console.log('Print11')
@@ -42,15 +41,15 @@ export function Main() {
       theQueue = []
     }
     theQueue.unshift(bc)
-    setLocalStorage('barcodes',theQueue)
+    setLocalStorage('barcodes', theQueue)
   }
 
-  function handleSubmit(f: boolean) {
+  function handleSubmit(f: 'submit' | 'online' | 'treasure') {
     addToPrintQueue(theType)
     console.log(theType)
-    doShopify(theType, CONST_COLLECTIONS, f)
+    doShopify(theType, collections, f)
     let initType = schemaType
-    initType.result.prods=[]
+    initType.result.prods = []
     setTheType(initType)
     // doPrint && doPrint(theType)
   }
@@ -64,8 +63,9 @@ export function Main() {
       <div className="photogrid">
         {theType.result.desc !== '' && <WebcamCapture setter={((e: any) => setTheType({ ...theType, imgs: e }))} />}
       </div>
-      <Button onClick={(e) => handleSubmit(false)} disabled={theType.imgs === ''}>Submit</Button>
-      <Button onClick={(e) => handleSubmit(true)} disabled={theType.imgs === ''}>Submit as Featured</Button>
+      <Button onClick={(e) => handleSubmit('submit')} disabled={true}>Submit</Button>
+      <Button onClick={(e) => handleSubmit('online')} disabled={theType.imgs === ''}>Submit Online</Button>
+      <Button onClick={(e) => handleSubmit('treasure')} disabled={theType.imgs === ''}>Submit as Treasure</Button>
       {/* <ClipLoader loading={shopifyDone} /> */}
     </div>
   )

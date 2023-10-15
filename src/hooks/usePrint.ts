@@ -35,13 +35,19 @@ export function usePrint() {
                 }
             }
         )
-
-        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
-        console.log(response);
-        const prtResponse = (await response.json());
-        console.log(prtResponse);
-        setPrintResult(prtResponse);
-        saveCount(printed);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+            if (!response.ok) throw `Barcode print failed with ${response.status}: ${response.statusText}`
+            console.log(response);
+            const prtResponse = (await response.json());
+            console.log(prtResponse);
+            setPrintResult(prtResponse);
+            saveCount(printed);
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
 
         // try {
         //     fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
@@ -75,12 +81,18 @@ export function usePrint() {
                 find: { job: '123456789012' }
             }
         )
-
-        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
-        console.log(response);
-        const prtResponse = (await response.json());
-        console.log(prtResponse);
-        setPrintResult(prtResponse);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+            console.log(response);
+            if (!response.ok) throw `Barcode align failed with ${response.status}: ${response.statusText}`
+            const prtResponse = (await response.json());
+            console.log(prtResponse);
+            setPrintResult(prtResponse);
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
 
 
         // try {
