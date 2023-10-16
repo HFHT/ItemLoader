@@ -17,7 +17,8 @@ export function usePrint() {
         console.log(printed);
 
         const header: any = { method: "POST", headers: new Headers() };
-
+        const gptDesc = userData.result.desc.includes('Titlex') ? parseGPT(userData.result.desc, 0) : userData.result.desc
+        console.log(gptDesc)
         header.body = JSON.stringify(
             {
                 method: 'insertOne',
@@ -30,8 +31,8 @@ export function usePrint() {
                     job: Date.now(),
                     date: Date.now(),
                     bc: userData.barcode,
-                    desc: (userData.barcode.slice(-5) + ' ' + parseGPT(userData.result.desc, 0)).slice(0, 35),
-                    blob: buildStarBlob(userData, printed),
+                    desc: (userData.barcode.slice(-5) + ' ' + gptDesc).slice(0, 35),
+                    blob: buildStarBlob(userData, gptDesc, printed),
                     fileX: ''
                 }
             }
@@ -142,12 +143,12 @@ export function usePrint() {
     return [printQ, doPrint, doAlign, doReprint, printResult];
 }
 
-function buildStarBlob(blob: any, printed: number) {
+function buildStarBlob(blob: any, gptDesc:string, printed: number) {
     if (printed === CONST_STAR_ADJUST_CNT) {
-        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
+        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, gptDesc.slice(0, 26)).replace(/{barcode}/g, blob.barcode)
         // return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
     }
-    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
+    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, gptDesc.slice(0, 26)).replace(/{barcode}/g, blob.barcode)
     // return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
 }
 

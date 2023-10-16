@@ -31,7 +31,7 @@ export function PrintBarcode() {
         barcode: theProduct.theProduct.data.products[0].variants[0].barcode,
         imgs: theProduct.theProduct.data.products[0].images[0].src,
         result: {
-          desc: theProduct.theProduct.data.products[0].title,
+          desc: theProduct.theProduct.data.products[0].title.slice(6),
           price: theProduct.theProduct.data.products[0].variants[0].price
         }
       })
@@ -86,6 +86,7 @@ export function PrintBarcode() {
 
   function showBarcode(bcInfo: any, i: number) {
     const gptDesc = bcInfo.result.desc.includes('Titlex') ? parseGPT(bcInfo.result.desc, 0) : bcInfo.result.desc
+    console.log('showBarcode:', gptDesc)
     return (
       <div key={i}>
         <Button onClick={() => { handlePrint(bcInfo, i) }}>Print</Button>
