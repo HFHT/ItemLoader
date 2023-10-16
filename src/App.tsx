@@ -3,6 +3,7 @@ import { AuthContextProvider } from './context'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { PageLayout } from './components'
 import { PrintBarcode, Main } from './Pages'
+import { Admin } from './Pages/Admin'
 
 const headers = new Headers
 async function getCollections() {
@@ -35,6 +36,7 @@ async function getCollections() {
                         <Routes>
                             <Route path='/' element={<Main collections={results} />} />
                             <Route path='/reprint' element={<PrintBarcode />} />
+                            <Route path='/admin' element={<Admin />} />
                         </Routes>
                     </PageLayout>
                 </AuthContextProvider>

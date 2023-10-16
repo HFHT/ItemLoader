@@ -7,6 +7,7 @@ import { useShopify } from '../../hooks';
 import { Wizard } from '../../components/Wizard';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 import { ClipLoader } from 'react-spinners';
+import { addToPrintQueue } from '../../helpers/addToPrintQueue';
 
 export function Main(collections: any) {
   const [theType, setTheType] = useState<Itype>(schemaType)
@@ -33,15 +34,6 @@ export function Main(collections: any) {
     if (e !== theType.type) {
       setTheType({ ...theType, type: e, idx: i, result: schemaResult })
     }
-  }
-
-  function addToPrintQueue(bc: any) {
-    let theQueue = getLocalStorage('barcodes')
-    if (!theQueue) {
-      theQueue = []
-    }
-    theQueue.unshift(bc)
-    setLocalStorage('barcodes', theQueue)
   }
 
   function handleSubmit(f: 'submit' | 'online' | 'treasure') {

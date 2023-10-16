@@ -1,5 +1,11 @@
 # Item Loader
 
+Finish up Reprint - need to actually do it if it is found.
+Finish up Barcode print status
+Add Barcode images to the list
+
+
+
 xFix localstore barcodes is empty on the reprint page (err on .map)
 Add fabric as a finish
 
