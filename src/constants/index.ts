@@ -11,9 +11,9 @@ export const CONST_STARLABEL_ADJ = '[align: center][mag: w 2; h 2]{price}[mag] {
 
 export const CONST_DISCOUNTS = ['red-collection', 'yellow-collection', 'blue-discount-collection', 'green-collection']
 
-export const CONST_GPT_PROD = 'Write an informative, two or three sentences, product description for:'
+export const CONST_GPT_PROD = 'Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
 
-export const CONST_GPT_TITLE = 'Make this into a product title,'
+export const CONST_GPT_TITLE = 'Write a tiny product title, {seo} {finish} {pieces} {mfg} {products} {sqft}'
 
 export const CONST_GPT_PROMPT = 'Write a product title and a product description. Precede the product title with "Titlex:" and the product description with "Descx:".\n Include only the following keywords: {seo}, {products}, {sqft}.\n Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
 

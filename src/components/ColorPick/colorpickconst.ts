@@ -24,7 +24,7 @@ export const spectrum = [
 export const newColors = [
     {White: '#F5F5F5'},
     {Black: '#000000'},
-    {'Slate Gray': '#708090'},
+    {'Gray': '#708090'},
     {'Red':'#8B0000'},
     {Magenta: '#8B008B'},
     {'Pink': '#FF69B4'},

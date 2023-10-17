@@ -9,7 +9,7 @@ export const fetchJson = async (url: any, init = {}) => {
 };
 
 // get JSON from multiple URLs and pass to setters
-export const fetchAndSetAll = async (collection: any) => {
+export const fetchAndSetAll = async (collection: any, isGpt: boolean = false) => {
     // fetch all data first
     const allData = await Promise.all(
         //   collection.map(({ url, init }:any) => console.log(url, init))
@@ -18,6 +18,15 @@ export const fetchAndSetAll = async (collection: any) => {
     console.log(allData)
     // iterate setters and pass in data
     collection.forEach(({ setter }: any, i: any) => {
-        setter(allData[i]);
+        setter(choose(isGpt, allData[i]));
     });
+
+    function choose(b:boolean,g:any) {
+        console.log(g)
+        if (g.hasOwnProperty('choices')) {
+            console.log(g.choices[0].text)
+            return g.choices[0].text.replace(/[\r\n|\n]+/gm, '').replace(/[\"]/gm,'')
+        }
+        return g
+    }
 };

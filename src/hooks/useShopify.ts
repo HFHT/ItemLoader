@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
-import { parseGPT } from "../helpers/functions";
 
 export function useShopify() {
     // const [theCollections, setTheCollections] = useState()
@@ -22,9 +21,9 @@ export function useShopify() {
                 collections: prepareCollections(collections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        "title": prompt.barcode.slice(-5) + ' ' + parseGPT(prompt.result.desc, 0),
+                        "title": prompt.barcode.slice(-5) + ' ' + prompt.result.desc[0],
                         "published_scope": featured === 'submit' ? "201136242996" : "global",
-                        "body_html": parseGPT(prompt.result.desc, 1),
+                        "body_html": prompt.result.desc[1],
                         "vendor": currentDiscount(),
                         "product_type": prompt.result.col[0],
                         "status": "active",
@@ -129,13 +128,14 @@ export function useShopify() {
     function prepareCollections(theCollections: any, result: any, featured: string, isSku: boolean) {
         if (!theCollections) return []
         var aryCol = [
-            theCollections[isSku ? 'purchased-products' : 'newly-added-items'],
-            theCollections[currentDiscount()]
+            theCollections.collections[isSku ? 'purchased-products' : 'newly-added-items'],
+            theCollections.collections[currentDiscount()]
         ]
-        featured === 'treasure' && (aryCol.push(theCollections['featured-items']))
+        featured === 'treasure' && (aryCol.push(theCollections.collections['featured-items']))
         console.log(theCollections)
+        console.log(aryCol)
         result.result.col.forEach((c: string) => {
-            aryCol.push(theCollections[c])
+            aryCol.push(theCollections.collections[c])
         })
         console.log(aryCol)
         return aryCol

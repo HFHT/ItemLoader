@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { BarCode, Button, Input } from "../../components";
 import { useBarCode, useEmptyBarCodes, useInterval, usePrint, useReadProduct, useTimeout } from '../../hooks';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
-import { parseGPT } from '../../helpers/functions';
 import { ClipLoader } from 'react-spinners';
 import { addToPrintQueue } from '../../helpers/addToPrintQueue';
 
@@ -31,7 +30,7 @@ export function PrintBarcode() {
         barcode: theProduct.theProduct.data.products[0].variants[0].barcode,
         imgs: theProduct.theProduct.data.products[0].images[0].src,
         result: {
-          desc: theProduct.theProduct.data.products[0].title.slice(6),
+          desc: [theProduct.theProduct.data.products[0].title.slice(6)],
           price: theProduct.theProduct.data.products[0].variants[0].price
         }
       })
@@ -85,7 +84,7 @@ export function PrintBarcode() {
   )
 
   function showBarcode(bcInfo: any, i: number) {
-    const gptDesc = bcInfo.result.desc.includes('Titlex') ? parseGPT(bcInfo.result.desc, 0) : bcInfo.result.desc
+    const gptDesc = bcInfo.result.desc[0]
     console.log('showBarcode:', gptDesc)
     return (
       <div key={i}>
