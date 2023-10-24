@@ -12,8 +12,8 @@ import { addToPrintQueue } from '../../helpers/addToPrintQueue';
 export function Main(collections: any) {
   const [theType, setTheType] = useState<Itype>(schemaType)
   const [doShopify, shopifyLoading]: any = useShopify()
-
-  console.log(collections)
+  const [hasSaved, setHasSaved] = useState(false)
+  // console.log(collections)
 
   // useEffect(() => {
   //   console.log('getCollections')
@@ -48,9 +48,9 @@ export function Main(collections: any) {
 
   return (
     <div className="apptop">
-      <Wizard thisType={theType} setter={(e: any) => setTheType(e)} />
+      <Wizard thisType={theType} setter={(e: any) => setTheType(e)} setSaved={(e:boolean) => setHasSaved(e)}/>
       <div className="aigrid">
-        <OpenAI isOpen={theType.result.seo !== ''} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
+        <OpenAI isOpen={hasSaved} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
       </div>
       <div className="photogrid">
         {theType.result.desc !== '' && <WebcamCapture setter={((e: any) => setTheType({ ...theType, imgs: e }))} />}

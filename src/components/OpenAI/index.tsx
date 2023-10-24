@@ -77,7 +77,7 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
     function fillPrompt(p:string) {
         p = p.replace(/{seo}/g, userData.result.seo).replace(/{products}/g, getProducts).replace(/{sqft}/g, userData.result.qty && userData.result.qty > 0 ? userData.result.qty + ' sq ft' : '')
         p = p.replace(/{condition}/g, userData.result.condition).replace(/{flaw}/g, userData.result.conditionAdds).replace(/{pieces}/g, userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : '')
-        p = p.replace(/{attr1}/g, userData.result.attr1).replace(/{attr2}/g, userData.result.attr2).replace(/{finish}/g, userData.result.finish).replace(/{mfg}/g, userData.result.mfg)
+        p = p.replace(/{attr1}/g, userData.result.attr1).replace(/{attr2}/g, userData.result.attr2).replace(/{finish}/g, userData.result.finish).replace(/{mfg}/g, userData.result.mfg).replace(/{fabric}/g, userData.result.fabric)
         console.log(p)
         return p
     }

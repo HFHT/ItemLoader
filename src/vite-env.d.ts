@@ -44,11 +44,13 @@ interface Iresult {
     col: string[];
     material: string;
     finish: string;
+    fabric: string;
     condition: string;
     conditionAdds: string;
     price: string;
     seo: string;
     new: boolean;
+    src: string;
 }
 interface Iprod {
     prod: string;
@@ -81,7 +83,9 @@ interface ItheRoom {
         finish: string[]
         color: string[]
         metal: string[]
+        fabric: string[]
         seo: string[]
+        src: string[]
     }
 }
 

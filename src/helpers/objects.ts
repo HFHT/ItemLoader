@@ -1,15 +1,15 @@
 
-export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', attr1: '', attr2: '', desc: '', col: [''], material: '', finish: '', condition: '', conditionAdds: '', price: '', seo: '', new: true }
+export const schemaResult = { room: '', prod: '', prods: [], mfg: '', pwr: '', attr1: '', attr2: '', desc: '', col: [''], material: '', finish: '', fabric: '', condition: '', conditionAdds: '', price: '', seo: '', src: '', new: true }
 export const schemaType = { type: '', idx: -1, imgs: '', col: { c: '', i: -1 }, barcode: '', result: schemaResult }
 
 // export const prices = ['$1', '$1.25', '$1.50', '$1.75', '$2', '$2.25', '$2.50', '$2.75', '$3.00', '$3.25', '$3.50', '$3.75', '$4', '$4.50', '$5', '$6', '$7', '$8', '$9', '$10', '$12.50', '$15', '$20', '$25', '$30', '$40', '$50', '$60', '$75', '$100', '$125', '$150', '$175', '$200', '$250', '$300', '$350', '$400'];
-export const prices = ['$10', '$12.50', '$15', '$20', '$25', '$30', '$40', '$50', '$60', '$75', '$99', '$125', '$149', '$175', '$199', '$249', '$299', '$349', '$399', '$449', '$499'];
+export const prices = ['$10', '$12.50', '$15', '$20', '$25', '$30', '$40', '$45', '$50', '$55', '$60', '$75', '$99', '$125', '$149', '$175', '$199', '$249', '$299', '$349', '$399', '$449', '$499'];
 
 export const conditions = ['New', 'Like new', 'Gently used', 'Good condition', 'Some wear']
 export const conditionAdds = [' ', 'Fading', 'Scuffs', 'Scratches', 'Stains', 'Cracking', 'Handcrafted', 'Upcycled']
 export const collections = ['Treasures']
 
-
+export const sources = [' ', 'Corporate', 'Priority', 'Other']
 const mfg: Iidx = {
   Appl: [' ', 'Amana', 'Bosch', 'Cafe', 'Danby', 'Electrolux', 'Frigidaire', 'GE', 'Haier', 'Igloo', 'Kenmore', 'KitchenAid', 'LG', 'Maytag', 'Panasonic', 'Samsung', 'Subzero', 'Whirlpool'],
   Tool: [' ', 'Bosch', 'Black & Decker', 'Craftsman', 'Dewalt', 'Dremel', 'Festool', 'Hilti', 'Hitachi', 'Homelite', 'Kobalt', 'Makita', 'Milwaukee', 'Porter Cable', 'Powermatic', 'Rigid', 'Ryobi', 'Skil', 'Worx'],
@@ -23,6 +23,7 @@ const types: Iidx = {
 const finish: Iidx = {
   Appl: ['Black', 'White', 'Red', 'Brown', 'Stainless'],
   Wood: ['Real Bamboo', 'Birch Hardwood', 'Cedar Hardwood', 'Cherry Hardwood', 'Hickory Hardwood', 'Maple Hardwood', 'Mahogany Hardwood', 'Mesquite Hardwood', 'Pine Hardwood', 'Red-oak Hardwood', 'Redwood Hardwood', 'Rosewood Hardwood', 'Walnut Hardwood', 'White-oak Hardwood'],
+  Fabric: [' ', 'Faux Leather', 'Genuine Leather', 'Mircofiber', 'Velvet'],
   Finish: ['Bamboo Finish', 'Birch Finish', 'Cedar Finish', 'Cherry Finish', 'Hickory Finish', 'Maple Finish', 'Mahogany Finish', 'Mesquite Finish', 'Pine Finish', 'Red-oak Finish', 'Redwood Finish', 'Rosewood Finish', 'Walnut Finish', 'White-oak Finish'],
   Metal: ['Aluminum', 'Chrome', 'Copper', 'Brass', 'Bronze', 'Gold', 'Iron', 'Nickel', 'Pewter', 'Steel'],
   Window: ['Aluminum', 'Vinyl'],
@@ -95,14 +96,13 @@ export const catWindType = [
 ]
 
 export const catFurnType = [
-  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { 'Chest of Drawers': { i: 0 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0 } }, { Shelving: { i: 0 } }, { 'Toy Chest': { i: 2084 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Paint, seo: seo.Furniture } },
-  { Bathroom: { col: ['furniture', 'bathroom'], item: [{ Cabinet: { i: 0 } }, { 'Bathroom Mirror': { i: 0 } }, { 'Bath Organizer': { i: 0 } }, { 'Shelving': { i: 0 } }, { 'Vanity': { i: 2070 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { "Dining Room": { col: ['furniture', 'dining-room'], item: [{ Barstool: { i: 0, s: true } }, { Bench: { i: 2068 } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0 } }, { 'Wine Rack': { i: 2089 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  // { Kitchen: { col: ['furniture', 'kitchen'], item: [{ Barstool: { i: 0, s: true } }, { Bench: { i: 2068 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { "Living Room": { col: ['furniture', 'living-room'], item: [{ 'Arm Chair': { i: 2096 } }, { 'Bean Bag Chair': { i: 2097 } }, { 'Bookshelf': { i: 0 } }, { 'Coffee Table': { i: 0 } }, { 'End Table': { i: 0, s: true } }, { 'Love Seat': { i: 0 } }, { 'Media Center': { i: 2080 } }, { Recliner: { i: 0 } }, { Sectional: { i: 0, s: true } }, { Shelving: { i: 0 } }, { Sofa: { i: 0 } }, { 'Sofa Table': { i: 0 } }, { Storage: { i: 2081 } }, { 'TV Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Office: { col: ['furniture', 'office-furniture'], item: [{ Bookcase: { i: 0 } }, { Credenza: { i: 0 } }, { Desk: { i: 0 } }, { 'File Cabinet': { i: 2076 } }, { 'Office Chair': { i: 0 } }, { 'Printer Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Patio: { col: ['furniture', 'patio-outdoor-living'], item: [{ Hammock: { i: 3869 } }, { 'Outdoor Bed': { i: 2131 } }, { 'Outdoor End Table': { i: 0 } }, { 'Outdoor Sofa': { i: 2138 } }, { 'Outdoor Storage Box': { i: 2140 } }, { 'Outdoor Structure': { i: 3874 } }, { 'Patio Chairs': { i: 2136, s: true } }, { 'Patio Table': { i: 2136 } }, { 'Sunshade': { i: 3885 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
-  { Sectional: { col: ['furniture', 'living-room'], item: [{ 'Right Chair': { i: 0 } }, { 'Armless Chair': { i: 0 } }, { 'Left Chair': { i: 0 } }, { 'Ottoman': { i: 0 } }, { 'Corner Chair': { i: 0 } }, { 'Chaise': { i: 0 } }, { 'Love Seat': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, seo: seo.Furniture } },
+  { Bedroom: { col: ['furniture', 'bedroom'], item: [{ Bed: { a: [attr.Bed], i: 2063 } }, { 'Bed Frame': { a: [attr.Bed], i: 2063 } }, { 'Chest of Drawers': { i: 0 } }, { Dresser: { i: 2075 } }, { Foundation: { a: [attr.Bed], i: 2065 } }, { 'Head/Foot': { a: [attr.Bed], i: 2064 } }, { Mattress: { a: [attr.Bed], i: 2066 } }, { Nightstand: { i: 0 } }, { Shelving: { i: 0 } }, { 'Toy Chest': { i: 2084 } }, { Wardrobe: { i: 2072 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { Bathroom: { col: ['furniture', 'bathroom'], item: [{ Cabinet: { i: 0 } }, { 'Bathroom Mirror': { i: 0 } }, { 'Bath Organizer': { i: 0 } }, { 'Shelving': { i: 0 } }, { 'Vanity': { i: 2070 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { "Dining Room": { col: ['furniture', 'dining-room'], item: [{ Barstool: { i: 0 } }, { Bench: { i: 2068 } }, { Buffet: { i: 2073 } }, { Cart: { i: 2091 } }, { 'China Cabinet': { i: 2074 } }, { 'Corner Cabinet': { i: 0 } }, { 'Hope Chest': { i: 2083 } }, { 'Liquor Cabinet': { i: 2088 } }, { 'Dining Table': { i: 2165 } }, { 'Dining Chairs': { i: 0 } }, { 'Wine Rack': { i: 2089 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { "Living Room": { col: ['furniture', 'living-room'], item: [{ 'Arm Chair': { i: 2096 } }, { 'Bean Bag Chair': { i: 2097 } }, { 'Bookshelf': { i: 0 } }, { 'Coffee Table': { i: 0 } }, { 'End Table': { i: 0 } }, { 'Love Seat': { i: 0 } }, { 'Media Center': { i: 2080 } }, { Recliner: { i: 0 } }, { Sectional: { i: 0 } }, { Shelving: { i: 0 } }, { Sofa: { i: 0 } }, { 'Sofa Table': { i: 0 } }, { Storage: { i: 2081 } }, { 'TV Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { Office: { col: ['furniture', 'office-furniture'], item: [{ Bookcase: { i: 0 } }, { Credenza: { i: 0 } }, { Desk: { i: 0 } }, { 'File Cabinet': { i: 2076 } }, { 'Office Chair': { i: 0 } }, { 'Printer Stand': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { Patio: { col: ['furniture', 'patio-outdoor-living'], item: [{ Hammock: { i: 3869 } }, { 'Outdoor Bed': { i: 2131 } }, { 'Outdoor End Table': { i: 0 } }, { 'Outdoor Sofa': { i: 2138 } }, { 'Outdoor Storage Box': { i: 2140 } }, { 'Outdoor Structure': { i: 3874 } }, { 'Patio Chairs': { i: 2136 } }, { 'Patio Table': { i: 2136 } }, { 'Sunshade': { i: 3885 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
+  { Sectional: { col: ['furniture', 'living-room'], item: [{ 'Right Chair': { i: 0 } }, { 'Armless Chair': { i: 0 } }, { 'Left Chair': { i: 0 } }, { 'Ottoman': { i: 0 } }, { 'Corner Chair': { i: 0 } }, { 'Chaise': { i: 0 } }, { 'Love Seat': { i: 0 } }], wood: finish.Wood, finish: finish.Finish, color: finish.Paint, metal: finish.Metal, fabric: finish.Fabric, seo: seo.Furniture } },
 
 ]
 //Taxonomy 3894

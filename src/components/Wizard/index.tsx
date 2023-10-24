@@ -9,9 +9,10 @@ import { uniqueBarCode } from '../../helpers/barCode';
 interface IWiz {
   thisType: Itype;
   setter: Function;
+  setSaved: Function;
 }
 
-export function Wizard({ thisType, setter }: IWiz) {
+export function Wizard({ thisType, setter, setSaved }: IWiz) {
   // const [theType, setTheType] = useState<Itype>(schemaType)
   // const [doShopify, getCollections, theCollections]: any = useShopify()
 
@@ -43,16 +44,16 @@ export function Wizard({ thisType, setter }: IWiz) {
       <div className="maingrid">
         <div className="usergrid">
           <Tiles tiles={catType} selected={thisType.idx} onClick={(e: string, i: number) => handleSetType(e, i)} />
-          <Category key={1} result={thisType.result} categories={catFurnType} isOpen={thisType.type === 'Furniture'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={2} result={thisType.result} categories={catApplType} isOpen={thisType.type === 'Appliances'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={3} result={thisType.result} categories={catHouseType} isOpen={thisType.type === 'Housewares'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={4} result={thisType.result} categories={catFloorType} isOpen={thisType.type === 'Flooring'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={5} result={thisType.result} categories={catLightType} isOpen={thisType.type === 'Lighting'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={6} result={thisType.result} categories={catPlumbType} isOpen={thisType.type === 'Plumbing'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={7} result={thisType.result} categories={catToolType} isOpen={thisType.type === 'Tool'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={8} result={thisType.result} categories={catCabType} isOpen={thisType.type === 'Cabinet'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={9} result={thisType.result} categories={catDoorType} isOpen={thisType.type === 'Door'} setter={(e: any) => setter({ ...thisType, result: e })} />
-          <Category key={10} result={thisType.result} categories={catWindType} isOpen={thisType.type === 'Window'} setter={(e: any) => setter({ ...thisType, result: e })} />
+          <Category key={1} result={thisType.result} categories={catFurnType} isOpen={thisType.type === 'Furniture'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={2} result={thisType.result} categories={catApplType} isOpen={thisType.type === 'Appliances'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={3} result={thisType.result} categories={catHouseType} isOpen={thisType.type === 'Housewares'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={4} result={thisType.result} categories={catFloorType} isOpen={thisType.type === 'Flooring'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={5} result={thisType.result} categories={catLightType} isOpen={thisType.type === 'Lighting'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={6} result={thisType.result} categories={catPlumbType} isOpen={thisType.type === 'Plumbing'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={7} result={thisType.result} categories={catToolType} isOpen={thisType.type === 'Tool'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={8} result={thisType.result} categories={catCabType} isOpen={thisType.type === 'Cabinet'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={9} result={thisType.result} categories={catDoorType} isOpen={thisType.type === 'Door'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
+          <Category key={10} result={thisType.result} categories={catWindType} isOpen={thisType.type === 'Window'} setter={(e: any) => setter({ ...thisType, result: e })} setSaved={(e:boolean)=>setSaved(e)} />
         </div>
       </div>
     </div>

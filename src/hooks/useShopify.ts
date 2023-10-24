@@ -27,7 +27,7 @@ export function useShopify() {
                         "vendor": currentDiscount(),
                         "product_type": prompt.result.col[0],
                         "status": "active",
-                        "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
+                        "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod, prompt.result.src],
                         "variants": [{
                             "barcode": prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode(),
                             "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',

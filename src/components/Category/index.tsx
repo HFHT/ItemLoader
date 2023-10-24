@@ -3,7 +3,7 @@ import './category.css';
 import { useEffect, useState } from "react"
 import { Button, ColorPick, InputTouchSpin, Tiles } from ".."
 import { getCategories } from "../../helpers/functions"
-import { catApplType, conditionAdds, conditions, prices, schemaResult } from "../../helpers/objects"
+import { catApplType, conditionAdds, conditions, prices, schemaResult, sources } from "../../helpers/objects"
 import { Product, Products } from "../Product"
 
 interface ITile {
@@ -13,11 +13,13 @@ interface ITile {
     result: Iresult
     // onClick({ }): Function | void
     setter: Function
+    setSaved: Function
+
 }
 
 
-export const Category = ({ isOpen, result, basicOnly = false, categories, setter }: ITile) => {
-    const [theRoom, setTheRoom] = useState<ItheRoom>({ e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], seo: [] } })
+export const Category = ({ isOpen, result, basicOnly = false, categories, setter, setSaved }: ITile) => {
+    const [theRoom, setTheRoom] = useState<ItheRoom>({ e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
     // const [theResult, setTheResult] = useState<Iresult>(schemaResult)
     const [theAttr, setTheAttr] = useState([])
     const [theSetSize, setTheSetSize] = useState(-1);
@@ -30,13 +32,13 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
         setter({ ...result, room: thisRoom, col: thisProd[thisRoom].col })
         setTheSetSize(-1)
     }
-    function handleProduct(e: any, i: any) {
-        // console.log(theResult, e, i, theRoom.prod.item[i])
-        let thisProd: any = theRoom.prod.item[i]
-        if (thisProd[e].hasOwnProperty('a')) { setTheAttr(thisProd[e].a) }
-        if (thisProd[e].hasOwnProperty('s')) { setTheSetSize(0) }
-        setter({ ...result, prod: e })
-    }
+    // function handleProduct(e: any, i: any) {
+    //     // console.log(theResult, e, i, theRoom.prod.item[i])
+    //     let thisProd: any = theRoom.prod.item[i]
+    //     if (thisProd[e].hasOwnProperty('a')) { setTheAttr(thisProd[e].a) }
+    //     if (thisProd[e].hasOwnProperty('s')) { setTheSetSize(0) }
+    //     setter({ ...result, prod: e })
+    // }
     function handleProducts(e: any, i: any, v: any) {
         console.log(result, e, i, theRoom.prod.item[i])
         if (!e) return
@@ -76,19 +78,29 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
         location.reload()
     }
     function handleReset() {
-        setter(schemaResult)
+        // setter(schemaResult)
         setTheAttr([])
         setTheSetSize(-1)
-        setTheRoom({ ...theRoom, e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], seo: [] } })
+        setTheRoom({ ...theRoom, e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
     }
     function handleSave() {
-        setter(result)
+        // Check if price has a dollar sign, if not then add one
+        // set a field to indicate that it is ready to generate AI
+        console.log('handleSave', result)
+        if (result.price.slice(0, 1) !== '$') {
+            setter({ ...result, price: '$' + result.price })
+        } else {
+            setter({ ...result })
+        }
+        setSaved(true)
         handleReset()
     }
 
     useEffect(() => {
+        console.log('useEffect', isOpen, result)
+
         if (isOpen && result.new) {
-            setTheRoom({ e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], seo: [] } })
+            setTheRoom({ e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
             setter({ ...result, new: false })
         }
     }, [isOpen])
@@ -108,12 +120,15 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
                     {!basicOnly && <Product title='Material:' isOpen={result.prod !== '' || result.prods.length > 0} products={selectFinishes(theRoom)} onClick={(e: any, i: any) => setter({ ...result, material: e })} />}
                     {!basicOnly && <Product title='Finish:' isOpen={result.material !== '' && result.material !== ' ' && result.material !== 'Color'} products={whichFinish(result.material, theRoom)} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />}
                     <ColorPick isOpen={result.material === 'Color'} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />
+                    <Product title='Fabric:' isOpen={result.finish !== '' || result.fabric === ' '} products={theRoom.prod.fabric} onClick={(e: any, i: any) => setter({ ...result, fabric: e })} />
                     <Product title='Condition:' isOpen={result.finish !== '' || result.material === ' '} products={conditions} onClick={(e: any, i: any) => setter({ ...result, condition: e })} />
                     <Product title='Condition:' isOpen={result.finish !== '' || result.material === ' '} products={conditionAdds} onClick={(e: any, i: any) => setter({ ...result, conditionAdds: e })} />
                     <Product title='Price:' isOpen={result.condition !== '' || (basicOnly && result.prods.length > 0)} products={prices} hasCustom={'number'} onClick={(e: any, i: any) => setter({ ...result, price: e })} />
                     <Product title='Seo:' isOpen={result.price !== ''} products={theRoom.prod.seo} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, seo: e })} />
-                    {result.seo !== '' && <Button onClick={() => handleSave()} >Generate Description</Button>}
-                    {result.seo === '' && <Button onClick={() => handleClearScreen()}  >Clear</Button>}
+                    <Product title='Source:' isOpen={result.seo !== ''} products={sources} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, src: e })} />
+
+                    {result.src !== '' && <Button onClick={() => handleSave()} >Generate Description</Button>}
+                    {result.src === '' && <Button onClick={() => handleClearScreen()}  >Clear</Button>}
 
                 </>
             }
@@ -125,8 +140,8 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
 function selectFinishes(selRoom: ItheRoom) {
     var theFinish = [' ']
     selRoom.prod.color && theFinish.push('Color')
-    selRoom.prod.wood && theFinish.push('Wood')
-    selRoom.prod.finish && theFinish.push('Finish')
+    // selRoom.prod.wood && theFinish.push('Wood')
+    selRoom.prod.finish && theFinish.push('Wood Finish')
     selRoom.prod.metal && theFinish.push('Metal')
     return theFinish
 }
@@ -136,7 +151,7 @@ function whichFinish(chosenFinish: string, selRoom: ItheRoom) {
         case 'Wood': { return selRoom.prod.wood }
         case 'Color': { return selRoom.prod.color }
         case 'Metal': { return selRoom.prod.metal }
-        case 'Finish': { return selRoom.prod.finish }
+        case 'Wood Finish': { return selRoom.prod.finish }
         default: { return [] }
     }
 
