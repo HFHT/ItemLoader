@@ -141,7 +141,7 @@ function selectFinishes(selRoom: ItheRoom) {
     var theFinish = [' ']
     selRoom.prod.color && theFinish.push('Color')
     // selRoom.prod.wood && theFinish.push('Wood')
-    selRoom.prod.finish && theFinish.push('Wood Finish')
+    selRoom.prod.finish && theFinish.push('Finish')
     selRoom.prod.metal && theFinish.push('Metal')
     return theFinish
 }
@@ -151,7 +151,7 @@ function whichFinish(chosenFinish: string, selRoom: ItheRoom) {
         case 'Wood': { return selRoom.prod.wood }
         case 'Color': { return selRoom.prod.color }
         case 'Metal': { return selRoom.prod.metal }
-        case 'Wood Finish': { return selRoom.prod.finish }
+        case 'Finish': { return selRoom.prod.finish }
         default: { return [] }
     }
 
