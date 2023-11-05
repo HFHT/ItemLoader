@@ -12,7 +12,7 @@ export function useShopify() {
     const doShopify = async (prompt: Itype, collections: any, featured: string = 'submit', isSku: boolean = false) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt)
-
+        let bc:string = prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode()
         let options = {
             method: "POST",
             headers: headers,
@@ -21,7 +21,8 @@ export function useShopify() {
                 collections: prepareCollections(collections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        "title": prompt.barcode.slice(-5) + ' ' + prompt.result.desc[0],
+                        "handle": bc,
+                        "title": bc.slice(-5) + ' ' + prompt.result.desc[0],
                         "published_scope": featured === 'submit' ? "201136242996" : "global",
                         "body_html": prompt.result.desc[1],
                         "vendor": currentDiscount(),
@@ -29,7 +30,7 @@ export function useShopify() {
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod, prompt.result.src],
                         "variants": [{
-                            "barcode": prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode(),
+                            "barcode": bc,
                             "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',
                             "compare_at_price": prompt.result.price,
                             "price": prompt.result.price,
