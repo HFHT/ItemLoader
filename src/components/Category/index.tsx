@@ -17,7 +17,6 @@ interface ITile {
 
 }
 
-
 export const Category = ({ isOpen, result, basicOnly = false, categories, setter, setSaved }: ITile) => {
     const [theRoom, setTheRoom] = useState<ItheRoom>({ e: '', i: -1, prod: { item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
     // const [theResult, setTheResult] = useState<Iresult>(schemaResult)
@@ -58,9 +57,15 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
             // TODO remove the .s properties and remove sets from objects.ts
             if (thisProd[e].hasOwnProperty('s') && thisProd[e].s) { setTheSetSize(0) }
             // add prop "e" to theResult.prods if it doesn't exist, if it does increase the qty by prop 'i'
-            adjust?.forEach((x) => {
+            adjust?.forEach((x, i, o) => {
                 // console.log(x.prod, e)
-                if (x.prod === e) { x.qty = x.qty + v; found = true }
+                if (x.prod === e) {
+                    x.qty = x.qty + v;
+                    if (x.qty === 0) {
+                        o.splice(i, 1)
+                    }
+                    found = true
+                }
             })
             if (!found) { adjust?.push({ prod: e, qty: v }) }
         }

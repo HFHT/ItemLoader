@@ -67,7 +67,7 @@ export function PrintBarcode() {
       <div><Button onClick={() => { handleClear() }}>Clear Barcode List</Button> Clears the below list of barcodes.</div>
       <div className='displayflex'>
         <Button onClick={() => { handleFetch(theHandle) }}>Find Product</Button>
-        <Input type='text' value={theHandle} title='Copy and Paste Shopify Title' onChange={(e: string) => setTheHandle(e)} />
+        <Input type='text' value={theHandle} title='Barcode...' onChange={(e: string) => setTheHandle(e)} />
       </div>
 
 
