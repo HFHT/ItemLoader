@@ -5,6 +5,7 @@ import { Button, ColorPick, InputTouchSpin, Tiles } from ".."
 import { getCategories } from "../../helpers/functions"
 import { catApplType, conditionAdds, conditions, prices, schemaResult, sources } from "../../helpers/objects"
 import { Product, Products } from "../Product"
+import { FinishPick } from '../FinishPick';
 
 interface ITile {
     isOpen: boolean
@@ -123,7 +124,9 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
                     <Product title='Attr1:' isOpen={theAttr.length > 0} products={theAttr[0]} onClick={(e: any, i: any) => setter({ ...result, attr1: e })} />
                     <Product title='Attr2:' isOpen={theAttr.length > 1} products={theAttr[1]} onClick={(e: any, i: any) => setter({ ...result, attr2: e })} />
                     {!basicOnly && <Product title='Material:' isOpen={result.prod !== '' || result.prods.length > 0} products={selectFinishes(theRoom)} onClick={(e: any, i: any) => setter({ ...result, material: e })} />}
-                    {!basicOnly && <Product title='Finish:' isOpen={result.material !== '' && result.material !== ' ' && result.material !== 'Color'} products={whichFinish(result.material, theRoom)} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />}
+                    {!basicOnly && <Product title='Finish:' isOpen={result.material !== '' && result.material !== ' ' && result.material !== 'Color' && result.material !== 'Wood'} products={whichFinish(result.material, theRoom)} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />}
+                    <FinishPick isOpen={result.material === 'Wood'} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />
+
                     <ColorPick isOpen={result.material === 'Color'} onClick={(e: any, i: any) => setter({ ...result, finish: e })} />
                     <Product title='Fabric:' isOpen={result.finish !== '' || result.fabric === ' '} products={theRoom.prod.fabric} onClick={(e: any, i: any) => setter({ ...result, fabric: e })} />
                     <Product title='Condition:' isOpen={result.finish !== '' || result.material === ' '} products={conditions} onClick={(e: any, i: any) => setter({ ...result, condition: e })} />
@@ -132,7 +135,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
                     <Product title='Seo:' isOpen={result.price !== ''} products={theRoom.prod.seo} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, seo: e })} />
                     <Product title='Source:' isOpen={result.seo !== ''} products={sources} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, src: e })} />
 
-                    {result.src !== '' && <Button onClick={() => handleSave()} >Generate Description</Button>}
+                    {result.src !== '' && Number(result.price.replace(/\$/g, '')) >= 10 && <Button onClick={() => handleSave()} >Generate Description</Button>}
                     {result.src === '' && <Button onClick={() => handleClearScreen()}  >Clear</Button>}
 
                 </>
@@ -145,7 +148,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
 function selectFinishes(selRoom: ItheRoom) {
     var theFinish = [' ']
     selRoom.prod.color && theFinish.push('Color')
-    // selRoom.prod.wood && theFinish.push('Wood')
+    selRoom.prod.wood && theFinish.push('Wood')
     selRoom.prod.finish && theFinish.push('Finish')
     selRoom.prod.metal && theFinish.push('Metal')
     return theFinish
