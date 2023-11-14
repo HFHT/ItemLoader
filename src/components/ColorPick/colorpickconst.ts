@@ -32,7 +32,7 @@ export const newColors = [
     {'Blue': '#4169E1'},
     {Brown: '#8B4513'},
     {Tan: '#D2B48C'},
-    {Cream: '#FEFBEA'},
+    {Beige: '#FEFBEA'},
     {Golden: '#FFD700'},
     {Orange: '#FFA500'},
 ]

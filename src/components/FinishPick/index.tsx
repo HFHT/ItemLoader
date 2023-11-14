@@ -19,7 +19,7 @@ export const FinishPick = ({ onClick, isOpen, selected = -1 }: ITile) => {
                 <>
                     <div className="colorpickGroup">
                         {finishes.map((theColor: Iidx, i) => (
-                            <button key={i} name={Object.keys(theColor)[0]} title={Object.keys(theColor)[0]} style={{ backgroundImage: `url("https://hfhtdev.blob.core.windows.net/itemloader/${theColor[Object.keys(theColor)[0]]}")` }} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
+                            <button key={i} name={Object.keys(theColor)[0]} title={Object.keys(theColor)[0]} style={{ backgroundImage: `url("${import.meta.env.VITE_STORAGEIMAGEURL}${theColor[Object.keys(theColor)[0]]}")` }} onClick={(e) => handleClick(e, i)} className={(selected === i) ? "tileButton tileactive" : "tileButton"}>
                                 {Object.keys(theColor)[0]}
                             </button>
                         ))}
