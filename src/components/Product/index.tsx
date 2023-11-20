@@ -17,7 +17,7 @@ interface ITiles extends ITile {
     onClear(e: string): Function | void
 }
 
-export const Product = ({ isOpen, products, onClick, hasCustom='', title }: ITile) => {
+export const Product = ({ isOpen, products, onClick, hasCustom = '', title }: ITile) => {
     const [selected, setSelected] = useState(-1)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         // console.log(e, id, products)
@@ -39,10 +39,9 @@ export const Product = ({ isOpen, products, onClick, hasCustom='', title }: ITil
 
 }
 
-export const Products = ({ isOpen, products, chosen, onClick, onClear, hasCustom='', title }: ITiles) => {
-    const handleClick = (e: string, id: number) => {
-        //@ts-ignore
-        onClick(e, id, 1)
+export const Products = ({ isOpen, products, chosen, onClick, onClear, hasCustom = '', title }: ITiles) => {
+    const handleClick = (e: string, id: number, b: number) => {
+        onClick(e, id, b)
     }
     const handleClear = (e: string) => {
         console.log('Products-handleClear')
@@ -53,7 +52,7 @@ export const Products = ({ isOpen, products, chosen, onClick, onClear, hasCustom
             {isOpen && products &&
                 <div className="prodtop">
                     {/* {title} */}
-                    <TilesMulti tiles={products} selected={0} chosen={chosen} hasCustom={hasCustom} onClick={(e: any, i: any) => handleClick(e, i)} onClear={(e: any) => handleClear(e)}/>
+                    <TilesMulti tiles={products} selected={0} chosen={chosen} hasCustom={hasCustom} onClick={(e: any, i: any, b: number) => handleClick(e, i, b)} onClear={(e: any) => handleClear(e)} />
                 </div>
             }
         </>

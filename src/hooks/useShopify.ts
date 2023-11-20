@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { CONST_COLLECTIONS, CONST_DISCOUNTS } from "../constants";
+import { CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
-import { parseGPT } from "../helpers/functions";
 
 export function useShopify() {
     // const [theCollections, setTheCollections] = useState()
@@ -10,28 +9,28 @@ export function useShopify() {
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
 
-    const doShopify = async (prompt: Itype, featured: boolean = false, isSku: boolean = false) => {
+    const doShopify = async (prompt: Itype, collections: any, featured: string = 'submit', isSku: boolean = false) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt)
-
+        let bc:string = prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode()
         let options = {
             method: "POST",
             headers: headers,
             body: JSON.stringify({
                 method: 'add',
-                collections: prepareCollections(CONST_COLLECTIONS, prompt, featured, isSku),
+                collections: prepareCollections(collections, prompt, featured, isSku),
                 product: JSON.stringify({
                     "product": {
-                        // "title": parseGPT(prompt.result.desc, 0),
-                        "title": prompt.barcode.slice(-5) + ' ' + parseGPT(prompt.result.desc, 0),
-                        "published_scope": "global",
-                        "body_html": parseGPT(prompt.result.desc, 1),
+                        "handle": bc,
+                        "title": bc.slice(-5) + ' ' + prompt.result.desc[0],
+                        "published_scope": featured === 'submit' ? "201136242996" : "global",
+                        "body_html": prompt.result.desc[1],
                         "vendor": currentDiscount(),
                         "product_type": prompt.result.col[0],
                         "status": "active",
-                        "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod],
+                        "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod, prompt.result.src],
                         "variants": [{
-                            "barcode": prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode(),
+                            "barcode": bc,
                             "sku": prompt.hasOwnProperty('sku') ? prompt.sku : '',
                             "compare_at_price": prompt.result.price,
                             "price": prompt.result.price,
@@ -50,6 +49,8 @@ export function useShopify() {
         };
         try {
             const response = await fetch(url, options);
+            console.log(response);
+            if (!response.ok) throw `Shopify Item failed with ${response.status}: ${response.statusText}`
             const shopifyResponse = (await response.json());
             console.log(shopifyResponse, shopifyResponse.prodId);
             if (shopifyResponse.hasOwnProperty('prodId')) {
@@ -62,6 +63,8 @@ export function useShopify() {
                 })
 
                 const imageResponse = await fetch(url, options);
+                console.log(imageResponse);
+                if (!imageResponse.ok) throw `Shopify Image upload failed with ${imageResponse.status}: ${imageResponse.statusText}`
                 const shopifyImgResponse = (await imageResponse.json());
                 setIsDone(shopifyImgResponse)
                 console.log(shopifyImgResponse);
@@ -75,28 +78,7 @@ export function useShopify() {
             alert(error);
         }
     }
-    async function getCollections(doIt:boolean) {
-        if (!doIt) return
-        // try {
-        //     const response = await (fetch(url, prepareOptions('listCol', [], '')))
-        //     console.log(response)
-        //     const shopifyResponse = (await response.json());
-        //     console.log(shopifyResponse);
-        //     if (shopifyResponse.hasOwnProperty('theCollections')) {
-        //         const temp: any = {}
-        //         shopifyResponse.theCollections.data.custom_collections.forEach((e: any) => temp[e.handle] = e.id)
-        //         setTheCollections(temp);
-
-        //     } else { throw 'Could not retrieve Collections, check the network.' }
-        // }
-        // catch (error) {
-        //     console.log(error);
-        //     alert(error);
-        // }
-        return
-    }
-    // return [doShopify, getCollections, theCollections, isDone];
-    return [doShopify, getCollections, CONST_COLLECTIONS, isDone];
+    return [doShopify, isDone];
 
 
     function prepareOptions(method: string, collections: [], product: any) {
@@ -144,16 +126,17 @@ export function useShopify() {
         )
     }
 
-    function prepareCollections(theCollections: any, result: any, featured: boolean, isSku: boolean) {
+    function prepareCollections(theCollections: any, result: any, featured: string, isSku: boolean) {
         if (!theCollections) return []
         var aryCol = [
-            theCollections[isSku ? 'purchased-products' : 'newly-added-items'],
-            theCollections[currentDiscount()]
+            theCollections.collections[isSku ? 'purchased-products' : 'newly-added-items'],
+            theCollections.collections[currentDiscount()]
         ]
-        featured && (aryCol.push(theCollections['featured-items']))
+        featured === 'treasure' && (aryCol.push(theCollections.collections['featured-items']))
         console.log(theCollections)
+        console.log(aryCol)
         result.result.col.forEach((c: string) => {
-            aryCol.push(theCollections[c])
+            aryCol.push(theCollections.collections[c])
         })
         console.log(aryCol)
         return aryCol

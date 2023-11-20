@@ -24,6 +24,7 @@ export function useDigitEyes1() {
                     };
                     try {
                         const response = await fetch(url, options);
+                        if (!response.ok) throw `UPC lookup failed with ${response.status}: ${response.statusText}`
                         const upcResponse = (await response.json());
                         console.log(upcResponse);
                         checkStatusCode(upcResponse.status);
@@ -47,5 +48,5 @@ export function useDigitEyes1() {
 
 export function checkStatusCode(status: string) {
     if (status === '402') { alert('Contact support: DigitEyes account needs more funding!') }
-    if (status.toString().match(/(400|401)/)) { alert(`Contact support: DigitEyes program error: ${status}`)}
+    if (status.toString().match(/(400|401)/)) { alert(`Contact support: DigitEyes program error: ${status}`) }
 }

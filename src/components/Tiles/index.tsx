@@ -8,7 +8,7 @@ interface ITile {
     selected?: number | string
     chosen?: Iprods
     hasCustom?: string
-    onClick(e: string, i: number): Function | void
+    onClick(e: string, i: number, b?: number): Function | void
 }
 interface ITiles extends ITile {
     onClear(e: string): Function | void
@@ -44,7 +44,10 @@ export const TilesMulti = ({ tiles, chosen, onClick, onClear, hasCustom = '', se
 
     // console.log('Tiles', tiles, selected)
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
-        onClick(e.currentTarget.name, id)
+        // e.type = 'click' (left) = contextmenu (right) e...button = 0 (left) 2 (right) 1 (middle)
+        console.log(e.type, e.nativeEvent.button)
+        e.preventDefault()
+        onClick(e.currentTarget.name, id, e.type === 'click' ? 1 : -1)
     }
     const handleCustom = (r: string) => {
         console.log('handleCustom', r, custom)
@@ -74,7 +77,7 @@ export const TilesMulti = ({ tiles, chosen, onClick, onClear, hasCustom = '', se
             <Button onClick={(e: any) => onClear(e)}>Reset</Button>
             {tiles && tiles.map((tileLabel, i) => (
                 <div key={i}>
-                    <button name={tileLabel} onClick={(e) => handleClick(e, i)} className={(isSelected(tileLabel)) ? "tileButton tileactive" : "tileButton"}>
+                    <button name={tileLabel} onClick={(e) => handleClick(e, i)} onContextMenu={(e) => handleClick(e, i)} className={(isSelected(tileLabel)) ? "tileButton tileactive" : "tileButton"}>
                         {tileLabel === ' ' ? '---' : tileLabel}
                     </button>
                     <span className={`${isSelectedQty(tileLabel) && 'tileqty'}`}>{isSelectedQty(tileLabel)}</span>

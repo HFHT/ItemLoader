@@ -6,17 +6,18 @@ export const CONST_STAR_ALIGN = '[feed: length 24mm]'
 
 export const CONST_STAR_ADJUST_CNT = 4
 
-export const CONST_STARLABEL = '[align: center][mag: w 2; h 2]{price}[mag] {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 6mm]'
-export const CONST_STARLABEL_ADJ = '[align: center][mag: w 2; h 2]{price}[mag] {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 7mm]'
+export const CONST_STARLABEL = '[align: center][mag: w 2; h 2]{price}[mag] {itemid} {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 6mm]'
+export const CONST_STARLABEL_ADJ = '[align: center][mag: w 2; h 2]{price}[mag] {itemid} {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 7mm]'
 
-export const CONST_DISCOUNTS = ['red-collection', 'yellow-collection', 'blue-discount-collection', 'green-collection']
+export const CONST_DISCOUNTS = ['blue-discount-collection', 'yellow-collection', 'red-collection', 'green-collection']
 
-export const CONST_GPT_PROD = 'Write an informative, two or three sentences, product description for:'
+export const CONST_GPT_PROD = 'Write an informative, two or three sentences product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {fabric}, {finish}'
 
-export const CONST_GPT_TITLE = 'Make this into a product title,'
+export const CONST_GPT_TITLE = 'Write a short product title for {mfg} {products} which includes: {pieces} {seo} {fabric} {finish} {sqft}'
 
-export const CONST_GPT_PROMPT = 'Write a product title and a product description. Precede the product title with "Titlex:" and the product description with "Descx:".\n The product title keywords are: {seo}, {products}, {sqft}.\n Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
+export const CONST_GPT_PROMPT = 'Write a product title and a product description. Precede the product title with "Titlex:" and the product description with "Descx:".\n Include only the following keywords: {seo}, {products}, {sqft}.\n Write an informative, two or three sentences, product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {finish}'
 
+// The following are now unused, being kept for now just in case of problems fetching collections
 export const CONST_COLLECTIONS = {
     "appliances": 458029072692,
     "art-home-decor": 458559619380,

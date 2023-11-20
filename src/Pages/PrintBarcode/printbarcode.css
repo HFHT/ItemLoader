@@ -1,7 +1,6 @@
-
 .addaigrid {
-    display:grid;
-    grid-row:auto; 
+    display: grid;
+    grid-row: auto;
     border-style: solid;
     border-radius: 6px;
 }
@@ -13,6 +12,9 @@
     justify-content: space-between;
     padding: 0.1rem;
 } */
+.displayflex {
+    display: flex;
+}
 
 .maingrid {
     display: grid;

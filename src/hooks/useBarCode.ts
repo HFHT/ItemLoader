@@ -3,62 +3,55 @@
 import { useState } from "react";
 import { daysAgo } from "../helpers/dateDB";
 import { CONST_PRINT_MAC } from "../constants";
+import { fetchAndSetAll } from "../helpers/fetchAndSetAll";
 
 export function useBarCode() {
     const [barcodes, setBarcodes] = useState();
     const [status, setStatus] = useState();
 
 
-    const getBarcodes = async (doIt:boolean) => {
+    const getBarcodes = async (doIt: boolean) => {
         if (!doIt) return
         const header: any = { method: "POST", headers: new Headers() };
         //req={"method":"find","db":"Inventory","collection":"Test","find":{"_id":0},"sort":{"_id":1}}
+        const headerQ: any = {
+            ...header, body: JSON.stringify(
+                {
+                    method: 'find',
+                    db: 'Inventory',
+                    collection: 'PrintQueue',
+                    find: { date: { $gt: daysAgo(3) } },
+                    sort: { date: -1 }
+                }
+            )
+        }
+        const headerS: any = {
+            ...header, body: JSON.stringify(
+                {
+                    method: 'find',
+                    db: 'Inventory',
+                    collection: '_Printers',
+                    find: { mac: CONST_PRINT_MAC }
+                }
+            )
+        }
 
-        header.body = JSON.stringify(
-            {
-                method: 'find',
-                db: 'Inventory',
-                collection: 'PrintQueue',
-                find: { date: { $gt: daysAgo(3)} },
-                sort: { date: -1 }
-            }
-        )
+
         try {
-            fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
-                .then(response => response.json())
-                .then(data => { setBarcodes(data) })
-                .catch(error => console.log(error))
+            fetchAndSetAll([
+                {
+                    url: `${import.meta.env.VITE_MONGO_URL}`,
+                    init: headerQ,
+                    setter: setBarcodes
+                },
+                {
+                    url: `${import.meta.env.VITE_MONGO_URL}`,
+                    init: headerS,
+                    setter: setStatus
+                }
+            ])
         }
-        catch (error) {
-            console.log(error);
-        }
-
+        catch (error) { console.log(error); alert('Read of Barcodes failed: ' + error); }
     }
-    async function getStatus(doIt:boolean) {
-    // const getStatus = async (doIt:boolean) => {
-        if (!doIt) return
-        const header: any = { method: "POST", headers: new Headers() };
-        //req={"method":"find","db":"Inventory","collection":"Test","find":{"_id":0},"sort":{"_id":1}}
-
-        header.body = JSON.stringify(
-            {
-                method: 'find',
-                db: 'Inventory',
-                collection: '_Printers',
-                find: { mac: CONST_PRINT_MAC }
-            }
-        )
-        try {
-            fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
-                .then(response => response.json())
-                .then(data => { console.log(data); setStatus(data) })
-                .catch(error => console.log(error))
-        }
-        catch (error) {
-            console.log(error);
-        }
-
-    }    
-
-    return [barcodes, getBarcodes, status, getStatus];
+    return [barcodes, getBarcodes, status];
 }

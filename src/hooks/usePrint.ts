@@ -1,7 +1,6 @@
 // usePrint places a record in the MongoDB printqueue database, the printer picks it up from there.
 
 import { useState } from "react";
-import { parseGPT } from "../helpers/functions";
 import { CONST_PRINT_MAC, CONST_STARLABEL, CONST_STARLABEL_ADJ, CONST_STAR_ADJUST_CNT, CONST_STAR_ALIGN } from "../constants";
 import { getCookie, setCookie } from "../helpers/cookies";
 
@@ -17,7 +16,8 @@ export function usePrint() {
         console.log(printed);
 
         const header: any = { method: "POST", headers: new Headers() };
-
+        const gptDesc = userData.result.desc[0]
+        console.log(gptDesc)
         header.body = JSON.stringify(
             {
                 method: 'insertOne',
@@ -29,19 +29,26 @@ export function usePrint() {
                     // job: userData.barcode,
                     job: Date.now(),
                     date: Date.now(),
-                    desc: (userData.barcode.slice(-5) + ' ' + parseGPT(userData.result.desc, 0)).slice(0, 35),
-                    blob: buildStarBlob(userData, printed),
+                    bc: userData.barcode,
+                    desc: (userData.barcode.slice(-5) + ' ' + gptDesc).slice(0, 35),
+                    blob: buildStarBlob(userData, gptDesc, printed),
                     fileX: ''
                 }
             }
         )
-
-        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
-        console.log(response);
-        const prtResponse = (await response.json());
-        console.log(prtResponse);
-        setPrintResult(prtResponse);
-        saveCount(printed);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+            if (!response.ok) throw `Barcode print failed with ${response.status}: ${response.statusText}`
+            console.log(response);
+            const prtResponse = (await response.json());
+            console.log(prtResponse);
+            setPrintResult(prtResponse);
+            saveCount(printed);
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
 
         // try {
         //     fetch(`${import.meta.env.VITE_MONGO_URL}`, header)
@@ -75,12 +82,18 @@ export function usePrint() {
                 find: { job: '123456789012' }
             }
         )
-
-        const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
-        console.log(response);
-        const prtResponse = (await response.json());
-        console.log(prtResponse);
-        setPrintResult(prtResponse);
+        try {
+            const response = await fetch(`${import.meta.env.VITE_MONGO_URL}`, header);
+            console.log(response);
+            if (!response.ok) throw `Barcode align failed with ${response.status}: ${response.statusText}`
+            const prtResponse = (await response.json());
+            console.log(prtResponse);
+            setPrintResult(prtResponse);
+        }
+        catch (error) {
+            console.log(error);
+            alert(error);
+        }
 
 
         // try {
@@ -129,13 +142,11 @@ export function usePrint() {
     return [printQ, doPrint, doAlign, doReprint, printResult];
 }
 
-function buildStarBlob(blob: any, printed: number) {
+function buildStarBlob(blob: any, gptDesc:string, printed: number) {
     if (printed === CONST_STAR_ADJUST_CNT) {
-        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
-        // return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+        return CONST_STARLABEL_ADJ.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, gptDesc.slice(0, 26)).replace(/{barcode}/g, blob.barcode)
     }
-    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, blob.barcode.slice(-5) + ' ' + parseGPT(blob.result.desc, 0).slice(0, 26)).replace(/{barcode}/g, blob.barcode)
-    // return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{description}/g, parseGPT(blob.result.desc, 0).slice(0, 24)).replace(/{barcode}/g, blob.barcode)
+    return CONST_STARLABEL.replace(/{price}/g, blob.result.price).replace(/{itemid}/g, blob.barcode.slice(-5)).replace(/{description}/g, gptDesc.slice(0, 26)).replace(/{barcode}/g, blob.barcode)
 }
 
 function saveCount(printed: number) {

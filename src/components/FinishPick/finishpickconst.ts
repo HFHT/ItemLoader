@@ -21,20 +21,20 @@ export const spectrum = [
     {Navy: '#000080'},
 ]
 
-export const newColors = [
-    {White: '#F5F5F5'},
-    {Black: '#000000'},
-    {'Gray': '#708090'},
-    {'Red':'#8B0000'},
-    {Magenta: '#8B008B'},
-    {'Pink': '#FF69B4'},
-    {Green: '#008000'},
-    {'Blue': '#4169E1'},
-    {Brown: '#8B4513'},
-    {Tan: '#D2B48C'},
-    {Beige: '#FEFBEA'},
-    {Golden: '#FFD700'},
-    {Orange: '#FFA500'},
+export const finishes = [
+    {'Maple Finish': 'maple.jpg'},
+    {'Pine Finish': 'pine.jpg'},
+    {'Oak Finish': 'oak.jpg'},
+    {'Bamboo Finish': 'bamboo.jpg'},
+    {'Birch Finish': 'birch.jpg'},
+    {'Mesquite Finish': 'mesquite.jpg'},
+    {'Cedar Finish':'cedar.jpg'},
+    {'Redwood Finish': 'redwood.jpg'},
+    {'Rosewood Finish': 'rosewood.jpg'},
+    {'Cherry Finish': 'cherry.jpg'},
+    {'Walnut Finish': 'walnut.jpg'},
+    {'Mahogany Finish': 'mahogany.jpg'},
+    {'Wood': 'oak.jpg'},
 ]
 
 
