@@ -41,6 +41,7 @@ interface Iresult {
     attr2: string;
     qty?: number;
     desc: string;
+    cat: string;
     col: string[];
     material: string;
     finish: string;
@@ -76,6 +77,8 @@ interface ItheRoom {
     e: string;
     i: number;
     prod: {
+        cat: string
+        col: string[]
         item: [{ a?: string, i: number, s?: boolean }]
         mfg: string[]
         pwr: string[]

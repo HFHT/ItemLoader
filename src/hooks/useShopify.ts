@@ -11,7 +11,7 @@ export function useShopify() {
 
     const doShopify = async (prompt: Itype, collections: any, featured: string = 'submit', isSku: boolean = false) => {
         if (!prompt.result.room) return;
-        console.log('useShopify', prompt)
+        console.log('useShopify', prompt, collections)
         let bc:string = prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode()
         let options = {
             method: "POST",
@@ -26,7 +26,7 @@ export function useShopify() {
                         "published_scope": featured === 'submit' ? "201136242996" : "global",
                         "body_html": prompt.result.desc[1],
                         "vendor": currentDiscount(),
-                        "product_type": prompt.result.col[0],
+                        "product_type": prompt.result.cat,
                         "status": "active",
                         "tags": [prompt.result.seo, prompt.result.room, prompt.result.prod, prompt.result.src],
                         "variants": [{

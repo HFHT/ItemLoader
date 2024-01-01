@@ -1,7 +1,7 @@
 import './wizard.css';
 
-import { useEffect, useState } from 'react'
-import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, catWindType, schemaResult, schemaType } from '../../helpers/objects';
+import { useEffect } from 'react'
+import { catApplType, catCabType, catDoorType, catFloorType, catFurnType, catHouseType, catLightType, catPlumbType, catToolType, catType, catWindType, schemaResult } from '../../helpers/objects';
 import { Category, Tiles } from '../../components';
 import { useShopify } from '../../hooks';
 import { uniqueBarCode } from '../../helpers/barCode';
@@ -14,13 +14,6 @@ interface IWiz {
 }
 
 export function Wizard({ isOpen, thisType, setter, setSaved }: IWiz) {
-  // const [theType, setTheType] = useState<Itype>(schemaType)
-  // const [doShopify, getCollections, theCollections]: any = useShopify()
-
-  // useEffect(() => {
-  //   //if (!theCollections) return;
-  //   getCollections();
-  // }, [])
 
   function handleSetType(e: string, i: number) {
     // console.log(e, theType.type)
