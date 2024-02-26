@@ -6,5 +6,6 @@ export * from './useUserMedia';
 export * from './useShopify';
 export * from './useReadProduct';
 export * from './usePrint';
+export * from './usePrinter';
 export * from './useInterval';
 export * from './useTimeout';

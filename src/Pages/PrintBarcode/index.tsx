@@ -2,7 +2,7 @@ import './printbarcode.css';
 
 import { useEffect, useState } from "react";
 import { BarCode, Button, Input } from "../../components";
-import { useBarCode, useEmptyBarCodes, useInterval, usePrint, useReadProduct, useTimeout } from '../../hooks';
+import { useBarCode, useEmptyBarCodes, useInterval, usePrint, usePrinter, useReadProduct, useTimeout } from '../../hooks';
 import { getLocalStorage, setLocalStorage } from '../../helpers/localStorage';
 import { ClipLoader } from 'react-spinners';
 import { addToPrintQueue } from '../../helpers/addToPrintQueue';
@@ -14,6 +14,8 @@ export function PrintBarcode() {
   const [timerVal, setTimerVal] = useState(80000)
 
   const [printQ, doPrint, doAlign, doReprint]: any = usePrint()
+  const print = usePrinter({})
+
   const [barcodes, getBarcodes, status]: any = useBarCode()
   const [theProduct, doReadProduct]: any = useReadProduct()
 
@@ -98,6 +100,7 @@ export function PrintBarcode() {
   function handlePrint(bc: any, i: number) {
     console.log('Reprint', bc)
     doPrint(bc)
+    print({ was: bc.result.price, now: bc.result.price, item: bc.barcode.slice(-5) })
     setbcprint(i, true)
   }
 

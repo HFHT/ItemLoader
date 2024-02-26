@@ -1,6 +1,6 @@
 
 export const CONST_PRINT_MAC = '00:11:62:0e:2f:bc'
-
+export const CONST_LOGO_IMAGE = 'HabiStorelogo_stacked_black.png'
 // export const CONST_STAR_ALIGN = '[feed: tearbar]\[feed: length 16mm]'
 export const CONST_STAR_ALIGN = '[feed: length 24mm]'
 
@@ -10,6 +10,8 @@ export const CONST_STARLABEL = '[align: center][mag: w 2; h 2]{price}[mag] {item
 export const CONST_STARLABEL_ADJ = '[align: center][mag: w 2; h 2]{price}[mag] {itemid} {description}\[barcode: type code128; data {barcode}; height 10mm; hri][feed: length 7mm]'
 
 export const CONST_DISCOUNTS = ['blue-discount-collection', 'yellow-collection', 'red-collection', 'green-collection']
+export const CONST_DISCOUNT_COLORS = [{bg:'#194b9d'}, {bg:'#FFCC00'}, {bg:'#A63740'}, {bg:'#43B02A'}]
+
 
 export const CONST_GPT_PROD = 'Write an informative, two or three sentences product description for {products} include keywords: {condition} with {flaw}, {seo},  {pieces}, {sqft}, {attr1}, {attr2}, {fabric}, {finish}'
 

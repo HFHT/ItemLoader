@@ -49,7 +49,7 @@ export function Main(collections: any) {
 
   return (
     <div className="apptop">
-      <Wizard isOpen={!hasSaved} thisType={theType} setter={(e: any) => setTheType(e)} setSaved={(e:boolean) => setHasSaved(e)}/>
+      <Wizard isOpen={!hasSaved} thisType={theType} setter={(e: any) => setTheType(e)} setSaved={(e: boolean) => setHasSaved(e)} />
       <div className="aigrid">
         <OpenAI isOpen={hasSaved} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
       </div>
