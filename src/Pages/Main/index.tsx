@@ -51,14 +51,14 @@ export function Main(collections: any) {
     <div className="apptop">
       <Wizard isOpen={!hasSaved} thisType={theType} setter={(e: any) => setTheType(e)} setSaved={(e: boolean) => setHasSaved(e)} />
       <div className="aigrid">
-        <OpenAI isOpen={hasSaved} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
+        <OpenAI isOpen={hasSaved && theType.result.desc === ''} disable={theType.result.desc !== ''} userData={theType} setResult={(e: any) => setTheType({ ...theType, result: { ...theType.result, desc: e } })} />
       </div>
       <div className="photogrid">
         {theType.result.desc !== '' && <WebcamCapture setter={((e: any) => setTheType({ ...theType, imgs: e }))} />}
       </div>
       <Button onClick={(e) => handleSubmit('submit')} disabled={true}>Submit</Button>
-      <Button onClick={(e) => handleSubmit('online')} disabled={theType.imgs === ''}>Submit Online</Button>
-      <Button onClick={(e) => handleSubmit('treasure')} disabled={theType.imgs === ''}>Submit as Treasure</Button>
+      <Button onClick={(e) => handleSubmit('online')} disabled={theType.imgs[0] === ''}>Submit Online</Button>
+      <Button onClick={(e) => handleSubmit('treasure')} disabled={theType.imgs[0] === ''}>Submit as Treasure</Button>
       {/* <ClipLoader loading={shopifyDone} /> */}
     </div>
   )

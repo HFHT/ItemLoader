@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { CONST_DISCOUNTS } from "../constants";
 import { uniqueBarCode } from "../helpers/barCode";
+import { fetchAndSetAll } from "../helpers/fetchAndSetAll";
 
 export function useShopify() {
     // const [theCollections, setTheCollections] = useState()
     const [isDone, setIsDone] = useState('')
+    const [imgStatus, setImgStatus] = useState<any>([])
 
     const headers = new Headers();
     var url = `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopify`;
@@ -12,7 +14,7 @@ export function useShopify() {
     const doShopify = async (prompt: Itype, collections: any, featured: string = 'submit', isSku: boolean = false) => {
         if (!prompt.result.room) return;
         console.log('useShopify', prompt, collections)
-        let bc:string = prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode()
+        let bc: string = prompt.hasOwnProperty('barcode') ? prompt.barcode : uniqueBarCode()
         let options = {
             method: "POST",
             headers: headers,
@@ -59,15 +61,36 @@ export function useShopify() {
                 options.body = JSON.stringify({
                     method: 'image',
                     product: shopifyResponse.prodId,
-                    body: prepareImage(1, prepareTitle(prompt), prompt.imgs.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
+                    body: prepareImage(1, prepareTitle(prompt), prompt.imgs[0].replace(/^data:image\/(png|jpg|jpeg);base64,/, ""))
                 })
-
-                const imageResponse = await fetch(url, options);
-                console.log(imageResponse);
-                if (!imageResponse.ok) throw `Shopify Image upload failed with ${imageResponse.status}: ${imageResponse.statusText}`
-                const shopifyImgResponse = (await imageResponse.json());
-                setIsDone(shopifyImgResponse)
-                console.log(shopifyImgResponse);
+                try {
+                    fetchAndSetAll(
+                        prompt.imgs.map((thisImg: any, idx: number) => {
+                            return {
+                                url: `${import.meta.env.VITE_AZURE_FUNC_URL}/api/HFHTShopifyImage`,
+                                setter: setImgStatus,
+                                init: {
+                                    ...options, body: JSON.stringify({
+                                        method: 'image',
+                                        product: shopifyResponse.prodId,
+                                        body: prepareImage(
+                                            idx + 1,
+                                            prepareTitle(prompt),
+                                            thisImg.replace(/^data:image\/(png|jpg|jpeg);base64,/, "")
+                                        )
+                                    })
+                                }
+                            }
+                        })
+                    )
+                }
+                catch (error) { console.log(error); alert('Upload of Image failed: ' + error); }
+                // const imageResponse = await fetch(url, options);
+                // console.log(imageResponse);
+                // if (!imageResponse.ok) throw `Shopify Image upload failed with ${imageResponse.status}: ${imageResponse.statusText}`
+                // const shopifyImgResponse = (await imageResponse.json());
+                // setIsDone(shopifyImgResponse)
+                // console.log(shopifyImgResponse);
             } else {
                 throw 'Upload to Shopify failed, try again later!'
             }
@@ -101,7 +124,7 @@ export function useShopify() {
                 image: {
                     position: imageNo,
                     metafields: [
-                        { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
+                        { key: 'new', value: 'newvalue', type: 'single_line_text_field', namespace: 'global' }
                     ],
                     src: img,
                     alt: alt,
@@ -113,7 +136,7 @@ export function useShopify() {
                 image: {
                     position: imageNo,
                     metafields: [
-                        { key: 'new', value: 'newvlue', type: 'single_line_text_field', namespace: 'global' }
+                        { key: 'new', value: 'newvalue', type: 'single_line_text_field', namespace: 'global' }
                     ],
                     attachment: img,
                     alt: alt,

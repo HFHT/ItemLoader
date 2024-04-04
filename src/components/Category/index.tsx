@@ -19,7 +19,7 @@ interface ITile {
 }
 
 export const Category = ({ isOpen, result, basicOnly = false, categories, setter, setSaved }: ITile) => {
-    const [theRoom, setTheRoom] = useState<ItheRoom>({ e: '', i: -1, prod: {  cat: '', col: [], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
+    const [theRoom, setTheRoom] = useState<ItheRoom>({ e: '', i: -1, prod: { cat: '', col: [], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
     // const [theResult, setTheResult] = useState<Iresult>(schemaResult)
     const [theAttr, setTheAttr] = useState([])
     const [theSetSize, setTheSetSize] = useState(-1);
@@ -27,7 +27,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
         // console.log(e, id, categories[id], Object.getOwnPropertyNames(categories[id])[0])
         const thisRoom: any = e;
         let thisProd: any = categories[id];
-        console.log('------',thisProd[thisRoom])
+        console.log('------', thisProd[thisRoom])
         setTheRoom({ e: thisRoom, i: id, prod: thisProd[thisRoom] })
         setter({ ...result, room: thisRoom, col: thisProd[thisRoom].col, cat: thisProd[thisRoom].cat })
         setTheSetSize(-1)
@@ -84,7 +84,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
         // setter(schemaResult)
         setTheAttr([])
         setTheSetSize(-1)
-        setTheRoom({ ...theRoom, e: '', i: -1, prod: { cat:'', col: [], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
+        setTheRoom({ ...theRoom, e: '', i: -1, prod: { cat: '', col: [], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
     }
     function handleSave() {
         // Check if price has a dollar sign, if not then add one
@@ -103,7 +103,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
         console.log('useEffect', isOpen, result)
 
         if (isOpen && result.new) {
-            setTheRoom({ e: '', i: -1, prod: { cat:'', col:[], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
+            setTheRoom({ e: '', i: -1, prod: { cat: '', col: [], item: [{ i: -1 }], mfg: [], pwr: [], wood: [], finish: [], color: [], metal: [], fabric: [], src: [], seo: [] } })
             setter({ ...result, new: false })
         }
     }, [isOpen])
@@ -130,6 +130,7 @@ export const Category = ({ isOpen, result, basicOnly = false, categories, setter
                     <Product title='Condition:' isOpen={result.finish !== '' || result.material === ' '} products={conditionAdds} onClick={(e: any, i: any) => setter({ ...result, conditionAdds: e })} />
                     <Product title='Price:' isOpen={result.condition !== '' || (basicOnly && result.prods.length > 0)} products={prices} hasCustom={'number'} onClick={(e: any, i: any) => setter({ ...result, price: e })} />
                     <Product title='Seo:' isOpen={result.price !== ''} products={theRoom.prod.seo} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, seo: e })} />
+                    {theRoom.prod.guarantee && <Product title='Guarantee' isOpen={result.seo !== ''} products={theRoom.prod.guarantee} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, guarantee: e })} />}
                     <Product title='Source:' isOpen={result.seo !== ''} products={sources} hasCustom={'text'} onClick={(e: any, i: any) => setter({ ...result, src: e })} />
 
                     {result.src !== '' && Number(result.price.replace(/\$/g, '')) >= 10 && <Button onClick={() => handleSave()} >Generate Description</Button>}

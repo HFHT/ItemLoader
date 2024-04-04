@@ -5,5 +5,10 @@ button {
 }
 
 .phototop {
-  display:flex
+  display: flex;
+}
+
+.img-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }

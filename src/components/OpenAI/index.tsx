@@ -4,12 +4,13 @@ import { useEffect, useState } from "react"
 import { useOpenAI } from "../../hooks"
 import { Button } from "../Button"
 import { CONST_GPT_PROD, CONST_GPT_PROMPT, CONST_GPT_TITLE } from '../../constants';
+import { guarantee, guaranteeTitle } from '../../helpers/objects';
 
 interface ITile {
     isOpen: boolean
     disable: boolean
     userData: Itype
-    setResult(e: [string,string]): Function | void
+    setResult(e: [string, string]): Function | void
 }
 
 export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
@@ -32,8 +33,16 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
         // getGPT(`${CONST_GPT_PROD} ${userData.result.condition} with some ${userData.result.conditionAdds} ${userData.result.seo} ${userData.result.attr1} ${userData.result.attr2} ${userData.result.qty && userData.result.qty > 0 ? userData.result.qty + ' sq ft' : ''} ${userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : ''} ${getProducts()} ${userData.result.finish}`)
         setIsChat(true)
     }
+    const theGptTitle = (thisTitle: string, theData: Itype) => {
+        if (theData.result.guarantee) {
+            let idx = guarantee.findIndex((a: any) => a === theData.result.guarantee)
+            return idx > 0 ? `${thisTitle}${guaranteeTitle[idx]}` : `${thisTitle} - ${theData.result.guarantee}`
+        }
+        return thisTitle
+    }
+
     function handleAccept() {
-        setResult([gptTitle,gptDesc])
+        setResult([theGptTitle(gptTitle, userData), gptDesc])
         resetGPT(true)
     }
 
@@ -43,7 +52,7 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
             {isOpen &&
                 <>
                     <div className="aitext">
-                        Title: {gptTitle}
+                        Title: {theGptTitle(gptTitle, userData)}
                     </div>
                     <div className="aitext">
                         Description: {gptDesc}
@@ -74,7 +83,7 @@ export const OpenAI = ({ isOpen, disable, userData, setResult }: ITile) => {
         return [fillPrompt(CONST_GPT_TITLE), fillPrompt(CONST_GPT_PROD)]
     }
 
-    function fillPrompt(p:string) {
+    function fillPrompt(p: string) {
         p = p.replace(/{seo}/g, userData.result.seo).replace(/{products}/g, getProducts).replace(/{sqft}/g, userData.result.qty && userData.result.qty > 0 ? userData.result.qty + ' sq ft' : '')
         p = p.replace(/{condition}/g, userData.result.condition).replace(/{flaw}/g, userData.result.conditionAdds).replace(/{pieces}/g, userData.result.prods.length > 1 ? userData.result.prods.length + ' piece' : '')
         p = p.replace(/{attr1}/g, userData.result.attr1).replace(/{attr2}/g, userData.result.attr2).replace(/{finish}/g, userData.result.finish).replace(/{mfg}/g, userData.result.mfg).replace(/{fabric}/g, userData.result.fabric)

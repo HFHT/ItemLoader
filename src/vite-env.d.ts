@@ -52,6 +52,7 @@ interface Iresult {
     seo: string;
     new: boolean;
     src: string;
+    guarantee?: string
 }
 interface Iprod {
     prod: string;
@@ -62,7 +63,7 @@ interface Iprods extends Array<Iprod> { }
 interface Itype {
     type: string
     idx: number
-    imgs: string
+    imgs: string[]
     col: {c:string, i:number}
     barcode: string
     sku?: string
@@ -89,6 +90,7 @@ interface ItheRoom {
         fabric: string[]
         seo: string[]
         src: string[]
+        guarantee?: string[]
     }
 }
 
